@@ -1,0 +1,31 @@
+# Git and VS code directories
+.git
+.vscode
+
+# Results from runs
+results
+results-tests
+**/*.pickle
+**/*.json
+**/*.gz
+
+# Test scripts
+**/tests
+**/test_script.py
+
+# Compiled files from Python and Cython
+**/*.pyc
+**/*.html
+**/*.c
+**/*.so
+**/__pycache__
+**/build
+
+# Files related to plotting, data generation and the paper
+tex
+r
+matlab
+
+# Readme files
+**/README.md
+
