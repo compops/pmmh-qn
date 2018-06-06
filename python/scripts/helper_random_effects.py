@@ -1,7 +1,7 @@
 import numpy as np
 
 from models.random_effects import RandomEffectsModel
-from state.importance_sampling.cython_time_series_data import ImportanceSamplingCython
+from state.importance_sampling.cython import ImportanceSamplingCython
 
 from parameter.mcmc.mh_zero_order import ZeroOrderMetropolisHastings as MetropolisHastings0
 from parameter.mcmc.mh_first_order import FirstOrderMetropolisHastings as MetropolisHastings1
