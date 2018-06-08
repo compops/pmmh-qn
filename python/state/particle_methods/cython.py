@@ -7,24 +7,12 @@ from state.particle_methods.stochastic_volatility import bpf_sv_corr as c_filter
 from state.particle_methods.stochastic_volatility import flps_sv_corr as c_smoother_sv
 from state.particle_methods.stochastic_volatility import get_settings as c_get_settings_sv
 
-from state.particle_methods.earthquake import bpf_eq as c_filter_earthquake
-from state.particle_methods.earthquake import bpf_eq_corr as c_filter_corr_earthquake
-from state.particle_methods.earthquake import flps_eq as c_smoother_earthquake
-from state.particle_methods.earthquake import flps_eq_corr as c_smoother_corr_earthquake
-from state.particle_methods.earthquake import get_settings as c_get_settings_earthquake
-
 class ParticleMethodsCython(BaseStateInference):
     """Particle methods."""
 
     def __init__(self, model):
         self.alg_type = 'particle'
-        if model.short_name is 'earthquake':
-            self.c_filter = c_filter_earthquake
-            self.c_filter_corr = c_filter_corr_earthquake
-            self.c_smoother = c_smoother_earthquake
-            self.c_smoother_corr = c_smoother_corr_earthquake
-            self.c_get_settings = c_get_settings_earthquake
-        elif model.short_name is 'sv':
+        if model.short_name is 'sv':
             self.c_filter = c_filter_sv
             self.c_filter_corr = c_filter_sv
             self.c_smoother = c_smoother_sv
