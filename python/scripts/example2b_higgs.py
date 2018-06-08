@@ -43,7 +43,7 @@ def main(data, seed_offset=0, use_all_data=False):
                    'min_no_samples_hessian_estimate': len(initial_params) + 2,
                    'no_iters_between_progress_reports': 100,
                    'correlated_rvs': True,
-                   'correlated_rvs_sigma': 0.01,
+                   'correlated_rvs_sigma': 0.05,
                    'remove_overflow_iterations': False,
                    'memory_length': 40,
                    'accept_first_iterations': 40,
