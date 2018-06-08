@@ -70,7 +70,7 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
         grad_copy = np.array(grad, copy=True)
 
         # Run benchmark with different Quasi-Newton proposals
-        memory_length_vector = (5, 10, 15, 20, 25, 30, 35, 40)
+        memory_length_vector = (5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
         error_bfgs_fro = []
         error_ls_fro = []
         error_sr1_fro = []

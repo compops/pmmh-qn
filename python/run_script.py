@@ -12,7 +12,9 @@ if len(sys.argv) > 1:
         data = example2a.load_data(file_path='/home/jhd956/archive/data/higgs', subset=110000)
         for i in range(10):
             example2a.main(data, use_all_data=False, seed_offset=i)
+        for i in range(25):
             example2b.main(data, use_all_data=False, seed_offset=i)
+            example3.main(seed_offset=i)
     elif int(sys.argv[1]) == 3:
         for i in range(25):
             example3.main(seed_offset=i)
