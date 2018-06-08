@@ -3,10 +3,8 @@ import numpy as np
 from scipy.stats import norm
 from state.base_state_inference import BaseStateInference
 
-from state.particle_methods.stochastic_volatility import bpf_sv as c_filter_sv
-from state.particle_methods.stochastic_volatility import bpf_sv_corr as c_filter_corr_sv
-from state.particle_methods.stochastic_volatility import flps_sv as c_smoother_sv
-from state.particle_methods.stochastic_volatility import flps_sv_corr as c_smoother_corr_sv
+from state.particle_methods.stochastic_volatility import bpf_sv_corr as c_filter_sv
+from state.particle_methods.stochastic_volatility import flps_sv_corr as c_smoother_sv
 from state.particle_methods.stochastic_volatility import get_settings as c_get_settings_sv
 
 from state.particle_methods.earthquake import bpf_eq as c_filter_earthquake
@@ -28,9 +26,9 @@ class ParticleMethodsCython(BaseStateInference):
             self.c_get_settings = c_get_settings_earthquake
         elif model.short_name is 'sv':
             self.c_filter = c_filter_sv
-            self.c_filter_corr = c_filter_corr_sv
+            self.c_filter_corr = c_filter_sv
             self.c_smoother = c_smoother_sv
-            self.c_smoother_corr = c_smoother_corr_sv
+            self.c_smoother_corr = c_smoother_sv
             self.c_get_settings = c_get_settings_sv
         else:
             raise NameError ("Cython implementation for model missing.")
@@ -50,7 +48,11 @@ class ParticleMethodsCython(BaseStateInference):
                 rv_p = rvs[len(obs):]
                 xf, ll, xtraj = self.c_filter_corr(obs, params=params, rvr=rv_r, rvp=rv_p)
             else:
-                xf, ll, xtraj = self.c_filter(obs, params=params)
+                rvs = np.random.normal(size=self.dim_rvs).flatten()
+                rv_r = norm.cdf(rvs[0:len(obs)]).flatten()
+                rv_p = rvs[len(obs):]
+                xf, ll, xtraj = self.c_filter_corr(obs, params=params, rvr=rv_r, rvp=rv_p)
+
             self.results.update({'filt_state_est': np.array(xf).flatten()})
             self.results.update({'state_trajectory': np.array(xtraj).flatten()})
             self.results.update({'log_like': float(ll)})
@@ -73,7 +75,10 @@ class ParticleMethodsCython(BaseStateInference):
                 rv_p = rvs[len(obs):]
                 xf, xs, ll, grad, xtraj = self.c_smoother_corr(obs, params=params, rvr=rv_r, rvp=rv_p)
             else:
-                xf, xs, ll, grad, xtraj = self.c_smoother(obs, params=params)
+                rvs = np.random.normal(size=self.dim_rvs).flatten()
+                rv_r = norm.cdf(rvs[0:len(obs)]).flatten()
+                rv_p = rvs[len(obs):]
+                xf, ll, xtraj = self.c_filter_corr(obs, params=params, rvr=rv_r, rvp=rv_p)
 
             # Compute estimate of gradient and Hessian
             if model.using_gradients or model.using_hessians:

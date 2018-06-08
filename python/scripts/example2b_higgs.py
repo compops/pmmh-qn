@@ -60,8 +60,8 @@ def main(data, seed_offset=0, use_all_data=False):
     mh.run('mh0',
            mh_settings=new_mh_settings,
            data=data,
-           use_all_data=use_all_data
-           seed_offset=seed_offset),
+           use_all_data=use_all_data,
+           seed_offset=seed_offset)
 
 
     new_mh_settings = copy.deepcopy(mh_settings)
