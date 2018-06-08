@@ -112,8 +112,9 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
             self.model.store_free_params(proposed_state['params_free'])
             log_jacobian = self.model.log_jacobian()
             _, log_prior = self.model.log_prior()
-        except:
+        except Exception as e:
             print("State estimation failed with error...")
+            print(e)
             return False
 
         if self.settings['correlated_rvs']:

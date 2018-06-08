@@ -38,7 +38,7 @@ class DirectComputation(BaseStateInference):
             idx = np.arange(model.no_obs).astype(int)
 
         try:
-            results = model.get_loglike_gradient(compute_gradient=False, idx=idx)
+            results = model.get_loglike_gradient(compute_gradient=False, compute_hessian=False, idx=idx)
             self.results.update({'filt_state_est': 0.0})
             self.results.update({'state_trajectory': 0.0})
             self.results.update({'log_like': float(results['log_like'])})
@@ -62,7 +62,7 @@ class DirectComputation(BaseStateInference):
             idx = np.arange(model.no_obs).astype(int)
 
         try:
-            results = model.get_loglike_gradient(compute_gradient=True, idx=idx)
+            results = model.get_loglike_gradient(compute_gradient=True, compute_hessian=True, idx=idx)
 
             self.results.update({'filt_state_est': 0.0})
             self.results.update({'state_trajectory': 0.0})
@@ -70,9 +70,16 @@ class DirectComputation(BaseStateInference):
 
             gradient_internal = np.array(results['gradient_internal'])
             gradient_internal += model.log_prior_gradient()
+
+            hessian_internal = np.array(results['hessian_internal'])
+            hessian_internal += model.log_prior_hessian()
+
             self.results.update({'gradient_internal': gradient_internal})
             self.results.update({'gradient': np.array(results['gradient'])})
+            self.results.update({'hessian_internal': hessian_internal})
+            self.results.update({'hessian': np.array(results['hessian'])})
             return True
+
         except Exception as e:
             # Smoother did not run properly, return False
             print("Error in computation of likelihood and its gradient.")

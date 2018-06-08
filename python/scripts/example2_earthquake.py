@@ -1,7 +1,7 @@
 """Script for reproducing example 3 in paper."""
 import copy
 import numpy as np
-import scripts_draft1.helper_earthquake as mh
+import scripts.helper_earthquake as mh
 
 def main(seed_offset=0):
     """Runs the experiment."""

@@ -3,18 +3,6 @@ import numpy as np
 from scipy.stats import norm
 from state.base_state_inference import BaseStateInference
 
-from state.particle_methods.linear_gaussian import bpf_lgss as c_filter_lgss
-from state.particle_methods.linear_gaussian import bpf_lgss_corr as c_filter_corr_lgss
-from state.particle_methods.linear_gaussian import flps_lgss as c_smoother_lgss
-from state.particle_methods.linear_gaussian import flps_lgss_corr as c_smoother_corr_lgss
-from state.particle_methods.linear_gaussian import get_settings as c_get_settings_lgss
-
-from state.particle_methods.stochastic_volatility import bpf_sv as c_filter_sv
-from state.particle_methods.stochastic_volatility import bpf_sv_corr as c_filter_corr_sv
-from state.particle_methods.stochastic_volatility import flps_sv as c_smoother_sv
-from state.particle_methods.stochastic_volatility import flps_sv_corr as c_smoother_corr_sv
-from state.particle_methods.stochastic_volatility import get_settings as c_get_settings_sv
-
 from state.particle_methods.earthquake import bpf_eq as c_filter_earthquake
 from state.particle_methods.earthquake import bpf_eq_corr as c_filter_corr_earthquake
 from state.particle_methods.earthquake import flps_eq as c_smoother_earthquake
@@ -26,19 +14,7 @@ class ParticleMethodsCython(BaseStateInference):
 
     def __init__(self, model):
         self.alg_type = 'particle'
-        if model.short_name is 'lgss':
-            self.c_filter = c_filter_lgss
-            self.c_filter_corr = c_filter_corr_lgss
-            self.c_smoother = c_smoother_lgss
-            self.c_smoother_corr = c_smoother_corr_lgss
-            self.c_get_settings = c_get_settings_lgss
-        elif model.short_name is 'sv':
-            self.c_filter = c_filter_sv
-            self.c_filter_corr = c_filter_corr_sv
-            self.c_smoother = c_smoother_sv
-            self.c_smoother_corr = c_smoother_corr_sv
-            self.c_get_settings = c_get_settings_sv
-        elif model.short_name is 'earthquake':
+        if model.short_name is 'earthquake':
             self.c_filter = c_filter_earthquake
             self.c_filter_corr = c_filter_corr_earthquake
             self.c_smoother = c_smoother_earthquake

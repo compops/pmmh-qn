@@ -28,13 +28,16 @@ def run(mh_version, mh_settings, data, use_all_data=False, seed_offset=0, alg_ty
     # Metropolis-Hastings algorithm
     if mh_version is 'mh0':
         sampler = MetropolisHastings0(sys_model, mh_settings)
-        file_path = '../results-draft1/example3-higgs/mh0'
+        file_path = '../results/example3-higgs/mh0'
     elif mh_version is 'mh1':
         sampler = MetropolisHastings1(sys_model, mh_settings)
-        file_path = '../results-draft1/example3-higgs/mh1'
+        file_path = '../results/example3-higgs/mh1'
+    elif mh_version is 'mh2':
+        sampler = MetropolisHastings2(sys_model, mh_settings)
+        file_path = '../results/example3-higgs/mh2'
     elif mh_version is 'qmh':
         sampler = QuasiNewtonMetropolisHastings(sys_model, mh_settings, qn_method=alg_type)
-        file_path = '../results-draft1/example3-higgs/qmh-' + alg_type
+        file_path = '../results/example3-higgs/qmh-' + alg_type
     else:
         raise NameError("Unknown MH method...")
 

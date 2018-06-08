@@ -86,7 +86,7 @@ class LogisticRegressionModel(BaseModel):
         self.obs = y
         self.regressors = x
 
-    def get_loglike_gradient(self, compute_gradient=False, idx=None):
+    def get_loglike_gradient(self, compute_gradient=False, compute_hessian=False, idx=None):
         """ Computes the log-likelihood and gradient of the data.
 
                 Inputs:
@@ -123,18 +123,36 @@ class LogisticRegressionModel(BaseModel):
         if compute_gradient:
             grad_1 = x.T / (1.0 + np.exp(np.sum(beta * x, axis=1)))
             grad_0 = -x.T / (1.0 + np.exp(-1.0 * np.sum(beta * x, axis=1)))
-            gradient = np.sum(y * grad_1 + (1.0 - y) * grad_0, axis=1)
 
-            # Add the gradient of the log-prior
+            gradient = np.sum(y * grad_1 + (1.0 - y) * grad_0, axis=1)
             gradient_internal = gradient[self.params_to_estimate_idx]
 
         else:
             gradient = np.zeros(len(beta))
             gradient_internal = np.zeros(len(beta))
 
+        # Compute Hessian
+        if compute_hessian:
+            hess = np.zeros((len(beta), len(beta)))
+            scale_0 = -(1.0 + np.exp(-np.sum(beta * x, axis=1)))**(-2)
+            scale_0 *= np.exp(-np.sum(beta * x, axis=1))
+            scale_1 = -(1.0 + np.exp(np.sum(beta * x, axis=1)))**(-2)
+            scale_1 *= np.exp(np.sum(beta * x, axis=1))
+
+            outer_product = np.einsum('ij...,i...->ij...', x, x)
+            hess = y * scale_1 + (1.0 - y) * scale_0
+            hess = np.sum(hess * outer_product.T, axis=2)
+            hessian_internal = hess[0:self.no_params_to_estimate, 0:self.no_params_to_estimate]
+
+        else:
+            hessian = np.zeros(len(beta))
+            hessian_internal = np.zeros(len(beta))
+
         return {'log_like': log_like,
                 'gradient': gradient,
-                'gradient_internal': gradient_internal
+                'gradient_internal': gradient_internal,
+                'hessian': hess,
+                'hessian_internal': hessian_internal
                 }
 
     def check_parameters(self):
@@ -166,8 +184,19 @@ class LogisticRegressionModel(BaseModel):
                 Second value: the sum of the log-prior for all variables.
 
         """
-        grad = multivariate_gaussian.logpdf_gradient(self.params, 0.0, 1.0)
-        return grad[self.params_to_estimate_idx]
+        grad = multivariate_gaussian.logpdf_gradient(self.params[0:self.no_params_to_estimate], 0.0, 1.0)
+        return grad
+
+    def log_prior_hessian(self):
+        """ Returns the logarithm of the prior distribution.
+
+            Returns:
+                First value: a dict with an entry for each parameter.
+                Second value: the sum of the log-prior for all variables.
+
+        """
+        hess = multivariate_gaussian.logpdf_hessian(self.params[0:self.no_params_to_estimate], 0.0, 1.0)
+        return np.diag(hess)
 
     def transform_params_to_free(self):
         """ Computes and store the values of the reparameterised parameters.

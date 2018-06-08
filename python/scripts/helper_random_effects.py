@@ -31,13 +31,13 @@ def run(mh_version, mh_settings, seed_offset=0, alg_type=None, folder_tag=None):
     # Metropolis-Hastings algorithm
     if mh_version is 'mh0':
         sampler = MetropolisHastings0(sys_model, mh_settings)
-        file_path = '../results-draft1/example1-random-effects/mh0'
+        file_path = '../results/example1-random-effects/mh0'
     elif mh_version is 'mh1':
         sampler = MetropolisHastings1(sys_model, mh_settings)
-        file_path = '../results-draft1/example1-random-effects/mh1'
+        file_path = '../results/example1-random-effects/mh1'
     elif mh_version is 'qmh':
         sampler = QuasiNewtonMetropolisHastings(sys_model, mh_settings, qn_method=alg_type)
-        file_path = '../results-draft1/example1-random-effects/qmh-' + alg_type
+        file_path = '../results/example1-random-effects/qmh-' + alg_type
     else:
         raise NameError("Unknown MH method...")
 

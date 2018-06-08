@@ -1,8 +1,7 @@
 """Script for reproducing example 1 in paper."""
 import copy
 import numpy as np
-
-import scripts_draft1.helper_random_effects as mh
+import scripts.helper_random_effects as mh
 
 
 def main(seed_offset=0):

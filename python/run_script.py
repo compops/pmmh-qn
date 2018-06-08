@@ -11,7 +11,7 @@ if len(sys.argv) > 1:
         for i in range(25):
             example2.main(seed_offset=i)
     elif int(sys.argv[1]) == 3:
-        data = example3.load_data(file_path='/home/compops/archive/data/higgs', subset=110000)
+        data = example3.load_data(file_path='/home/jhd956/archive/data/higgs', subset=110000)
         example3.main(data, use_all_data=False, seed_offset=0)
     else:
         raise NameError("Unknown example to run...")
