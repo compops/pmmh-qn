@@ -21,9 +21,9 @@ def main(data, seed_offset=0, use_all_data=False):
     """Runs the experiment."""
     no_regressors = 22
     initial_params = np.zeros(no_regressors)
-    hessian_guess = 1e-4 * np.eye(no_regressors)
+    hessian_guess = 1e-3 * np.eye(no_regressors)
 
-    mh_settings = {'no_iters': 10000,
+    mh_settings = {'no_iters': 30000,
                    'no_burnin_iters': 3000,
                    'adapt_step_size': False,
                    'adapt_step_size_initial': 0.1,
