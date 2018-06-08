@@ -2,7 +2,7 @@ import sys
 import scripts.example1_random_effects as example1
 import scripts.example2a_higgs as example2a
 import scripts.example2b_higgs as example2b
-import scripts.example3_earthquake as example3
+import scripts.example3_stochastic_volatility as example3
 
 if len(sys.argv) > 1:
     if int(sys.argv[1]) == 1:
