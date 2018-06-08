@@ -130,7 +130,7 @@ tes_aprob <- data.frame(cbind(aprob, tes, col))
 colnames(tes_aprob) <- c("aprob", "tes", "col")
 tes_aprob$col <- as.factor(tes_aprob$col)
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example1-qn-aprob.pdf", height = 4, width = 4)
+cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example1-qn-aprob.pdf", height = 3, width = 4)
 ggplot(tes_aprob, aes(x = aprob, y = tes, color = col)) +
   geom_point(size=1) +
   lims(x = c(0, 0.75), y = c(0, 1.25)) +
