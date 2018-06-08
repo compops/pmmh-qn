@@ -145,7 +145,7 @@ class LogisticRegressionModel(BaseModel):
             hessian_internal = hess[0:self.no_params_to_estimate, 0:self.no_params_to_estimate]
 
         else:
-            hessian = np.zeros(len(beta))
+            hess = np.zeros(len(beta))
             hessian_internal = np.zeros(len(beta))
 
         return {'log_like': log_like,
