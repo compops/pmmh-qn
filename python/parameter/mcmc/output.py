@@ -186,6 +186,55 @@ def plot(mcmc, max_acf_lag = 500):
             plt.xlabel("iter")
     plt.show()
 
+def compile_benchmark_results(mcmc, sim_name=None):
+    no_iters = mcmc.settings['no_iters']
+    no_burnin_iters = mcmc.settings['no_burnin_iters']
+    no_effective_iters = no_iters - no_burnin_iters
+    idx = range(no_burnin_iters, no_iters)
+    current_time = time.strftime("%c")
+
+    if not 'error_sr1_fro' in mcmc.state_history[no_iters-1]:
+        return None
+
+    benchmarkout = {}
+    benchmarkout.update({'simulation_name': sim_name})
+    benchmarkout.update({'simulation_time': current_time})
+    benchmarkout.update({'time_per_iteration': mcmc.time_per_iter})
+
+    df = pd.DataFrame(mcmc.state_history)
+    field_names = ['error_bfgs_fro', 'error_ls_fro', 'error_sr1_fro']
+
+    for field in field_names:
+        if not field in mcmc.state_history[no_iters-1]:
+            print("Skipping saving " + field + " to file.")
+            continue
+
+        if type(df[no_iters-1][field]) is float or type(df[no_iters-1][field]) is np.float64:
+            tmp = np.zeros((no_effective_iters, 1))
+        else:
+            tmp = np.zeros((no_effective_iters, len(df[no_iters-1][field])))
+
+        for i in range(no_effective_iters):
+            foo = df[i + no_burnin_iters][field]
+
+            if type(foo) is not np.ndarray:
+                if np.isnan(foo): foo = 0.0
+                if np.isposinf(foo): foo = 10000000.0
+                if np.isneginf(foo): foo = -10000000.0
+
+            if type(foo) is np.ndarray:
+                idx = np.where(np.isnan(foo))
+                foo[idx] = 0.0
+                idx = np.where(np.isposinf(foo))
+                foo[idx] = 10000000.0
+                idx = np.where(np.isneginf(foo))
+                foo[idx] = -10000000.0
+
+            tmp[i, :] = foo
+
+        benchmarkout.update({field: tmp})
+
+    return benchmarkout
 
 
 def compile_results(mcmc, sim_name=None):
@@ -256,8 +305,6 @@ def compile_results(mcmc, sim_name=None):
 
     return mcmcout, data, recasted_settings, df
 
-
-
 def save_to_file(mcmc, file_path, sim_name=None, sim_desc=None):
 
     mcout, data, settings, mcoutdf = compile_results(mcmc, sim_name=sim_name)
@@ -275,3 +322,8 @@ def save_to_file(mcmc, file_path, sim_name=None, sim_desc=None):
     #write_to_feather(mcoutdf, file_path, sim_name, 'mcmc_output.feather')
     write_to_json(data, file_path, sim_name, 'data.json')
     write_to_json(settings, file_path, sim_name, 'settings.json')
+
+    benchmark = compile_benchmark_results(mcmc, sim_name=sim_name)
+
+    if not type(benchmark) is type(None):
+        write_to_json(benchmark, file_path, sim_name, 'benchmark.json')

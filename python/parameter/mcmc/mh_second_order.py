@@ -119,9 +119,9 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
 
         if self.settings['correlated_rvs']:
             rvs = {'rvs': proposed_state['rvs']}
-            smoother_completed = estimator.smoother(self.model, rvs=rvs)
+            smoother_completed = estimator.smoother(self.model, compute_hessian=True, rvs=rvs)
         else:
-            smoother_completed = estimator.smoother(self.model)
+            smoother_completed = estimator.smoother(self.model, compute_hessian=True)
 
         if not smoother_completed:
             print("State estimation failed with error...")

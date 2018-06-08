@@ -49,6 +49,8 @@ class BaseStateInference(object):
 
         if 'log_joint_hessian_estimate' in self.results:
             hessian_estimate = self.results['log_joint_hessian_estimate']
+            idx = model.params_to_estimate_idx
+            self.results.update({'hessian_internal_noprior': np.copy(hessian_estimate[np.ix_(idx, idx)])})
             estimate_gradients = True
             estimate_hessian = True
         else:
@@ -98,5 +100,6 @@ class BaseStateInference(object):
         if estimate_hessian:
             idx = model.params_to_estimate_idx
             self.results.update({'hessian_internal': np.array(hessian_estimate[np.ix_(idx, idx)])})
+            self.results.update({'hessian_internal_prior': np.array(hessian_estimate[np.ix_(idx, idx)])})
 
         return True

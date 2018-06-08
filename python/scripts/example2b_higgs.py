@@ -41,7 +41,7 @@ def main(data, seed_offset=0, use_all_data=False):
                    'step_size_hessian': 0.5,
                    'initial_params': initial_params,
                    'min_no_samples_hessian_estimate': len(initial_params) + 2,
-                   'no_iters_between_progress_reports': 1000,
+                   'no_iters_between_progress_reports': 100,
                    'correlated_rvs': True,
                    'correlated_rvs_sigma': 0.01,
                    'remove_overflow_iterations': False,
@@ -51,6 +51,7 @@ def main(data, seed_offset=0, use_all_data=False):
                    'hess_corr_fallback': hessian_guess,
                    'hess_corr_method': 'flip'
                    }
+
 
     # new_mh_settings = copy.deepcopy(mh_settings)
     # new_mh_settings.update({'hessian': hessian_estimate})
@@ -63,26 +64,26 @@ def main(data, seed_offset=0, use_all_data=False):
     #        seed_offset=seed_offset)
 
 
-    # new_mh_settings = copy.deepcopy(mh_settings)
-    # new_mh_settings.update({'hessian': hessian_estimate})
-    # new_mh_settings.update({'adapt_step_size': False})
-    # new_mh_settings.update({'step_size_gradient': 0.5})
-    # new_mh_settings.update({'step_size_hessian': 0.5})
-    # mh.run('mh2',
-    #        mh_settings=new_mh_settings,
-    #        data=data,
-    #        use_all_data=use_all_data,
-    #        seed_offset=seed_offset)
-
     new_mh_settings = copy.deepcopy(mh_settings)
-    new_mh_settings.update({'adapt_step_size_target': 0.2})
-    new_mh_settings.update({'ls_regularisation_parameter': 0.1})
-    mh.run('qmh',
+    new_mh_settings.update({'hessian': hessian_estimate})
+    new_mh_settings.update({'adapt_step_size': False})
+    new_mh_settings.update({'step_size_gradient': 0.5})
+    new_mh_settings.update({'step_size_hessian': 0.5})
+    mh.run('mh2',
            mh_settings=new_mh_settings,
            data=data,
            use_all_data=use_all_data,
-           seed_offset=seed_offset,
-           alg_type='ls')
+           seed_offset=seed_offset)
+
+    # new_mh_settings = copy.deepcopy(mh_settings)
+    # new_mh_settings.update({'adapt_step_size_target': 0.2})
+    # new_mh_settings.update({'ls_regularisation_parameter': 0.1})
+    # mh.run('qmh',
+    #        mh_settings=new_mh_settings,
+    #        data=data,
+    #        use_all_data=use_all_data,
+    #        seed_offset=seed_offset,
+    #        alg_type='ls')
 
     return None
 

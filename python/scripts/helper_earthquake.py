@@ -27,16 +27,16 @@ def run(mh_version, mh_settings, seed_offset=0, alg_type=None):
     # Metropolis-Hastings algorithm
     if mh_version is 'mh0':
         sampler = MetropolisHastings0(sys_model, mh_settings)
-        file_path = '../results/example2-earthquake/mh0'
+        file_path = '../results/example3-earthquake/mh0'
     elif mh_version is 'mh1':
         sampler = MetropolisHastings1(sys_model, mh_settings)
-        file_path = '../results/example2-earthquake/mh1'
+        file_path = '../results/example3-earthquake/mh1'
     elif mh_version is 'mh2':
         sampler = MetropolisHastings2(sys_model, mh_settings)
-        file_path = '../results/example2-earthquake/mh2'
+        file_path = '../results/example3-earthquake/mh2'
     elif mh_version is 'qmh':
         sampler = QuasiNewtonMetropolisHastings(sys_model, mh_settings, qn_method=alg_type)
-        file_path = '../results/example2-earthquake/qmh_' + alg_type
+        file_path = '../results/example3-earthquake/qmh_' + alg_type
     else:
         raise NameError("Unknown MH method...")
 
@@ -45,7 +45,7 @@ def run(mh_version, mh_settings, seed_offset=0, alg_type=None):
 
     # Save results to file
     if alg_type:
-        sim_name = 'example2-' + mh_version + '_' + alg_type + '_' + str(seed_offset)
+        sim_name = 'example3-' + mh_version + '_' + alg_type + '_' + str(seed_offset)
     else:
-        sim_name = 'example2-' + mh_version + '_' + str(seed_offset)
+        sim_name = 'example3-' + mh_version + '_' + str(seed_offset)
     sampler.save_to_file(file_path=file_path, sim_name=sim_name, sim_desc="")
