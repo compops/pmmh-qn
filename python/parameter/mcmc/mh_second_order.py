@@ -133,7 +133,9 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
 
         try:
             hess = np.linalg.inv(estimator.results['hessian_internal'])
+            hess = np.diag(np.diag(hess))
             hess, fixed_hess = correct_hessian(hess, alt_hess, hess_corr)
+
             nat_grad = hess @ grad
             hess *= step_size_hessian
             nat_grad *= step_size_gradient

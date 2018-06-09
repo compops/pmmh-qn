@@ -30,7 +30,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         self.using_hessians = True
         self.emp_hessian = None
         model.using_gradients = self.using_gradients
-        model.using_hessians = self.using_hessians
+        model.using_hessians = False
 
         if qn_method is 'bfgs':
             self.name = "Quasi-Newton Metropolis-Hastings using BFGS"

@@ -19,7 +19,7 @@ def main(seed_offset=0):
                    'adapt_step_size_rate': 0.5,
                    'adapt_step_size_target': 0.6,
                    'initial_params': initial_params,
-                   'no_iters_between_progress_reports': 1000,
+                   'no_iters_between_progress_reports': 100,
                    'correlated_rvs': True,
                    'correlated_rvs_sigma': 0.5,
                    'memory_length': 30,
@@ -44,6 +44,15 @@ def main(seed_offset=0):
     new_mh_settings.update({'step_size_gradient': 0.01 *  1.125 / np.sqrt(4**(1.0 / 3.0))})
     new_mh_settings.update({'step_size_hessian': 0.01 *  1.125 / np.sqrt(4**(1.0 / 3.0))})
     mh.run('mh1',
+           mh_settings=new_mh_settings,
+           seed_offset=seed_offset)
+
+    new_mh_settings = copy.deepcopy(mh_settings)
+    new_mh_settings.update({'hessian': hessian_estimate})
+    new_mh_settings.update({'adapt_step_size': False})
+    new_mh_settings.update({'step_size_gradient': 0.8})
+    new_mh_settings.update({'step_size_hessian': 0.8})
+    mh.run('mh2',
            mh_settings=new_mh_settings,
            seed_offset=seed_offset)
 

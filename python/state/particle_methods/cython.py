@@ -56,17 +56,22 @@ class ParticleMethodsCython(BaseStateInference):
         obs = np.array(model.obs.flatten()).astype(np.float)
         params = model.get_all_params()
 
+        if model.using_hessians:
+            hessian_flag = 1
+        else:
+            hessian_flag = 0
+
         try:
             if 'rvs' in kwargs:
                 rvs = kwargs['rvs']['rvs'].flatten()
                 rv_r = norm.cdf(rvs[0:len(obs)]).flatten()
                 rv_p = rvs[len(obs):]
-                xf, xs, ll, grad, xtraj = self.c_smoother_corr(obs, params=params, rvr=rv_r, rvp=rv_p)
             else:
                 rvs = np.random.normal(size=self.dim_rvs).flatten()
                 rv_r = norm.cdf(rvs[0:len(obs)]).flatten()
                 rv_p = rvs[len(obs):]
-                xf, ll, xtraj = self.c_filter_corr(obs, params=params, rvr=rv_r, rvp=rv_p)
+
+            xf, xs, ll, grad, xtraj, hess1, hess2 = self.c_smoother_corr(obs, params=params, rvr=rv_r, rvp=rv_p, compute_hessian=hessian_flag)
 
             # Compute estimate of gradient and Hessian
             if model.using_gradients or model.using_hessians:
@@ -76,11 +81,10 @@ class ParticleMethodsCython(BaseStateInference):
                 grad_est = np.nansum(grad, axis=1)
 
             if model.using_hessians:
-                part1 = np.mat(grad).transpose()
-                part1 = np.dot(np.mat(grad), part1)
-                part2 = np.mat(grad_est)
-                part2 = np.dot(np.mat(grad_est).transpose(), part2)
-                hessian_est = part1 - part2 / model.no_obs
+                part1 = np.diag(grad_est**2)
+                part2 = np.array(hess1).reshape((model.no_params,model.no_params))
+                part2 += np.array(hess2).reshape((model.no_params, model.no_params))
+                hessian_est = part1 - part2
 
             self.results.update({'filt_state_est': np.array(xf).flatten()})
             self.results.update({'state_trajectory': np.array(xtraj).flatten()})
