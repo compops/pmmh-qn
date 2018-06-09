@@ -81,7 +81,7 @@ class ParticleMethodsCython(BaseStateInference):
                 grad_est = np.nansum(grad, axis=1)
 
             if model.using_hessians:
-                part1 = np.diag(grad_est**2)
+                part1 = np.inner(grad_est, grad_est)
                 part2 = np.array(hess1).reshape((model.no_params,model.no_params))
                 part2 += np.array(hess2).reshape((model.no_params, model.no_params))
                 hessian_est = part1 - part2

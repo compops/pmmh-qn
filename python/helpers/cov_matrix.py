@@ -151,12 +151,12 @@ def correct_hessian(estimate, fallback_hessian, strategy='flip', verbose=False):
     if strategy is 'replace' or estimate is None:
         # Replace the Hessian estimate with another estimate
         corr_estimate = fallback_hessian
-        if verbose:
-            print("Corrected Hessian: replaced with fallback Hessian.")
+        #if verbose:
+        print("Corrected Hessian: replaced with fallback Hessian.")
 
     elif strategy is 'regularise':
         # Shift the eigenvalues by adding a diagonal matrix
-        corr_estimate = estimate - 2.0 * np.min(np.linalg.eig(estimate)[0])
+        corr_estimate = estimate - 2.0 * np.min(np.linalg.eig(estimate)[0]) * np.eye(estimate.shape[0])
         if verbose:
             print("Corrected Hessian: added diagonal matrix to shift negative eigenvalues.")
 

@@ -74,17 +74,13 @@ class BaseStateInference(object):
             else:
                 gradient_estimate[i] += log_prior_gradient[param1]
                 log_prior_hessian = model.log_prior_hessian()
-
-            if estimate_hessian:
-                for param2 in log_prior_gradient.keys():
-                    if isinstance(model.params[param2], tuple):
-                        raise NotImplementedError()
-                    else:
-                        j = 0
-                        hessian_estimate[i, j] -= log_prior_hessian[param1]
-                        hessian_estimate[i, j] -= log_prior_hessian[param2]
-                        j += 1
             i += 1
+
+        # i = 0
+        # if estimate_hessian:
+        #     for param1 in log_prior_gradient.keys():
+        #         hessian_estimate[i, i] -= log_prior_hessian[param1]
+        #         i += 1
 
         # Compile output
         i = 0

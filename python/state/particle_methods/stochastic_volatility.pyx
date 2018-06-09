@@ -13,7 +13,7 @@ from libc.float cimport FLT_MAX
 from libc.stdlib cimport malloc, free
 
 DEF LAG = 10
-DEF NPART = 100
+DEF NPART = 75
 DEF NOBS = 361
 DEF NPARAMS = 4
 DEF PI = 3.1415
@@ -479,39 +479,57 @@ def flps_sv_corr(double [:] obs, double [:] params, double [:] rvr, double [:] r
                     sub_hessian1[3][3] += 2.0 * sigmav**(-1) * rho * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
                     sub_hessian1[3][3] -= exp(-curr_particle) * obs[i - LAG]**2 * rho_term
 
-                    # sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
-                    # sub_hessian1[0][1] *= (1.0 - phi**2)
-                    # sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
-                    # sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
-                    # sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[1][0] = sub_hessian1[0][1]
-                    # sub_hessian1[2][0] = sub_hessian1[0][2]
-                    # sub_hessian1[3][0] = sub_hessian1[0][3]
+                    sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+                    sub_hessian1[0][1] *= (1.0 - phi**2)
+                    sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+                    sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+                    sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[1][0] = sub_hessian1[0][1]
+                    sub_hessian1[2][0] = sub_hessian1[0][2]
+                    sub_hessian1[3][0] = sub_hessian1[0][3]
 
-                    # sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
-                    # sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
-                    # sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
-                    # sub_hessian1[2][1] = sub_hessian1[1][2]
-                    # sub_hessian1[3][1] = sub_hessian1[1][3]
+                    sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+                    sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+                    sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+                    sub_hessian1[2][1] = sub_hessian1[1][2]
+                    sub_hessian1[3][1] = sub_hessian1[1][3]
 
-                    # sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
-                    # sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
-                    # sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[2][3] = sub_hessian1[2][3]
+                    sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+                    sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+                    sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[2][3] = sub_hessian1[2][3]
 
                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+                    sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+                    sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
+                    sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
+
                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+                    sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]
+                    sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
+
                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+                    sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]
+
                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
 
                     for k in range(NPARAMS):
                         if isfinite(sub_hessian1[k][k]):
                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
-                        if isfinite(sub_hessian2[k][l]):
+
+                        if isfinite(sub_hessian2[k][k]):
                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
+
+                        for l in range(k+1, NPARAMS):
+                            if isfinite(sub_hessian1[k][l]):
+                                hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+                                hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+                            if isfinite(sub_hessian2[k][l]):
+                                hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+                                hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
 
         # Estimate log-likelihood
         log_like += max_weight + log(norm_factor) - log(NPART)
@@ -553,39 +571,58 @@ def flps_sv_corr(double [:] obs, double [:] params, double [:] rvr, double [:] r
                     sub_hessian1[3][3] += 2.0 * sigmav**(-1) * rho * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
                     sub_hessian1[3][3] -= exp(-curr_particle) * obs[i - LAG]**2 * rho_term
 
-                    # sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
-                    # sub_hessian1[0][1] *= (1.0 - phi**2)
-                    # sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
-                    # sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
-                    # sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[1][0] = sub_hessian1[0][1]
-                    # sub_hessian1[2][0] = sub_hessian1[0][2]
-                    # sub_hessian1[3][0] = sub_hessian1[0][3]
+                    sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+                    sub_hessian1[0][1] *= (1.0 - phi**2)
+                    sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+                    sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+                    sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[1][0] = sub_hessian1[0][1]
+                    sub_hessian1[2][0] = sub_hessian1[0][2]
+                    sub_hessian1[3][0] = sub_hessian1[0][3]
 
-                    # sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
-                    # sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
-                    # sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
-                    # sub_hessian1[2][1] = sub_hessian1[1][2]
-                    # sub_hessian1[3][1] = sub_hessian1[1][3]
+                    sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+                    sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+                    sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+                    sub_hessian1[2][1] = sub_hessian1[1][2]
+                    sub_hessian1[3][1] = sub_hessian1[1][3]
 
-                    # sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
-                    # sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
-                    # sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
-                    # sub_hessian1[2][3] = sub_hessian1[2][3]
+                    sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+                    sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+                    sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+                    sub_hessian1[2][3] = sub_hessian1[2][3]
 
                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+                    sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+                    sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
+                    sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
+
                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+                    sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]
+                    sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
+
                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+                    sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]
+
                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
 
                     for k in range(NPARAMS):
                         if isfinite(sub_hessian1[k][k]):
                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
-                        if isfinite(sub_hessian2[k][l]):
+
+                        if isfinite(sub_hessian2[k][k]):
                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
+
+                        for l in range(k+1, NPARAMS):
+                            if isfinite(sub_hessian1[k][l]):
+                                hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+                                hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+                            if isfinite(sub_hessian2[k][l]):
+                                hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+                                hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
+
 
     # Sample trajectory
     idx = sampleParticle_corr(weights, rvr[0])

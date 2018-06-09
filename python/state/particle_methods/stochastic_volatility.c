@@ -2553,7 +2553,7 @@ static PyObject *__pyx_tp_new__memoryviewslice(PyTypeObject *t, PyObject *a, PyO
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_10;
-static PyObject *__pyx_int_100;
+static PyObject *__pyx_int_75;
 static PyObject *__pyx_int_361;
 static PyObject *__pyx_int_184977713;
 static PyObject *__pyx_int_neg_1;
@@ -3113,13 +3113,13 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
   double *__pyx_v_weights;
   double *__pyx_v_particles;
   double *__pyx_v_weights_at_t;
-  int __pyx_v_ancestors[0x64];
-  int __pyx_v_new_idx[0x64];
-  double __pyx_v_old_particles[0x64];
+  int __pyx_v_ancestors[75];
+  int __pyx_v_new_idx[75];
+  double __pyx_v_old_particles[75];
   double __pyx_v_filt_state_est[0x169];
   double __pyx_v_state_trajectory[0x169];
-  double __pyx_v_unnorm_weights[0x64];
-  double __pyx_v_shifted_weights[0x64];
+  double __pyx_v_unnorm_weights[75];
+  double __pyx_v_shifted_weights[75];
   double __pyx_v_log_like;
   double __pyx_v_mu;
   double __pyx_v_phi;
@@ -3169,7 +3169,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *     cdef int *old_ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
  *     cdef double *weights = <double *>malloc(NPART * NOBS * sizeof(double))
  */
-  __pyx_v_ancestry = ((int *)malloc((0x8D04 * (sizeof(int)))));
+  __pyx_v_ancestry = ((int *)malloc((0x69C3 * (sizeof(int)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":63
  *     # Initialise variables
@@ -3178,7 +3178,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *     cdef double *weights = <double *>malloc(NPART * NOBS * sizeof(double))
  *     cdef double *particles = <double *>malloc(NPART * NOBS * sizeof(double))
  */
-  __pyx_v_old_ancestry = ((int *)malloc((0x8D04 * (sizeof(int)))));
+  __pyx_v_old_ancestry = ((int *)malloc((0x69C3 * (sizeof(int)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":64
  *     cdef int *ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
@@ -3187,7 +3187,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *     cdef double *particles = <double *>malloc(NPART * NOBS * sizeof(double))
  *     cdef double *weights_at_t = <double *>malloc(NPART * sizeof(double))
  */
-  __pyx_v_weights = ((double *)malloc((0x8D04 * (sizeof(double)))));
+  __pyx_v_weights = ((double *)malloc((0x69C3 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":65
  *     cdef int *old_ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
@@ -3196,7 +3196,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *     cdef double *weights_at_t = <double *>malloc(NPART * sizeof(double))
  * 
  */
-  __pyx_v_particles = ((double *)malloc((0x8D04 * (sizeof(double)))));
+  __pyx_v_particles = ((double *)malloc((0x69C3 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":66
  *     cdef double *weights = <double *>malloc(NPART * NOBS * sizeof(double))
@@ -3205,7 +3205,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  * 
  *     cdef int[NPART] ancestors
  */
-  __pyx_v_weights_at_t = ((double *)malloc((0x64 * (sizeof(double)))));
+  __pyx_v_weights_at_t = ((double *)malloc((75 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":75
  *     cdef double[NPART] unnorm_weights
@@ -3322,7 +3322,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             ancestry[i + j * NOBS] = 0
  *             old_ancestry[i + j * NOBS] = 0
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":102
@@ -3379,7 +3379,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *         particles[0 + j * NOBS] = mu + stDev * rvp[0 + j * NOBS]
  *         weights[0 + j * NOBS] = 1.0 / NPART
  */
-  for (__pyx_t_5 = 0; __pyx_t_5 < 0x64; __pyx_t_5+=1) {
+  for (__pyx_t_5 = 0; __pyx_t_5 < 75; __pyx_t_5+=1) {
     __pyx_v_j = __pyx_t_5;
 
     /* "state/particle_methods/stochastic_volatility.pyx":110
@@ -3400,7 +3400,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *         ancestry[0 + j * NOBS] = j
  *         weights_at_t[j] = 0.0
  */
-    (__pyx_v_weights[(0 + (__pyx_v_j * 0x169))]) = (1.0 / 100.0);
+    (__pyx_v_weights[(0 + (__pyx_v_j * 0x169))]) = (1.0 / 75.0);
 
     /* "state/particle_methods/stochastic_volatility.pyx":112
  *         particles[0 + j * NOBS] = mu + stDev * rvp[0 + j * NOBS]
@@ -3448,7 +3448,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *         particles[0 + j * NOBS] = old_particles[new_idx[j]]
  */
   __pyx_t_11 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_double);
-  __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+  __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
   if (unlikely(!__pyx_t_11 || !__pyx_t_10 || !PyBytes_AsString(__pyx_t_11))) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_GOTREF(__pyx_t_10);
@@ -3460,7 +3460,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
   __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_t_9), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_DECREF(((PyObject *)__pyx_t_9)); __pyx_t_9 = 0;
   __pyx_t_10 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_int);
-  __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+  __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
   if (unlikely(!__pyx_t_10 || !__pyx_t_11 || !PyBytes_AsString(__pyx_t_10))) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GOTREF(__pyx_t_11);
@@ -3488,7 +3488,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *         particles[0 + j * NOBS] = old_particles[new_idx[j]]
  * 
  */
-  for (__pyx_t_5 = 0; __pyx_t_5 < 0x64; __pyx_t_5+=1) {
+  for (__pyx_t_5 = 0; __pyx_t_5 < 75; __pyx_t_5+=1) {
     __pyx_v_j = __pyx_t_5;
 
     /* "state/particle_methods/stochastic_volatility.pyx":120
@@ -3518,7 +3518,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             weights_at_t[j] = weights[i - 1 + j * NOBS]
  *         systematic_corr(ancestors, weights_at_t, rvr[i])
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":126
@@ -3561,7 +3561,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *                 old_ancestry[k + j * NOBS] = ancestry[k + j * NOBS]
  * 
  */
-      for (__pyx_t_17 = 0; __pyx_t_17 < 0x64; __pyx_t_17+=1) {
+      for (__pyx_t_17 = 0; __pyx_t_17 < 75; __pyx_t_17+=1) {
         __pyx_v_j = __pyx_t_17;
 
         /* "state/particle_methods/stochastic_volatility.pyx":132
@@ -3582,7 +3582,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             ancestry[i + j * NOBS] = ancestors[j]
  *             for k in range(i):
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":135
@@ -3624,7 +3624,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             mean = mu + phi * (particles[i - 1 + ancestors[j] * NOBS] - mu)
  *             mean += sigmav * rho * exp(-0.5 * particles[i + ancestors[j] * NOBS]) * obs[i - 1]
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":141
@@ -3675,7 +3675,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             old_particles[j] = particles[i + j * NOBS]
  * 
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":148
@@ -3707,7 +3707,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *                 old_ancestry[k + j * NOBS] = ancestry[k + j * NOBS]
  * 
  */
-      for (__pyx_t_17 = 0; __pyx_t_17 < 0x64; __pyx_t_17+=1) {
+      for (__pyx_t_17 = 0; __pyx_t_17 < 75; __pyx_t_17+=1) {
         __pyx_v_j = __pyx_t_17;
 
         /* "state/particle_methods/stochastic_volatility.pyx":152
@@ -3729,7 +3729,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *         for j in range(NPART):
  */
     __pyx_t_11 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_double);
-    __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+    __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
     if (unlikely(!__pyx_t_11 || !__pyx_t_10 || !PyBytes_AsString(__pyx_t_11))) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_GOTREF(__pyx_t_10);
@@ -3741,7 +3741,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
     __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_t_9), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_DECREF(((PyObject *)__pyx_t_9)); __pyx_t_9 = 0;
     __pyx_t_10 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_int);
-    __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+    __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
     if (unlikely(!__pyx_t_10 || !__pyx_t_11 || !PyBytes_AsString(__pyx_t_10))) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_GOTREF(__pyx_t_11);
@@ -3769,7 +3769,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             particles[i + j * NOBS] = old_particles[new_idx[j]]
  * 
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":157
@@ -3789,7 +3789,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             for k in range(i+1):
  *                 ancestry[k + j * NOBS] = old_ancestry[k + new_idx[j] * NOBS]
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":160
@@ -3822,7 +3822,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             unnorm_weights[j] = norm_logpdf(obs[i], 0.0, exp(0.5 *particles[i + j * NOBS]))
  * 
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":165
@@ -3862,7 +3862,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             shifted_weights[j] = exp(unnorm_weights[j] - max_weight)
  *             if isfinite(shifted_weights[j]):
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":170
@@ -3932,7 +3932,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  *             weights[i + j * NOBS] = shifted_weights[j] / norm_factor
  *             if isfinite(weights[i + j * NOBS] * particles[i + j * NOBS]) != 0:
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":179
@@ -3981,7 +3981,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_4bpf
  * 
  *     # Sample trajectory
  */
-    __pyx_v_log_like = (__pyx_v_log_like + ((__pyx_v_max_weight + log(__pyx_v_norm_factor)) - log(100.0)));
+    __pyx_v_log_like = (__pyx_v_log_like + ((__pyx_v_max_weight + log(__pyx_v_norm_factor)) - log(75.0)));
   }
 
   /* "state/particle_methods/stochastic_volatility.pyx":187
@@ -4239,8 +4239,8 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
   double *__pyx_v_particles;
   double *__pyx_v_weights;
   double *__pyx_v_weights_at_t;
-  double __pyx_v_old_particles[0x64];
-  int __pyx_v_new_idx[0x64];
+  double __pyx_v_old_particles[75];
+  int __pyx_v_new_idx[75];
   double __pyx_v_filt_state_est[0x169];
   double __pyx_v_smo_state_est[0x169];
   double __pyx_v_state_trajectory[0x169];
@@ -4322,14 +4322,29 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
   Py_ssize_t __pyx_t_37;
   Py_ssize_t __pyx_t_38;
   Py_ssize_t __pyx_t_39;
-  Py_ssize_t __pyx_t_40;
+  int __pyx_t_40;
   Py_ssize_t __pyx_t_41;
-  PyObject *__pyx_t_42 = NULL;
-  PyObject *__pyx_t_43 = NULL;
-  PyObject *__pyx_t_44 = NULL;
-  PyObject *__pyx_t_45 = NULL;
-  PyObject *__pyx_t_46 = NULL;
-  PyObject *__pyx_t_47 = NULL;
+  Py_ssize_t __pyx_t_42;
+  Py_ssize_t __pyx_t_43;
+  Py_ssize_t __pyx_t_44;
+  Py_ssize_t __pyx_t_45;
+  Py_ssize_t __pyx_t_46;
+  Py_ssize_t __pyx_t_47;
+  Py_ssize_t __pyx_t_48;
+  Py_ssize_t __pyx_t_49;
+  Py_ssize_t __pyx_t_50;
+  Py_ssize_t __pyx_t_51;
+  Py_ssize_t __pyx_t_52;
+  Py_ssize_t __pyx_t_53;
+  Py_ssize_t __pyx_t_54;
+  Py_ssize_t __pyx_t_55;
+  Py_ssize_t __pyx_t_56;
+  PyObject *__pyx_t_57 = NULL;
+  PyObject *__pyx_t_58 = NULL;
+  PyObject *__pyx_t_59 = NULL;
+  PyObject *__pyx_t_60 = NULL;
+  PyObject *__pyx_t_61 = NULL;
+  PyObject *__pyx_t_62 = NULL;
   __Pyx_RefNannySetupContext("flps_sv_corr", 0);
 
   /* "state/particle_methods/stochastic_volatility.pyx":206
@@ -4339,7 +4354,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *particle_history = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef double *old_particle_history = <double *>malloc(LAG * NPART * sizeof(double))
  */
-  __pyx_v_ancestors = ((int *)malloc((0x64 * (sizeof(int)))));
+  __pyx_v_ancestors = ((int *)malloc((75 * (sizeof(int)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":207
  *     # Initialise variables
@@ -4348,7 +4363,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *old_particle_history = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef int *ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
  */
-  __pyx_v_particle_history = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_particle_history = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":208
  *     cdef int *ancestors = <int *>malloc(NPART * sizeof(int))
@@ -4357,7 +4372,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef int *ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
  *     cdef int *old_ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
  */
-  __pyx_v_old_particle_history = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_old_particle_history = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":209
  *     cdef double *particle_history = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4366,7 +4381,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef int *old_ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
  * 
  */
-  __pyx_v_ancestry = ((int *)malloc((0x8D04 * (sizeof(int)))));
+  __pyx_v_ancestry = ((int *)malloc((0x69C3 * (sizeof(int)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":210
  *     cdef double *old_particle_history = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4375,7 +4390,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  * 
  *     cdef double *particles = <double *>malloc(NOBS * NPART * sizeof(double))
  */
-  __pyx_v_old_ancestry = ((int *)malloc((0x8D04 * (sizeof(int)))));
+  __pyx_v_old_ancestry = ((int *)malloc((0x69C3 * (sizeof(int)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":212
  *     cdef int *old_ancestry = <int *>malloc(NPART * NOBS * sizeof(int))
@@ -4384,7 +4399,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *weights = <double *>malloc(NOBS * NPART * sizeof(double))
  *     cdef double *weights_at_t = <double *>malloc(NPART * sizeof(double))
  */
-  __pyx_v_particles = ((double *)malloc((0x8D04 * (sizeof(double)))));
+  __pyx_v_particles = ((double *)malloc((0x69C3 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":213
  * 
@@ -4393,7 +4408,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *weights_at_t = <double *>malloc(NPART * sizeof(double))
  * 
  */
-  __pyx_v_weights = ((double *)malloc((0x8D04 * (sizeof(double)))));
+  __pyx_v_weights = ((double *)malloc((0x69C3 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":214
  *     cdef double *particles = <double *>malloc(NOBS * NPART * sizeof(double))
@@ -4402,7 +4417,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  * 
  *     cdef double[NPART] old_particles
  */
-  __pyx_v_weights_at_t = ((double *)malloc((0x64 * (sizeof(double)))));
+  __pyx_v_weights_at_t = ((double *)malloc((75 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":223
  *     cdef double[NOBS] state_trajectory
@@ -4411,7 +4426,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *shifted_weights = <double *>malloc(NPART * sizeof(double))
  * 
  */
-  __pyx_v_unnorm_weights = ((double *)malloc((0x64 * (sizeof(double)))));
+  __pyx_v_unnorm_weights = ((double *)malloc((75 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":224
  * 
@@ -4420,7 +4435,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  * 
  *     cdef double sub_gradient[NPARAMS]
  */
-  __pyx_v_shifted_weights = ((double *)malloc((0x64 * (sizeof(double)))));
+  __pyx_v_shifted_weights = ((double *)malloc((75 * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":229
  *     cdef double gradient[NPARAMS][NOBS]
@@ -4429,7 +4444,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *old_alpha_history0 = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef double *alpha_history1 = <double *>malloc(LAG * NPART * sizeof(double))
  */
-  __pyx_v_alpha_history0 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_alpha_history0 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":230
  * 
@@ -4438,7 +4453,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *alpha_history1 = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef double *old_alpha_history1 = <double *>malloc(LAG * NPART * sizeof(double))
  */
-  __pyx_v_old_alpha_history0 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_old_alpha_history0 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":231
  *     cdef double *alpha_history0 = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4447,7 +4462,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *old_alpha_history1 = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef double *alpha_history2 = <double *>malloc(LAG * NPART * sizeof(double))
  */
-  __pyx_v_alpha_history1 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_alpha_history1 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":232
  *     cdef double *old_alpha_history0 = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4456,7 +4471,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *alpha_history2 = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef double *old_alpha_history2 = <double *>malloc(LAG * NPART * sizeof(double))
  */
-  __pyx_v_old_alpha_history1 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_old_alpha_history1 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":233
  *     cdef double *alpha_history1 = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4465,7 +4480,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *old_alpha_history2 = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef double *alpha_history3 = <double *>malloc(LAG * NPART * sizeof(double))
  */
-  __pyx_v_alpha_history2 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_alpha_history2 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":234
  *     cdef double *old_alpha_history1 = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4474,7 +4489,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *alpha_history3 = <double *>malloc(LAG * NPART * sizeof(double))
  *     cdef double *old_alpha_history3 = <double *>malloc(LAG * NPART * sizeof(double))
  */
-  __pyx_v_old_alpha_history2 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_old_alpha_history2 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":235
  *     cdef double *alpha_history2 = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4483,7 +4498,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     cdef double *old_alpha_history3 = <double *>malloc(LAG * NPART * sizeof(double))
  * 
  */
-  __pyx_v_alpha_history3 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_alpha_history3 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":236
  *     cdef double *old_alpha_history2 = <double *>malloc(LAG * NPART * sizeof(double))
@@ -4492,7 +4507,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  * 
  *     cdef double hessian1[NPARAMS][NPARAMS]
  */
-  __pyx_v_old_alpha_history3 = ((double *)malloc((0x3E8 * (sizeof(double)))));
+  __pyx_v_old_alpha_history3 = ((double *)malloc((0x2EE * (sizeof(double)))));
 
   /* "state/particle_methods/stochastic_volatility.pyx":243
  *     cdef double sub_hessian2[NPARAMS][NPARAMS]
@@ -4636,7 +4651,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             particle_history[k + j * LAG] = 0.0
  *             if compute_hessian == 1:
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":273
@@ -4794,7 +4809,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             weights_at_t[j] = 0.0
  *             particles[i + j * NOBS] = 0.0
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":290
@@ -4929,7 +4944,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *         particles[0 + j * NOBS] = mu + stDev * particles[0 + j * NOBS]
  *         weights[0 + j * NOBS] = 1.0 / NPART
  */
-  for (__pyx_t_5 = 0; __pyx_t_5 < 0x64; __pyx_t_5+=1) {
+  for (__pyx_t_5 = 0; __pyx_t_5 < 75; __pyx_t_5+=1) {
     __pyx_v_j = __pyx_t_5;
 
     /* "state/particle_methods/stochastic_volatility.pyx":307
@@ -4948,7 +4963,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *         particle_history[0 + j * LAG] = particles[0 + j * NOBS]
  *         ancestry[0 + j * NOBS] = j
  */
-    (__pyx_v_weights[(0 + (__pyx_v_j * 0x169))]) = (1.0 / 100.0);
+    (__pyx_v_weights[(0 + (__pyx_v_j * 0x169))]) = (1.0 / 75.0);
 
     /* "state/particle_methods/stochastic_volatility.pyx":309
  *         particles[0 + j * NOBS] = mu + stDev * particles[0 + j * NOBS]
@@ -4994,7 +5009,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *         filt_state_est[0] += weights[0 + j * NOBS] * particles[0 + j * NOBS]
  * 
  */
-  for (__pyx_t_5 = 0; __pyx_t_5 < 0x64; __pyx_t_5+=1) {
+  for (__pyx_t_5 = 0; __pyx_t_5 < 75; __pyx_t_5+=1) {
     __pyx_v_j = __pyx_t_5;
 
     /* "state/particle_methods/stochastic_volatility.pyx":315
@@ -5016,7 +5031,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *     for j in range(NPART):
  */
   __pyx_t_11 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_double);
-  __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+  __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
   if (unlikely(!__pyx_t_11 || !__pyx_t_10 || !PyBytes_AsString(__pyx_t_11))) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_GOTREF(__pyx_t_10);
@@ -5028,7 +5043,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
   __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_t_9), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_DECREF(((PyObject *)__pyx_t_9)); __pyx_t_9 = 0;
   __pyx_t_10 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_int);
-  __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+  __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
   if (unlikely(!__pyx_t_10 || !__pyx_t_11 || !PyBytes_AsString(__pyx_t_10))) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GOTREF(__pyx_t_11);
@@ -5056,7 +5071,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *         particles[0 + j * NOBS] = old_particles[new_idx[j]]
  * 
  */
-  for (__pyx_t_5 = 0; __pyx_t_5 < 0x64; __pyx_t_5+=1) {
+  for (__pyx_t_5 = 0; __pyx_t_5 < 75; __pyx_t_5+=1) {
     __pyx_v_j = __pyx_t_5;
 
     /* "state/particle_methods/stochastic_volatility.pyx":321
@@ -5095,7 +5110,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             weights_at_t[j] = weights[i - 1 + j * NOBS]
  *         systematic_corr(ancestors, weights_at_t, rvr[i])
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":328
@@ -5126,7 +5141,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             for k in range(LAG):
  *                 old_particle_history[k + j * LAG] = particle_history[k + j * LAG]
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":333
@@ -5224,7 +5239,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *                 old_ancestry[k + j * NOBS] = ancestry[k + j * NOBS]
  * 
  */
-      for (__pyx_t_17 = 0; __pyx_t_17 < 0x64; __pyx_t_17+=1) {
+      for (__pyx_t_17 = 0; __pyx_t_17 < 75; __pyx_t_17+=1) {
         __pyx_v_j = __pyx_t_17;
 
         /* "state/particle_methods/stochastic_volatility.pyx":344
@@ -5245,7 +5260,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             ancestry[i + j * NOBS] = ancestors[j]
  *             for k in range(i):
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":347
@@ -5287,7 +5302,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             mean = mu + phi * (particles[i - 1 + ancestors[j] * NOBS] - mu)
  *             mean += sigmav * rho * exp(-0.5 * particles[i - 1 + ancestors[j] * NOBS]) * obs[i - 1]
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":353
@@ -5571,7 +5586,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             old_particles[j] = particles[i + j * NOBS]
  * 
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":392
@@ -5601,7 +5616,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *                 for k in range(LAG):
  *                     old_alpha_history0[k + j * LAG] = alpha_history0[k + j * LAG]
  */
-      for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+      for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
         __pyx_v_j = __pyx_t_6;
 
         /* "state/particle_methods/stochastic_volatility.pyx":396
@@ -5680,7 +5695,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *                 old_ancestry[k + j * NOBS] = ancestry[k + j * NOBS]
  * 
  */
-      for (__pyx_t_17 = 0; __pyx_t_17 < 0x64; __pyx_t_17+=1) {
+      for (__pyx_t_17 = 0; __pyx_t_17 < 75; __pyx_t_17+=1) {
         __pyx_v_j = __pyx_t_17;
 
         /* "state/particle_methods/stochastic_volatility.pyx":404
@@ -5702,7 +5717,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *         for j in range(NPART):
  */
     __pyx_t_11 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_double);
-    __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+    __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
     if (unlikely(!__pyx_t_11 || !__pyx_t_10 || !PyBytes_AsString(__pyx_t_11))) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_GOTREF(__pyx_t_10);
@@ -5714,7 +5729,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
     __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_t_9), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_DECREF(((PyObject *)__pyx_t_9)); __pyx_t_9 = 0;
     __pyx_t_10 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_int);
-    __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x64));
+    __pyx_t_11 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)75));
     if (unlikely(!__pyx_t_10 || !__pyx_t_11 || !PyBytes_AsString(__pyx_t_10))) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_GOTREF(__pyx_t_11);
@@ -5742,7 +5757,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             particles[i + j * NOBS] = old_particles[new_idx[j]]
  *             particle_history[0 + j * LAG] = old_particles[new_idx[j]]
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":409
@@ -5879,7 +5894,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             unnorm_weights[j] = norm_logpdf(obs[i], 0.0, exp(0.5 * particles[i + j * NOBS]))
  * 
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":426
@@ -5919,7 +5934,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             shifted_weights[j] = exp(unnorm_weights[j] - max_weight)
  *             foo_double = norm_factor + shifted_weights[j]
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":431
@@ -5976,7 +5991,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *             weights[i + j * NOBS] = shifted_weights[j] / norm_factor
  *             if isfinite(weights[i + j * NOBS] * particles[i + j * NOBS]) != 0:
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
       /* "state/particle_methods/stochastic_volatility.pyx":438
@@ -6035,7 +6050,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *                 curr_particle = particle_history[(LAG - 1) + j * LAG]
  *                 next_particle = particle_history[(LAG - 2) + j * LAG]
  */
-      for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+      for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
         __pyx_v_j = __pyx_t_6;
 
         /* "state/particle_methods/stochastic_volatility.pyx":445
@@ -6324,7 +6339,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *                     sub_hessian1[3][3] += 2.0 * sigmav**(-1) * rho * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
  *                     sub_hessian1[3][3] -= exp(-curr_particle) * obs[i - LAG]**2 * rho_term             # <<<<<<<<<<<<<<
  * 
- *                     # sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
  */
           __pyx_t_8 = 3;
           __pyx_t_23 = 3;
@@ -6332,43 +6347,307 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
           if (__pyx_t_32 < 0) __pyx_t_32 += __pyx_v_obs.shape[0];
           ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((exp((-__pyx_v_curr_particle)) * pow((*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_32 * __pyx_v_obs.strides[0]) ))), 2.0)) * __pyx_v_rho_term));
 
+          /* "state/particle_methods/stochastic_volatility.pyx":482
+ *                     sub_hessian1[3][3] -= exp(-curr_particle) * obs[i - LAG]**2 * rho_term
+ * 
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ */
+          ((__pyx_v_sub_hessian1[0])[1]) = ((((-__pyx_v_q_matrix) * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - __pyx_v_phi)) - (__pyx_v_q_matrix * __pyx_v_state_quad_term));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":483
+ * 
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          __pyx_t_8 = 0;
+          __pyx_t_23 = 1;
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) * (1.0 - pow(__pyx_v_phi, 2.0)));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":484
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ */
+          ((__pyx_v_sub_hessian1[0])[2]) = ((-2.0 * __pyx_v_state_quad_term) * (1.0 - __pyx_v_phi));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":485
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          __pyx_t_8 = 0;
+          __pyx_t_23 = 2;
+          __pyx_t_33 = (__pyx_v_i - 10);
+          if (__pyx_t_33 < 0) __pyx_t_33 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((((((__pyx_v_q_matrix * (1.0 - __pyx_v_phi)) * __pyx_v_sigmav) * __pyx_v_rho) * __pyx_v_state_quad_term) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_33 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":486
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ */
+          ((__pyx_v_sub_hessian1[0])[3]) = ((((2.0 * __pyx_v_q_matrix) * __pyx_v_rho) * __pyx_v_state_quad_term) * (1.0 - __pyx_v_phi));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":487
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]
+ */
+          __pyx_t_8 = 0;
+          __pyx_t_23 = 3;
+          __pyx_t_34 = (__pyx_v_i - 10);
+          if (__pyx_t_34 < 0) __pyx_t_34 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((((pow(__pyx_v_sigmav, -2.0) * (1.0 - __pyx_v_phi)) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_34 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":488
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]
+ */
+          ((__pyx_v_sub_hessian1[1])[0]) = ((__pyx_v_sub_hessian1[0])[1]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":489
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]
+ * 
+ */
+          ((__pyx_v_sub_hessian1[2])[0]) = ((__pyx_v_sub_hessian1[0])[2]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":490
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          ((__pyx_v_sub_hessian1[3])[0]) = ((__pyx_v_sub_hessian1[0])[3]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":492
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]
+ * 
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ */
+          __pyx_t_35 = (__pyx_v_i - 10);
+          if (__pyx_t_35 < 0) __pyx_t_35 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[1])[2]) = ((-2.0 * __pyx_v_state_quad_term) - (((__pyx_v_rho * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_35 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":493
+ * 
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ */
+          __pyx_t_8 = 1;
+          __pyx_t_23 = 2;
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) * ((__pyx_v_q_matrix * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - pow(__pyx_v_phi, 2.0))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":494
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]
+ */
+          __pyx_t_36 = (__pyx_v_i - 10);
+          if (__pyx_t_36 < 0) __pyx_t_36 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[1])[3]) = (((2.0 * __pyx_v_rho) * __pyx_v_state_quad_term) - (((__pyx_v_sigmav * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_36 * __pyx_v_obs.strides[0]) )))) * __pyx_v_rho_term));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":495
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]
+ */
+          __pyx_t_8 = 1;
+          __pyx_t_23 = 3;
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) * ((__pyx_v_q_matrix * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - pow(__pyx_v_phi, 2.0))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":496
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]
+ * 
+ */
+          ((__pyx_v_sub_hessian1[2])[1]) = ((__pyx_v_sub_hessian1[1])[2]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":497
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+ */
+          ((__pyx_v_sub_hessian1[3])[1]) = ((__pyx_v_sub_hessian1[1])[3]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":499
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]
+ * 
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ */
+          ((__pyx_v_sub_hessian1[2])[3]) = (((2.0 * __pyx_v_q_matrix) * pow(__pyx_v_state_quad_term, 2.0)) * __pyx_v_rho);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":500
+ * 
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          __pyx_t_8 = 2;
+          __pyx_t_23 = 3;
+          __pyx_t_37 = (__pyx_v_i - 10);
+          if (__pyx_t_37 < 0) __pyx_t_37 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + ((((((2.0 * pow(__pyx_v_rho, 2.0)) * __pyx_v_q_matrix) * __pyx_v_state_quad_term) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_37 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":501
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]
+ */
+          __pyx_t_8 = 2;
+          __pyx_t_23 = 3;
+          __pyx_t_38 = (__pyx_v_i - 10);
+          if (__pyx_t_38 < 0) __pyx_t_38 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((__pyx_v_rho * exp((-__pyx_v_curr_particle))) * pow((*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_38 * __pyx_v_obs.strides[0]) ))), 2.0)));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":502
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]
+ * 
+ */
+          __pyx_t_8 = 2;
+          __pyx_t_23 = 3;
+          __pyx_t_39 = (__pyx_v_i - 10);
+          if (__pyx_t_39 < 0) __pyx_t_39 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + (((pow(__pyx_v_sigmav, -1.0) * __pyx_v_state_quad_term) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_39 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":503
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+ */
+          ((__pyx_v_sub_hessian1[2])[3]) = ((__pyx_v_sub_hessian1[2])[3]);
+
           /* "state/particle_methods/stochastic_volatility.pyx":505
- *                     # sub_hessian1[2][3] = sub_hessian1[2][3]
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]
  * 
  *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
- *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
- *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
  */
           ((__pyx_v_sub_hessian2[0])[0]) = (pow((__pyx_v_sub_gradient[0]), 2.0) + ((2.0 * (__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[0])));
 
           /* "state/particle_methods/stochastic_volatility.pyx":506
  * 
  *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
- *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]             # <<<<<<<<<<<<<<
- *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
- *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
  */
-          ((__pyx_v_sub_hessian2[1])[1]) = (pow((__pyx_v_sub_gradient[1]), 2.0) + ((2.0 * (__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[1])));
+          ((__pyx_v_sub_hessian2[0])[1]) = ((((__pyx_v_sub_gradient[0]) * (__pyx_v_sub_gradient[1])) + ((__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[1]))) + ((__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[0])));
 
           /* "state/particle_methods/stochastic_volatility.pyx":507
  *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
+ * 
+ */
+          ((__pyx_v_sub_hessian2[0])[2]) = ((((__pyx_v_sub_gradient[0]) * (__pyx_v_sub_gradient[2])) + ((__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[2]))) + ((__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[0])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":508
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
+ * 
  *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+ */
+          ((__pyx_v_sub_hessian2[0])[3]) = ((((__pyx_v_sub_gradient[0]) * (__pyx_v_sub_gradient[3])) + ((__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[3]))) + ((__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[0])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":510
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
+ * 
+ *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]             # <<<<<<<<<<<<<<
+ *                     sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
+ */
+          ((__pyx_v_sub_hessian2[1])[1]) = (pow((__pyx_v_sub_gradient[1]), 2.0) + ((2.0 * (__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[1])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":511
+ * 
+ *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]             # <<<<<<<<<<<<<<
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
+ * 
+ */
+          ((__pyx_v_sub_hessian2[1])[2]) = (((__pyx_v_sub_gradient[1]) * (__pyx_v_sub_gradient[2])) + ((((__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[2])) * (__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[1])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":512
+ *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+ */
+          ((__pyx_v_sub_hessian2[1])[3]) = (((__pyx_v_sub_gradient[1]) * (__pyx_v_sub_gradient[3])) + ((((__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[3])) * (__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[1])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":514
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
+ * 
  *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]             # <<<<<<<<<<<<<<
- *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
+ *                     sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]
  * 
  */
           ((__pyx_v_sub_hessian2[2])[2]) = (pow((__pyx_v_sub_gradient[2]), 2.0) + ((2.0 * (__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[2])));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":508
- *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+          /* "state/particle_methods/stochastic_volatility.pyx":515
+ * 
  *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+ *                     sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
+ */
+          ((__pyx_v_sub_hessian2[2])[3]) = (((__pyx_v_sub_gradient[2]) * (__pyx_v_sub_gradient[3])) + ((((__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[3])) * (__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[2])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":517
+ *                     sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]
+ * 
  *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]             # <<<<<<<<<<<<<<
  * 
  *                     for k in range(NPARAMS):
  */
           ((__pyx_v_sub_hessian2[3])[3]) = (pow((__pyx_v_sub_gradient[3]), 2.0) + ((2.0 * (__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[3])));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":510
+          /* "state/particle_methods/stochastic_volatility.pyx":519
  *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
  * 
  *                     for k in range(NPARAMS):             # <<<<<<<<<<<<<<
@@ -6378,64 +6657,157 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
           for (__pyx_t_15 = 0; __pyx_t_15 < 4; __pyx_t_15+=1) {
             __pyx_v_k = __pyx_t_15;
 
-            /* "state/particle_methods/stochastic_volatility.pyx":511
+            /* "state/particle_methods/stochastic_volatility.pyx":520
  * 
  *                     for k in range(NPARAMS):
  *                         if isfinite(sub_hessian1[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):
+ * 
  */
             __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_k])) != 0);
             if (__pyx_t_7) {
 
-              /* "state/particle_methods/stochastic_volatility.pyx":512
+              /* "state/particle_methods/stochastic_volatility.pyx":521
  *                     for k in range(NPARAMS):
  *                         if isfinite(sub_hessian1[k][k]):
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
- *                         if isfinite(sub_hessian2[k][l]):
- *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):
  */
               __pyx_t_16 = __pyx_v_k;
               __pyx_t_17 = __pyx_v_k;
               ((__pyx_v_hessian1[__pyx_t_16])[__pyx_t_17]) = (((__pyx_v_hessian1[__pyx_t_16])[__pyx_t_17]) + (((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_k]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-              /* "state/particle_methods/stochastic_volatility.pyx":511
+              /* "state/particle_methods/stochastic_volatility.pyx":520
  * 
  *                     for k in range(NPARAMS):
  *                         if isfinite(sub_hessian1[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):
+ * 
  */
             }
 
-            /* "state/particle_methods/stochastic_volatility.pyx":513
- *                         if isfinite(sub_hessian1[k][k]):
+            /* "state/particle_methods/stochastic_volatility.pyx":523
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
  * 
  */
-            __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l])) != 0);
+            __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_k])) != 0);
             if (__pyx_t_7) {
 
-              /* "state/particle_methods/stochastic_volatility.pyx":514
- *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):
+              /* "state/particle_methods/stochastic_volatility.pyx":524
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):
  *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
  * 
- *         # Estimate log-likelihood
+ *                         for l in range(k+1, NPARAMS):
  */
               __pyx_t_16 = __pyx_v_k;
               __pyx_t_17 = __pyx_v_k;
               ((__pyx_v_hessian2[__pyx_t_16])[__pyx_t_17]) = (((__pyx_v_hessian2[__pyx_t_16])[__pyx_t_17]) + (((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_k]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-              /* "state/particle_methods/stochastic_volatility.pyx":513
- *                         if isfinite(sub_hessian1[k][k]):
+              /* "state/particle_methods/stochastic_volatility.pyx":523
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
  * 
  */
+            }
+
+            /* "state/particle_methods/stochastic_volatility.pyx":526
+ *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
+ * 
+ *                         for l in range(k+1, NPARAMS):             # <<<<<<<<<<<<<<
+ *                             if isfinite(sub_hessian1[k][l]):
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ */
+            for (__pyx_t_16 = (__pyx_v_k + 1); __pyx_t_16 < 4; __pyx_t_16+=1) {
+              __pyx_v_l = __pyx_t_16;
+
+              /* "state/particle_methods/stochastic_volatility.pyx":527
+ * 
+ *                         for l in range(k+1, NPARAMS):
+ *                             if isfinite(sub_hessian1[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ */
+              __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_l])) != 0);
+              if (__pyx_t_7) {
+
+                /* "state/particle_methods/stochastic_volatility.pyx":528
+ *                         for l in range(k+1, NPARAMS):
+ *                             if isfinite(sub_hessian1[k][l]):
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):
+ */
+                __pyx_t_17 = __pyx_v_k;
+                __pyx_t_40 = __pyx_v_l;
+                ((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":529
+ *                             if isfinite(sub_hessian1[k][l]):
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ *                             if isfinite(sub_hessian2[k][l]):
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ */
+                __pyx_t_17 = __pyx_v_l;
+                __pyx_t_40 = __pyx_v_k;
+                ((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":527
+ * 
+ *                         for l in range(k+1, NPARAMS):
+ *                             if isfinite(sub_hessian1[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ */
+              }
+
+              /* "state/particle_methods/stochastic_volatility.pyx":530
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ */
+              __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l])) != 0);
+              if (__pyx_t_7) {
+
+                /* "state/particle_methods/stochastic_volatility.pyx":531
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ * 
+ */
+                __pyx_t_17 = __pyx_v_k;
+                __pyx_t_40 = __pyx_v_l;
+                ((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":532
+ *                             if isfinite(sub_hessian2[k][l]):
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ * 
+ *         # Estimate log-likelihood
+ */
+                __pyx_t_17 = __pyx_v_l;
+                __pyx_t_40 = __pyx_v_k;
+                ((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":530
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ */
+              }
             }
           }
 
@@ -6458,17 +6830,17 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
     }
 
-    /* "state/particle_methods/stochastic_volatility.pyx":517
+    /* "state/particle_methods/stochastic_volatility.pyx":535
  * 
  *         # Estimate log-likelihood
  *         log_like += max_weight + log(norm_factor) - log(NPART)             # <<<<<<<<<<<<<<
  * 
  *     # Estimate gradients of the log joint distribution
  */
-    __pyx_v_log_like = (__pyx_v_log_like + ((__pyx_v_max_weight + log(__pyx_v_norm_factor)) - log(100.0)));
+    __pyx_v_log_like = (__pyx_v_log_like + ((__pyx_v_max_weight + log(__pyx_v_norm_factor)) - log(75.0)));
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":520
+  /* "state/particle_methods/stochastic_volatility.pyx":538
  * 
  *     # Estimate gradients of the log joint distribution
  *     for i in range(NOBS - LAG, NOBS):             # <<<<<<<<<<<<<<
@@ -6478,7 +6850,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
   for (__pyx_t_5 = 0x15F; __pyx_t_5 < 0x169; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":521
+    /* "state/particle_methods/stochastic_volatility.pyx":539
  *     # Estimate gradients of the log joint distribution
  *     for i in range(NOBS - LAG, NOBS):
  *         idx  = NOBS - i - 1             # <<<<<<<<<<<<<<
@@ -6487,17 +6859,17 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
     __pyx_v_idx = ((0x169 - __pyx_v_i) - 1);
 
-    /* "state/particle_methods/stochastic_volatility.pyx":522
+    /* "state/particle_methods/stochastic_volatility.pyx":540
  *     for i in range(NOBS - LAG, NOBS):
  *         idx  = NOBS - i - 1
  *         for j in range(NPART):             # <<<<<<<<<<<<<<
  *             curr_particle = particle_history[idx + j * LAG]
  *             smo_state_est[i] +=  weights[NOBS - 1 + j * NOBS] * curr_particle
  */
-    for (__pyx_t_6 = 0; __pyx_t_6 < 0x64; __pyx_t_6+=1) {
+    for (__pyx_t_6 = 0; __pyx_t_6 < 75; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "state/particle_methods/stochastic_volatility.pyx":523
+      /* "state/particle_methods/stochastic_volatility.pyx":541
  *         idx  = NOBS - i - 1
  *         for j in range(NPART):
  *             curr_particle = particle_history[idx + j * LAG]             # <<<<<<<<<<<<<<
@@ -6506,7 +6878,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
       __pyx_v_curr_particle = (__pyx_v_particle_history[(__pyx_v_idx + (__pyx_v_j * 10))]);
 
-      /* "state/particle_methods/stochastic_volatility.pyx":524
+      /* "state/particle_methods/stochastic_volatility.pyx":542
  *         for j in range(NPART):
  *             curr_particle = particle_history[idx + j * LAG]
  *             smo_state_est[i] +=  weights[NOBS - 1 + j * NOBS] * curr_particle             # <<<<<<<<<<<<<<
@@ -6516,7 +6888,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
       __pyx_t_15 = __pyx_v_i;
       (__pyx_v_smo_state_est[__pyx_t_15]) = ((__pyx_v_smo_state_est[__pyx_t_15]) + ((__pyx_v_weights[(0x168 + (__pyx_v_j * 0x169))]) * __pyx_v_curr_particle));
 
-      /* "state/particle_methods/stochastic_volatility.pyx":526
+      /* "state/particle_methods/stochastic_volatility.pyx":544
  *             smo_state_est[i] +=  weights[NOBS - 1 + j * NOBS] * curr_particle
  * 
  *             if (idx - 1) >= 0:             # <<<<<<<<<<<<<<
@@ -6526,7 +6898,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
       __pyx_t_7 = (((__pyx_v_idx - 1) >= 0) != 0);
       if (__pyx_t_7) {
 
-        /* "state/particle_methods/stochastic_volatility.pyx":527
+        /* "state/particle_methods/stochastic_volatility.pyx":545
  * 
  *             if (idx - 1) >= 0:
  *                 next_particle = particle_history[idx - 1 + j * LAG]             # <<<<<<<<<<<<<<
@@ -6535,7 +6907,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
         __pyx_v_next_particle = (__pyx_v_particle_history[((__pyx_v_idx - 1) + (__pyx_v_j * 10))]);
 
-        /* "state/particle_methods/stochastic_volatility.pyx":528
+        /* "state/particle_methods/stochastic_volatility.pyx":546
  *             if (idx - 1) >= 0:
  *                 next_particle = particle_history[idx - 1 + j * LAG]
  *                 state_quad_term = next_particle - mu - phi * (curr_particle - mu)             # <<<<<<<<<<<<<<
@@ -6544,18 +6916,18 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
         __pyx_v_state_quad_term = ((__pyx_v_next_particle - __pyx_v_mu) - (__pyx_v_phi * (__pyx_v_curr_particle - __pyx_v_mu)));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":529
+        /* "state/particle_methods/stochastic_volatility.pyx":547
  *                 next_particle = particle_history[idx - 1 + j * LAG]
  *                 state_quad_term = next_particle - mu - phi * (curr_particle - mu)
  *                 state_quad_term -= sigmav * rho * exp(-0.5 * curr_particle) * obs[i - 1]             # <<<<<<<<<<<<<<
  * 
  *                 sub_gradient[0] = q_matrix * state_quad_term * (1.0 - phi)
  */
-        __pyx_t_33 = (__pyx_v_i - 1);
-        if (__pyx_t_33 < 0) __pyx_t_33 += __pyx_v_obs.shape[0];
-        __pyx_v_state_quad_term = (__pyx_v_state_quad_term - (((__pyx_v_sigmav * __pyx_v_rho) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_33 * __pyx_v_obs.strides[0]) )))));
+        __pyx_t_41 = (__pyx_v_i - 1);
+        if (__pyx_t_41 < 0) __pyx_t_41 += __pyx_v_obs.shape[0];
+        __pyx_v_state_quad_term = (__pyx_v_state_quad_term - (((__pyx_v_sigmav * __pyx_v_rho) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_41 * __pyx_v_obs.strides[0]) )))));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":531
+        /* "state/particle_methods/stochastic_volatility.pyx":549
  *                 state_quad_term -= sigmav * rho * exp(-0.5 * curr_particle) * obs[i - 1]
  * 
  *                 sub_gradient[0] = q_matrix * state_quad_term * (1.0 - phi)             # <<<<<<<<<<<<<<
@@ -6564,7 +6936,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
         (__pyx_v_sub_gradient[0]) = ((__pyx_v_q_matrix * __pyx_v_state_quad_term) * (1.0 - __pyx_v_phi));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":532
+        /* "state/particle_methods/stochastic_volatility.pyx":550
  * 
  *                 sub_gradient[0] = q_matrix * state_quad_term * (1.0 - phi)
  *                 sub_gradient[1] = q_matrix * state_quad_term * (curr_particle - mu) * (1.0 - phi**2)             # <<<<<<<<<<<<<<
@@ -6573,7 +6945,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
         (__pyx_v_sub_gradient[1]) = (((__pyx_v_q_matrix * __pyx_v_state_quad_term) * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - pow(__pyx_v_phi, 2.0)));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":533
+        /* "state/particle_methods/stochastic_volatility.pyx":551
  *                 sub_gradient[0] = q_matrix * state_quad_term * (1.0 - phi)
  *                 sub_gradient[1] = q_matrix * state_quad_term * (curr_particle - mu) * (1.0 - phi**2)
  *                 sub_gradient[2] = q_matrix * state_quad_term * state_quad_term - 1.0             # <<<<<<<<<<<<<<
@@ -6582,7 +6954,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
         (__pyx_v_sub_gradient[2]) = (((__pyx_v_q_matrix * __pyx_v_state_quad_term) * __pyx_v_state_quad_term) - 1.0);
 
-        /* "state/particle_methods/stochastic_volatility.pyx":534
+        /* "state/particle_methods/stochastic_volatility.pyx":552
  *                 sub_gradient[1] = q_matrix * state_quad_term * (curr_particle - mu) * (1.0 - phi**2)
  *                 sub_gradient[2] = q_matrix * state_quad_term * state_quad_term - 1.0
  *                 sub_gradient[2] += q_matrix * state_quad_term * sigmav * rho * exp(-0.5 * curr_particle) * obs[i - 1]             # <<<<<<<<<<<<<<
@@ -6590,11 +6962,11 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *                 sub_gradient[3] -= q_matrix * rho * state_quad_term * state_quad_term
  */
         __pyx_t_8 = 2;
-        __pyx_t_34 = (__pyx_v_i - 1);
-        if (__pyx_t_34 < 0) __pyx_t_34 += __pyx_v_obs.shape[0];
-        (__pyx_v_sub_gradient[__pyx_t_8]) = ((__pyx_v_sub_gradient[__pyx_t_8]) + (((((__pyx_v_q_matrix * __pyx_v_state_quad_term) * __pyx_v_sigmav) * __pyx_v_rho) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_34 * __pyx_v_obs.strides[0]) )))));
+        __pyx_t_42 = (__pyx_v_i - 1);
+        if (__pyx_t_42 < 0) __pyx_t_42 += __pyx_v_obs.shape[0];
+        (__pyx_v_sub_gradient[__pyx_t_8]) = ((__pyx_v_sub_gradient[__pyx_t_8]) + (((((__pyx_v_q_matrix * __pyx_v_state_quad_term) * __pyx_v_sigmav) * __pyx_v_rho) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_42 * __pyx_v_obs.strides[0]) )))));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":535
+        /* "state/particle_methods/stochastic_volatility.pyx":553
  *                 sub_gradient[2] = q_matrix * state_quad_term * state_quad_term - 1.0
  *                 sub_gradient[2] += q_matrix * state_quad_term * sigmav * rho * exp(-0.5 * curr_particle) * obs[i - 1]
  *                 sub_gradient[3] = rho             # <<<<<<<<<<<<<<
@@ -6603,7 +6975,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
         (__pyx_v_sub_gradient[3]) = __pyx_v_rho;
 
-        /* "state/particle_methods/stochastic_volatility.pyx":536
+        /* "state/particle_methods/stochastic_volatility.pyx":554
  *                 sub_gradient[2] += q_matrix * state_quad_term * sigmav * rho * exp(-0.5 * curr_particle) * obs[i - 1]
  *                 sub_gradient[3] = rho
  *                 sub_gradient[3] -= q_matrix * rho * state_quad_term * state_quad_term             # <<<<<<<<<<<<<<
@@ -6613,7 +6985,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
         __pyx_t_8 = 3;
         (__pyx_v_sub_gradient[__pyx_t_8]) = ((__pyx_v_sub_gradient[__pyx_t_8]) - (((__pyx_v_q_matrix * __pyx_v_rho) * __pyx_v_state_quad_term) * __pyx_v_state_quad_term));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":537
+        /* "state/particle_methods/stochastic_volatility.pyx":555
  *                 sub_gradient[3] = rho
  *                 sub_gradient[3] -= q_matrix * rho * state_quad_term * state_quad_term
  *                 sub_gradient[3] += q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - 1] * rho_term             # <<<<<<<<<<<<<<
@@ -6621,11 +6993,11 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  *                 gradient[0][i - LAG + 1] += sub_gradient[0] * weights[i + j * NOBS]
  */
         __pyx_t_8 = 3;
-        __pyx_t_35 = (__pyx_v_i - 1);
-        if (__pyx_t_35 < 0) __pyx_t_35 += __pyx_v_obs.shape[0];
-        (__pyx_v_sub_gradient[__pyx_t_8]) = ((__pyx_v_sub_gradient[__pyx_t_8]) + (((((__pyx_v_q_matrix * __pyx_v_state_quad_term) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_35 * __pyx_v_obs.strides[0]) )))) * __pyx_v_rho_term));
+        __pyx_t_43 = (__pyx_v_i - 1);
+        if (__pyx_t_43 < 0) __pyx_t_43 += __pyx_v_obs.shape[0];
+        (__pyx_v_sub_gradient[__pyx_t_8]) = ((__pyx_v_sub_gradient[__pyx_t_8]) + (((((__pyx_v_q_matrix * __pyx_v_state_quad_term) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_43 * __pyx_v_obs.strides[0]) )))) * __pyx_v_rho_term));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":539
+        /* "state/particle_methods/stochastic_volatility.pyx":557
  *                 sub_gradient[3] += q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - 1] * rho_term
  * 
  *                 gradient[0][i - LAG + 1] += sub_gradient[0] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
@@ -6636,7 +7008,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
         __pyx_t_23 = ((__pyx_v_i - 10) + 1);
         ((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) + ((__pyx_v_sub_gradient[0]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":540
+        /* "state/particle_methods/stochastic_volatility.pyx":558
  * 
  *                 gradient[0][i - LAG + 1] += sub_gradient[0] * weights[i + j * NOBS]
  *                 gradient[1][i - LAG + 1] += sub_gradient[1] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
@@ -6647,7 +7019,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
         __pyx_t_23 = ((__pyx_v_i - 10) + 1);
         ((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) + ((__pyx_v_sub_gradient[1]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":541
+        /* "state/particle_methods/stochastic_volatility.pyx":559
  *                 gradient[0][i - LAG + 1] += sub_gradient[0] * weights[i + j * NOBS]
  *                 gradient[1][i - LAG + 1] += sub_gradient[1] * weights[i + j * NOBS]
  *                 gradient[2][i - LAG + 1] += sub_gradient[2] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
@@ -6658,7 +7030,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
         __pyx_t_23 = ((__pyx_v_i - 10) + 1);
         ((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) + ((__pyx_v_sub_gradient[2]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":542
+        /* "state/particle_methods/stochastic_volatility.pyx":560
  *                 gradient[1][i - LAG + 1] += sub_gradient[1] * weights[i + j * NOBS]
  *                 gradient[2][i - LAG + 1] += sub_gradient[2] * weights[i + j * NOBS]
  *                 gradient[3][i - LAG + 1] += sub_gradient[3] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
@@ -6669,7 +7041,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
         __pyx_t_23 = ((__pyx_v_i - 10) + 1);
         ((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_gradient[__pyx_t_8])[__pyx_t_23]) + ((__pyx_v_sub_gradient[3]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-        /* "state/particle_methods/stochastic_volatility.pyx":544
+        /* "state/particle_methods/stochastic_volatility.pyx":562
  *                 gradient[3][i - LAG + 1] += sub_gradient[3] * weights[i + j * NOBS]
  * 
  *                 if compute_hessian == 1:             # <<<<<<<<<<<<<<
@@ -6679,7 +7051,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
         __pyx_t_7 = ((__pyx_v_compute_hessian == 1) != 0);
         if (__pyx_t_7) {
 
-          /* "state/particle_methods/stochastic_volatility.pyx":545
+          /* "state/particle_methods/stochastic_volatility.pyx":563
  * 
  *                 if compute_hessian == 1:
  *                     sub_hessian1[0][0] = -q_matrix * (1.0 - phi)**2             # <<<<<<<<<<<<<<
@@ -6688,7 +7060,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           ((__pyx_v_sub_hessian1[0])[0]) = ((-__pyx_v_q_matrix) * pow((1.0 - __pyx_v_phi), 2.0));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":546
+          /* "state/particle_methods/stochastic_volatility.pyx":564
  *                 if compute_hessian == 1:
  *                     sub_hessian1[0][0] = -q_matrix * (1.0 - phi)**2
  *                     sub_hessian1[1][1] = 2.0 * phi * state_quad_term + (curr_particle - mu) * (1.0 - phi**2)             # <<<<<<<<<<<<<<
@@ -6697,7 +7069,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           ((__pyx_v_sub_hessian1[1])[1]) = (((2.0 * __pyx_v_phi) * __pyx_v_state_quad_term) + ((__pyx_v_curr_particle - __pyx_v_mu) * (1.0 - pow(__pyx_v_phi, 2.0))));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":547
+          /* "state/particle_methods/stochastic_volatility.pyx":565
  *                     sub_hessian1[0][0] = -q_matrix * (1.0 - phi)**2
  *                     sub_hessian1[1][1] = 2.0 * phi * state_quad_term + (curr_particle - mu) * (1.0 - phi**2)
  *                     sub_hessian1[1][1] *= -q_matrix * (curr_particle - mu) * (1.0 - phi**2)             # <<<<<<<<<<<<<<
@@ -6708,7 +7080,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
           __pyx_t_23 = 1;
           ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) * (((-__pyx_v_q_matrix) * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - pow(__pyx_v_phi, 2.0))));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":548
+          /* "state/particle_methods/stochastic_volatility.pyx":566
  *                     sub_hessian1[1][1] = 2.0 * phi * state_quad_term + (curr_particle - mu) * (1.0 - phi**2)
  *                     sub_hessian1[1][1] *= -q_matrix * (curr_particle - mu) * (1.0 - phi**2)
  *                     sub_hessian1[2][2] = -2.0 * q_matrix * state_quad_term * state_quad_term             # <<<<<<<<<<<<<<
@@ -6717,7 +7089,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           ((__pyx_v_sub_hessian1[2])[2]) = (((-2.0 * __pyx_v_q_matrix) * __pyx_v_state_quad_term) * __pyx_v_state_quad_term);
 
-          /* "state/particle_methods/stochastic_volatility.pyx":549
+          /* "state/particle_methods/stochastic_volatility.pyx":567
  *                     sub_hessian1[1][1] *= -q_matrix * (curr_particle - mu) * (1.0 - phi**2)
  *                     sub_hessian1[2][2] = -2.0 * q_matrix * state_quad_term * state_quad_term
  *                     sub_hessian1[2][2] -= 2.0 * q_matrix * state_quad_term * rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
@@ -6726,11 +7098,11 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           __pyx_t_8 = 2;
           __pyx_t_23 = 2;
-          __pyx_t_36 = (__pyx_v_i - 10);
-          if (__pyx_t_36 < 0) __pyx_t_36 += __pyx_v_obs.shape[0];
-          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((((((2.0 * __pyx_v_q_matrix) * __pyx_v_state_quad_term) * __pyx_v_rho) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_36 * __pyx_v_obs.strides[0]) )))));
+          __pyx_t_44 = (__pyx_v_i - 10);
+          if (__pyx_t_44 < 0) __pyx_t_44 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((((((2.0 * __pyx_v_q_matrix) * __pyx_v_state_quad_term) * __pyx_v_rho) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_44 * __pyx_v_obs.strides[0]) )))));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":550
+          /* "state/particle_methods/stochastic_volatility.pyx":568
  *                     sub_hessian1[2][2] = -2.0 * q_matrix * state_quad_term * state_quad_term
  *                     sub_hessian1[2][2] -= 2.0 * q_matrix * state_quad_term * rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
  *                     sub_hessian1[2][2] -= q_matrix * (rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG])**2             # <<<<<<<<<<<<<<
@@ -6739,11 +7111,11 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           __pyx_t_8 = 2;
           __pyx_t_23 = 2;
-          __pyx_t_37 = (__pyx_v_i - 10);
-          if (__pyx_t_37 < 0) __pyx_t_37 += __pyx_v_obs.shape[0];
-          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - (__pyx_v_q_matrix * pow((((__pyx_v_rho * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_37 * __pyx_v_obs.strides[0]) )))), 2.0)));
+          __pyx_t_45 = (__pyx_v_i - 10);
+          if (__pyx_t_45 < 0) __pyx_t_45 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - (__pyx_v_q_matrix * pow((((__pyx_v_rho * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_45 * __pyx_v_obs.strides[0]) )))), 2.0)));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":551
+          /* "state/particle_methods/stochastic_volatility.pyx":569
  *                     sub_hessian1[2][2] -= 2.0 * q_matrix * state_quad_term * rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
  *                     sub_hessian1[2][2] -= q_matrix * (rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG])**2
  *                     sub_hessian1[2][2] += q_matrix * state_quad_term * rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
@@ -6752,11 +7124,11 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           __pyx_t_8 = 2;
           __pyx_t_23 = 2;
-          __pyx_t_38 = (__pyx_v_i - 10);
-          if (__pyx_t_38 < 0) __pyx_t_38 += __pyx_v_obs.shape[0];
-          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + (((((__pyx_v_q_matrix * __pyx_v_state_quad_term) * __pyx_v_rho) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_38 * __pyx_v_obs.strides[0]) )))));
+          __pyx_t_46 = (__pyx_v_i - 10);
+          if (__pyx_t_46 < 0) __pyx_t_46 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + (((((__pyx_v_q_matrix * __pyx_v_state_quad_term) * __pyx_v_rho) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_46 * __pyx_v_obs.strides[0]) )))));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":552
+          /* "state/particle_methods/stochastic_volatility.pyx":570
  *                     sub_hessian1[2][2] -= q_matrix * (rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG])**2
  *                     sub_hessian1[2][2] += q_matrix * state_quad_term * rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
  *                     sub_hessian1[3][3] = rho_term - 2.0 * q_matrix * rho**2 * state_quad_term**2 - sigmav*(-2) * state_quad_term**2             # <<<<<<<<<<<<<<
@@ -6765,7 +7137,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           ((__pyx_v_sub_hessian1[3])[3]) = ((__pyx_v_rho_term - (((2.0 * __pyx_v_q_matrix) * pow(__pyx_v_rho, 2.0)) * pow(__pyx_v_state_quad_term, 2.0))) - ((__pyx_v_sigmav * -2.0) * pow(__pyx_v_state_quad_term, 2.0)));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":553
+          /* "state/particle_methods/stochastic_volatility.pyx":571
  *                     sub_hessian1[2][2] += q_matrix * state_quad_term * rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
  *                     sub_hessian1[3][3] = rho_term - 2.0 * q_matrix * rho**2 * state_quad_term**2 - sigmav*(-2) * state_quad_term**2
  *                     sub_hessian1[3][3] += 2.0 * sigmav**(-1) * rho * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
@@ -6774,60 +7146,324 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
           __pyx_t_8 = 3;
           __pyx_t_23 = 3;
-          __pyx_t_39 = (__pyx_v_i - 10);
-          if (__pyx_t_39 < 0) __pyx_t_39 += __pyx_v_obs.shape[0];
-          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + (((((2.0 * pow(__pyx_v_sigmav, -1.0)) * __pyx_v_rho) * __pyx_v_state_quad_term) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_39 * __pyx_v_obs.strides[0]) )))));
+          __pyx_t_47 = (__pyx_v_i - 10);
+          if (__pyx_t_47 < 0) __pyx_t_47 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + (((((2.0 * pow(__pyx_v_sigmav, -1.0)) * __pyx_v_rho) * __pyx_v_state_quad_term) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_47 * __pyx_v_obs.strides[0]) )))));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":554
+          /* "state/particle_methods/stochastic_volatility.pyx":572
  *                     sub_hessian1[3][3] = rho_term - 2.0 * q_matrix * rho**2 * state_quad_term**2 - sigmav*(-2) * state_quad_term**2
  *                     sub_hessian1[3][3] += 2.0 * sigmav**(-1) * rho * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
  *                     sub_hessian1[3][3] -= exp(-curr_particle) * obs[i - LAG]**2 * rho_term             # <<<<<<<<<<<<<<
  * 
- *                     # sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
  */
           __pyx_t_8 = 3;
           __pyx_t_23 = 3;
-          __pyx_t_40 = (__pyx_v_i - 10);
-          if (__pyx_t_40 < 0) __pyx_t_40 += __pyx_v_obs.shape[0];
-          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((exp((-__pyx_v_curr_particle)) * pow((*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_40 * __pyx_v_obs.strides[0]) ))), 2.0)) * __pyx_v_rho_term));
+          __pyx_t_48 = (__pyx_v_i - 10);
+          if (__pyx_t_48 < 0) __pyx_t_48 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((exp((-__pyx_v_curr_particle)) * pow((*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_48 * __pyx_v_obs.strides[0]) ))), 2.0)) * __pyx_v_rho_term));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":574
+ *                     sub_hessian1[3][3] -= exp(-curr_particle) * obs[i - LAG]**2 * rho_term
+ * 
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ */
+          ((__pyx_v_sub_hessian1[0])[1]) = ((((-__pyx_v_q_matrix) * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - __pyx_v_phi)) - (__pyx_v_q_matrix * __pyx_v_state_quad_term));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":575
+ * 
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          __pyx_t_8 = 0;
+          __pyx_t_23 = 1;
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) * (1.0 - pow(__pyx_v_phi, 2.0)));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":576
+ *                     sub_hessian1[0][1] = -q_matrix * (curr_particle - mu) * (1.0 - phi) - q_matrix * state_quad_term
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ */
+          ((__pyx_v_sub_hessian1[0])[2]) = ((-2.0 * __pyx_v_state_quad_term) * (1.0 - __pyx_v_phi));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":577
+ *                     sub_hessian1[0][1] *= (1.0 - phi**2)
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          __pyx_t_8 = 0;
+          __pyx_t_23 = 2;
+          __pyx_t_49 = (__pyx_v_i - 10);
+          if (__pyx_t_49 < 0) __pyx_t_49 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((((((__pyx_v_q_matrix * (1.0 - __pyx_v_phi)) * __pyx_v_sigmav) * __pyx_v_rho) * __pyx_v_state_quad_term) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_49 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":578
+ *                     sub_hessian1[0][2] = -2.0 * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ */
+          ((__pyx_v_sub_hessian1[0])[3]) = ((((2.0 * __pyx_v_q_matrix) * __pyx_v_rho) * __pyx_v_state_quad_term) * (1.0 - __pyx_v_phi));
 
           /* "state/particle_methods/stochastic_volatility.pyx":579
- *                     # sub_hessian1[2][3] = sub_hessian1[2][3]
+ *                     sub_hessian1[0][2] -= q_matrix * (1.0 - phi) * sigmav * rho *state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]
+ */
+          __pyx_t_8 = 0;
+          __pyx_t_23 = 3;
+          __pyx_t_50 = (__pyx_v_i - 10);
+          if (__pyx_t_50 < 0) __pyx_t_50 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((((pow(__pyx_v_sigmav, -2.0) * (1.0 - __pyx_v_phi)) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_50 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":580
+ *                     sub_hessian1[0][3] = 2.0 * q_matrix * rho * state_quad_term * (1.0 - phi)
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]
+ */
+          ((__pyx_v_sub_hessian1[1])[0]) = ((__pyx_v_sub_hessian1[0])[1]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":581
+ *                     sub_hessian1[0][3] -= sigmav**(-2) * (1.0 - phi) * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]
+ * 
+ */
+          ((__pyx_v_sub_hessian1[2])[0]) = ((__pyx_v_sub_hessian1[0])[2]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":582
+ *                     sub_hessian1[1][0] = sub_hessian1[0][1]
+ *                     sub_hessian1[2][0] = sub_hessian1[0][2]
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          ((__pyx_v_sub_hessian1[3])[0]) = ((__pyx_v_sub_hessian1[0])[3]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":584
+ *                     sub_hessian1[3][0] = sub_hessian1[0][3]
+ * 
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ */
+          __pyx_t_51 = (__pyx_v_i - 10);
+          if (__pyx_t_51 < 0) __pyx_t_51 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[1])[2]) = ((-2.0 * __pyx_v_state_quad_term) - (((__pyx_v_rho * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_51 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":585
+ * 
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ */
+          __pyx_t_8 = 1;
+          __pyx_t_23 = 2;
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) * ((__pyx_v_q_matrix * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - pow(__pyx_v_phi, 2.0))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":586
+ *                     sub_hessian1[1][2] = -2.0 * state_quad_term - rho * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]
+ */
+          __pyx_t_52 = (__pyx_v_i - 10);
+          if (__pyx_t_52 < 0) __pyx_t_52 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[1])[3]) = (((2.0 * __pyx_v_rho) * __pyx_v_state_quad_term) - (((__pyx_v_sigmav * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_52 * __pyx_v_obs.strides[0]) )))) * __pyx_v_rho_term));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":587
+ *                     sub_hessian1[1][2] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]
+ */
+          __pyx_t_8 = 1;
+          __pyx_t_23 = 3;
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) * ((__pyx_v_q_matrix * (__pyx_v_curr_particle - __pyx_v_mu)) * (1.0 - pow(__pyx_v_phi, 2.0))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":588
+ *                     sub_hessian1[1][3] = 2.0 * rho * state_quad_term - sigmav * exp(-0.5 * curr_particle) * obs[i - LAG] * rho_term
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]
+ * 
+ */
+          ((__pyx_v_sub_hessian1[2])[1]) = ((__pyx_v_sub_hessian1[1])[2]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":589
+ *                     sub_hessian1[1][3] *= q_matrix * (curr_particle - mu) * (1.0 - phi**2)
+ *                     sub_hessian1[2][1] = sub_hessian1[1][2]
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+ */
+          ((__pyx_v_sub_hessian1[3])[1]) = ((__pyx_v_sub_hessian1[1])[3]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":591
+ *                     sub_hessian1[3][1] = sub_hessian1[1][3]
+ * 
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ */
+          ((__pyx_v_sub_hessian1[2])[3]) = (((2.0 * __pyx_v_q_matrix) * pow(__pyx_v_state_quad_term, 2.0)) * __pyx_v_rho);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":592
+ * 
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ */
+          __pyx_t_8 = 2;
+          __pyx_t_23 = 3;
+          __pyx_t_53 = (__pyx_v_i - 10);
+          if (__pyx_t_53 < 0) __pyx_t_53 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + ((((((2.0 * pow(__pyx_v_rho, 2.0)) * __pyx_v_q_matrix) * __pyx_v_state_quad_term) * __pyx_v_sigmav) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_53 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":593
+ *                     sub_hessian1[2][3] = 2.0 * q_matrix * state_quad_term**2 * rho
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]
+ */
+          __pyx_t_8 = 2;
+          __pyx_t_23 = 3;
+          __pyx_t_54 = (__pyx_v_i - 10);
+          if (__pyx_t_54 < 0) __pyx_t_54 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) - ((__pyx_v_rho * exp((-__pyx_v_curr_particle))) * pow((*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_54 * __pyx_v_obs.strides[0]) ))), 2.0)));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":594
+ *                     sub_hessian1[2][3] += 2.0 * rho**2 * q_matrix * state_quad_term * sigmav * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]             # <<<<<<<<<<<<<<
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]
+ * 
+ */
+          __pyx_t_8 = 2;
+          __pyx_t_23 = 3;
+          __pyx_t_55 = (__pyx_v_i - 10);
+          if (__pyx_t_55 < 0) __pyx_t_55 += __pyx_v_obs.shape[0];
+          ((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) = (((__pyx_v_sub_hessian1[__pyx_t_8])[__pyx_t_23]) + (((pow(__pyx_v_sigmav, -1.0) * __pyx_v_state_quad_term) * exp((-0.5 * __pyx_v_curr_particle))) * (*((double *) ( /* dim=0 */ (__pyx_v_obs.data + __pyx_t_55 * __pyx_v_obs.strides[0]) )))));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":595
+ *                     sub_hessian1[2][3] -= rho * exp(-curr_particle) * obs[i - LAG]**2
+ *                     sub_hessian1[2][3] += sigmav**(-1) * state_quad_term * exp(-0.5 * curr_particle) * obs[i - LAG]
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+ */
+          ((__pyx_v_sub_hessian1[2])[3]) = ((__pyx_v_sub_hessian1[2])[3]);
+
+          /* "state/particle_methods/stochastic_volatility.pyx":597
+ *                     sub_hessian1[2][3] = sub_hessian1[2][3]
  * 
  *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
- *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
- *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
  */
           ((__pyx_v_sub_hessian2[0])[0]) = (pow((__pyx_v_sub_gradient[0]), 2.0) + ((2.0 * (__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[0])));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":580
+          /* "state/particle_methods/stochastic_volatility.pyx":598
  * 
  *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
+ */
+          ((__pyx_v_sub_hessian2[0])[1]) = ((((__pyx_v_sub_gradient[0]) * (__pyx_v_sub_gradient[1])) + ((__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[1]))) + ((__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[0])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":599
+ *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
+ * 
+ */
+          ((__pyx_v_sub_hessian2[0])[2]) = ((((__pyx_v_sub_gradient[0]) * (__pyx_v_sub_gradient[2])) + ((__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[2]))) + ((__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[0])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":600
+ *                     sub_hessian2[0][1] = sub_gradient[0] * sub_gradient[1] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[1] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][2] = sub_gradient[0] * sub_gradient[2] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[2] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[0]
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+ */
+          ((__pyx_v_sub_hessian2[0])[3]) = ((((__pyx_v_sub_gradient[0]) * (__pyx_v_sub_gradient[3])) + ((__pyx_v_alpha_history0[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[3]))) + ((__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[0])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":602
+ *                     sub_hessian2[0][3] = sub_gradient[0] * sub_gradient[3] + alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[3] + alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[0]
+ * 
  *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]             # <<<<<<<<<<<<<<
- *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
- *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
+ *                     sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
  */
           ((__pyx_v_sub_hessian2[1])[1]) = (pow((__pyx_v_sub_gradient[1]), 2.0) + ((2.0 * (__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[1])));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":581
- *                     sub_hessian2[0][0] = sub_gradient[0]**2 + 2.0 * alpha_history0[(LAG - 2) + j * LAG] * sub_gradient[0]
+          /* "state/particle_methods/stochastic_volatility.pyx":603
+ * 
  *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]             # <<<<<<<<<<<<<<
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
+ * 
+ */
+          ((__pyx_v_sub_hessian2[1])[2]) = (((__pyx_v_sub_gradient[1]) * (__pyx_v_sub_gradient[2])) + ((((__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[2])) * (__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[1])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":604
+ *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][2] = sub_gradient[1] * sub_gradient[2] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[2] * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[1]
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+ */
+          ((__pyx_v_sub_hessian2[1])[3]) = (((__pyx_v_sub_gradient[1]) * (__pyx_v_sub_gradient[3])) + ((((__pyx_v_alpha_history1[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[3])) * (__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[1])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":606
+ *                     sub_hessian2[1][3] = sub_gradient[1] * sub_gradient[3] + alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[1]
+ * 
  *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]             # <<<<<<<<<<<<<<
- *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
+ *                     sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]
  * 
  */
           ((__pyx_v_sub_hessian2[2])[2]) = (pow((__pyx_v_sub_gradient[2]), 2.0) + ((2.0 * (__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[2])));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":582
- *                     sub_hessian2[1][1] = sub_gradient[1]**2 + 2.0 * alpha_history1[(LAG - 2) + j * LAG] * sub_gradient[1]
+          /* "state/particle_methods/stochastic_volatility.pyx":607
+ * 
  *                     sub_hessian2[2][2] = sub_gradient[2]**2 + 2.0 * alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[2]
+ *                     sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]             # <<<<<<<<<<<<<<
+ * 
+ *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
+ */
+          ((__pyx_v_sub_hessian2[2])[3]) = (((__pyx_v_sub_gradient[2]) * (__pyx_v_sub_gradient[3])) + ((((__pyx_v_alpha_history2[(8 + (__pyx_v_j * 10))]) * (__pyx_v_sub_gradient[3])) * (__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[2])));
+
+          /* "state/particle_methods/stochastic_volatility.pyx":609
+ *                     sub_hessian2[2][3] = sub_gradient[2] * sub_gradient[3] + alpha_history2[(LAG - 2) + j * LAG] * sub_gradient[3] * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[2]
+ * 
  *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]             # <<<<<<<<<<<<<<
  * 
  *                     for k in range(NPARAMS):
  */
           ((__pyx_v_sub_hessian2[3])[3]) = (pow((__pyx_v_sub_gradient[3]), 2.0) + ((2.0 * (__pyx_v_alpha_history3[(8 + (__pyx_v_j * 10))])) * (__pyx_v_sub_gradient[3])));
 
-          /* "state/particle_methods/stochastic_volatility.pyx":584
+          /* "state/particle_methods/stochastic_volatility.pyx":611
  *                     sub_hessian2[3][3] = sub_gradient[3]**2 + 2.0 * alpha_history3[(LAG - 2) + j * LAG] * sub_gradient[3]
  * 
  *                     for k in range(NPARAMS):             # <<<<<<<<<<<<<<
@@ -6837,68 +7473,161 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
           for (__pyx_t_15 = 0; __pyx_t_15 < 4; __pyx_t_15+=1) {
             __pyx_v_k = __pyx_t_15;
 
-            /* "state/particle_methods/stochastic_volatility.pyx":585
+            /* "state/particle_methods/stochastic_volatility.pyx":612
  * 
  *                     for k in range(NPARAMS):
  *                         if isfinite(sub_hessian1[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):
+ * 
  */
             __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_k])) != 0);
             if (__pyx_t_7) {
 
-              /* "state/particle_methods/stochastic_volatility.pyx":586
+              /* "state/particle_methods/stochastic_volatility.pyx":613
  *                     for k in range(NPARAMS):
  *                         if isfinite(sub_hessian1[k][k]):
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
- *                         if isfinite(sub_hessian2[k][l]):
- *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):
  */
               __pyx_t_16 = __pyx_v_k;
               __pyx_t_17 = __pyx_v_k;
               ((__pyx_v_hessian1[__pyx_t_16])[__pyx_t_17]) = (((__pyx_v_hessian1[__pyx_t_16])[__pyx_t_17]) + (((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_k]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-              /* "state/particle_methods/stochastic_volatility.pyx":585
+              /* "state/particle_methods/stochastic_volatility.pyx":612
  * 
  *                     for k in range(NPARAMS):
  *                         if isfinite(sub_hessian1[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):
+ * 
  */
             }
 
-            /* "state/particle_methods/stochastic_volatility.pyx":587
- *                         if isfinite(sub_hessian1[k][k]):
+            /* "state/particle_methods/stochastic_volatility.pyx":615
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
  * 
  */
-            __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l])) != 0);
+            __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_k])) != 0);
             if (__pyx_t_7) {
 
-              /* "state/particle_methods/stochastic_volatility.pyx":588
- *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):
+              /* "state/particle_methods/stochastic_volatility.pyx":616
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):
  *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
  * 
- *     # Sample trajectory
+ *                         for l in range(k+1, NPARAMS):
  */
               __pyx_t_16 = __pyx_v_k;
               __pyx_t_17 = __pyx_v_k;
               ((__pyx_v_hessian2[__pyx_t_16])[__pyx_t_17]) = (((__pyx_v_hessian2[__pyx_t_16])[__pyx_t_17]) + (((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_k]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
 
-              /* "state/particle_methods/stochastic_volatility.pyx":587
- *                         if isfinite(sub_hessian1[k][k]):
+              /* "state/particle_methods/stochastic_volatility.pyx":615
  *                             hessian1[k][k] += sub_hessian1[k][k] * weights[i + j * NOBS]
- *                         if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ * 
+ *                         if isfinite(sub_hessian2[k][k]):             # <<<<<<<<<<<<<<
  *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
  * 
  */
             }
+
+            /* "state/particle_methods/stochastic_volatility.pyx":618
+ *                             hessian2[k][k] += sub_hessian2[k][k] * weights[i + j * NOBS]
+ * 
+ *                         for l in range(k+1, NPARAMS):             # <<<<<<<<<<<<<<
+ *                             if isfinite(sub_hessian1[k][l]):
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ */
+            for (__pyx_t_16 = (__pyx_v_k + 1); __pyx_t_16 < 4; __pyx_t_16+=1) {
+              __pyx_v_l = __pyx_t_16;
+
+              /* "state/particle_methods/stochastic_volatility.pyx":619
+ * 
+ *                         for l in range(k+1, NPARAMS):
+ *                             if isfinite(sub_hessian1[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ */
+              __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_l])) != 0);
+              if (__pyx_t_7) {
+
+                /* "state/particle_methods/stochastic_volatility.pyx":620
+ *                         for l in range(k+1, NPARAMS):
+ *                             if isfinite(sub_hessian1[k][l]):
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):
+ */
+                __pyx_t_17 = __pyx_v_k;
+                __pyx_t_40 = __pyx_v_l;
+                ((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":621
+ *                             if isfinite(sub_hessian1[k][l]):
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ *                             if isfinite(sub_hessian2[k][l]):
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ */
+                __pyx_t_17 = __pyx_v_l;
+                __pyx_t_40 = __pyx_v_k;
+                ((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian1[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian1[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":619
+ * 
+ *                         for l in range(k+1, NPARAMS):
+ *                             if isfinite(sub_hessian1[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ */
+              }
+
+              /* "state/particle_methods/stochastic_volatility.pyx":622
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ */
+              __pyx_t_7 = (isfinite(((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l])) != 0);
+              if (__pyx_t_7) {
+
+                /* "state/particle_methods/stochastic_volatility.pyx":623
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ * 
+ */
+                __pyx_t_17 = __pyx_v_k;
+                __pyx_t_40 = __pyx_v_l;
+                ((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":624
+ *                             if isfinite(sub_hessian2[k][l]):
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+                __pyx_t_17 = __pyx_v_l;
+                __pyx_t_40 = __pyx_v_k;
+                ((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) = (((__pyx_v_hessian2[__pyx_t_17])[__pyx_t_40]) + (((__pyx_v_sub_hessian2[__pyx_v_k])[__pyx_v_l]) * (__pyx_v_weights[(__pyx_v_i + (__pyx_v_j * 0x169))])));
+
+                /* "state/particle_methods/stochastic_volatility.pyx":622
+ *                                 hessian1[k][l] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                                 hessian1[l][k] += sub_hessian1[k][l] * weights[i + j * NOBS]
+ *                             if isfinite(sub_hessian2[k][l]):             # <<<<<<<<<<<<<<
+ *                                 hessian2[k][l] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ *                                 hessian2[l][k] += sub_hessian2[k][l] * weights[i + j * NOBS]
+ */
+              }
+            }
           }
 
-          /* "state/particle_methods/stochastic_volatility.pyx":544
+          /* "state/particle_methods/stochastic_volatility.pyx":562
  *                 gradient[3][i - LAG + 1] += sub_gradient[3] * weights[i + j * NOBS]
  * 
  *                 if compute_hessian == 1:             # <<<<<<<<<<<<<<
@@ -6907,7 +7636,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
         }
 
-        /* "state/particle_methods/stochastic_volatility.pyx":526
+        /* "state/particle_methods/stochastic_volatility.pyx":544
  *             smo_state_est[i] +=  weights[NOBS - 1 + j * NOBS] * curr_particle
  * 
  *             if (idx - 1) >= 0:             # <<<<<<<<<<<<<<
@@ -6918,18 +7647,18 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
     }
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":591
+  /* "state/particle_methods/stochastic_volatility.pyx":628
  * 
  *     # Sample trajectory
  *     idx = sampleParticle_corr(weights, rvr[0])             # <<<<<<<<<<<<<<
  *     for i in range(NOBS):
  *         j = ancestry[i + idx * NOBS]
  */
-  __pyx_t_41 = 0;
-  if (__pyx_t_41 < 0) __pyx_t_41 += __pyx_v_rvr.shape[0];
-  __pyx_v_idx = __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParticle_corr(__pyx_v_weights, (*((double *) ( /* dim=0 */ (__pyx_v_rvr.data + __pyx_t_41 * __pyx_v_rvr.strides[0]) ))));
+  __pyx_t_56 = 0;
+  if (__pyx_t_56 < 0) __pyx_t_56 += __pyx_v_rvr.shape[0];
+  __pyx_v_idx = __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParticle_corr(__pyx_v_weights, (*((double *) ( /* dim=0 */ (__pyx_v_rvr.data + __pyx_t_56 * __pyx_v_rvr.strides[0]) ))));
 
-  /* "state/particle_methods/stochastic_volatility.pyx":592
+  /* "state/particle_methods/stochastic_volatility.pyx":629
  *     # Sample trajectory
  *     idx = sampleParticle_corr(weights, rvr[0])
  *     for i in range(NOBS):             # <<<<<<<<<<<<<<
@@ -6939,7 +7668,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
   for (__pyx_t_5 = 0; __pyx_t_5 < 0x169; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":593
+    /* "state/particle_methods/stochastic_volatility.pyx":630
  *     idx = sampleParticle_corr(weights, rvr[0])
  *     for i in range(NOBS):
  *         j = ancestry[i + idx * NOBS]             # <<<<<<<<<<<<<<
@@ -6948,7 +7677,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
     __pyx_v_j = (__pyx_v_ancestry[(__pyx_v_i + (__pyx_v_idx * 0x169))]);
 
-    /* "state/particle_methods/stochastic_volatility.pyx":594
+    /* "state/particle_methods/stochastic_volatility.pyx":631
  *     for i in range(NOBS):
  *         j = ancestry[i + idx * NOBS]
  *         state_trajectory[i] = particles[i + j * NOBS]             # <<<<<<<<<<<<<<
@@ -6958,7 +7687,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
     (__pyx_v_state_trajectory[__pyx_v_i]) = (__pyx_v_particles[(__pyx_v_i + (__pyx_v_j * 0x169))]);
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":596
+  /* "state/particle_methods/stochastic_volatility.pyx":633
  *         state_trajectory[i] = particles[i + j * NOBS]
  * 
  *     free(particles)             # <<<<<<<<<<<<<<
@@ -6967,7 +7696,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_particles);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":597
+  /* "state/particle_methods/stochastic_volatility.pyx":634
  * 
  *     free(particles)
  *     free(weights)             # <<<<<<<<<<<<<<
@@ -6976,7 +7705,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_weights);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":598
+  /* "state/particle_methods/stochastic_volatility.pyx":635
  *     free(particles)
  *     free(weights)
  *     free(weights_at_t)             # <<<<<<<<<<<<<<
@@ -6985,7 +7714,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_weights_at_t);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":599
+  /* "state/particle_methods/stochastic_volatility.pyx":636
  *     free(weights)
  *     free(weights_at_t)
  *     free(particle_history)             # <<<<<<<<<<<<<<
@@ -6994,7 +7723,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_particle_history);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":600
+  /* "state/particle_methods/stochastic_volatility.pyx":637
  *     free(weights_at_t)
  *     free(particle_history)
  *     free(old_particle_history)             # <<<<<<<<<<<<<<
@@ -7003,7 +7732,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_old_particle_history);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":601
+  /* "state/particle_methods/stochastic_volatility.pyx":638
  *     free(particle_history)
  *     free(old_particle_history)
  *     free(ancestors)             # <<<<<<<<<<<<<<
@@ -7012,7 +7741,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_ancestors);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":602
+  /* "state/particle_methods/stochastic_volatility.pyx":639
  *     free(old_particle_history)
  *     free(ancestors)
  *     free(unnorm_weights)             # <<<<<<<<<<<<<<
@@ -7021,7 +7750,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_unnorm_weights);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":603
+  /* "state/particle_methods/stochastic_volatility.pyx":640
  *     free(ancestors)
  *     free(unnorm_weights)
  *     free(shifted_weights)             # <<<<<<<<<<<<<<
@@ -7030,7 +7759,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_shifted_weights);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":604
+  /* "state/particle_methods/stochastic_volatility.pyx":641
  *     free(unnorm_weights)
  *     free(shifted_weights)
  *     free(ancestry)             # <<<<<<<<<<<<<<
@@ -7039,7 +7768,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_ancestry);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":605
+  /* "state/particle_methods/stochastic_volatility.pyx":642
  *     free(shifted_weights)
  *     free(ancestry)
  *     free(old_ancestry)             # <<<<<<<<<<<<<<
@@ -7048,7 +7777,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_old_ancestry);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":606
+  /* "state/particle_methods/stochastic_volatility.pyx":643
  *     free(ancestry)
  *     free(old_ancestry)
  *     free(alpha_history0)             # <<<<<<<<<<<<<<
@@ -7057,7 +7786,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_alpha_history0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":607
+  /* "state/particle_methods/stochastic_volatility.pyx":644
  *     free(old_ancestry)
  *     free(alpha_history0)
  *     free(old_alpha_history0)             # <<<<<<<<<<<<<<
@@ -7066,7 +7795,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_old_alpha_history0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":608
+  /* "state/particle_methods/stochastic_volatility.pyx":645
  *     free(alpha_history0)
  *     free(old_alpha_history0)
  *     free(alpha_history1)             # <<<<<<<<<<<<<<
@@ -7075,7 +7804,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_alpha_history1);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":609
+  /* "state/particle_methods/stochastic_volatility.pyx":646
  *     free(old_alpha_history0)
  *     free(alpha_history1)
  *     free(old_alpha_history1)             # <<<<<<<<<<<<<<
@@ -7084,7 +7813,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_old_alpha_history1);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":610
+  /* "state/particle_methods/stochastic_volatility.pyx":647
  *     free(alpha_history1)
  *     free(old_alpha_history1)
  *     free(alpha_history2)             # <<<<<<<<<<<<<<
@@ -7093,7 +7822,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_alpha_history2);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":611
+  /* "state/particle_methods/stochastic_volatility.pyx":648
  *     free(old_alpha_history1)
  *     free(alpha_history2)
  *     free(old_alpha_history2)             # <<<<<<<<<<<<<<
@@ -7102,7 +7831,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_old_alpha_history2);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":612
+  /* "state/particle_methods/stochastic_volatility.pyx":649
  *     free(alpha_history2)
  *     free(old_alpha_history2)
  *     free(alpha_history3)             # <<<<<<<<<<<<<<
@@ -7111,7 +7840,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_alpha_history3);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":613
+  /* "state/particle_methods/stochastic_volatility.pyx":650
  *     free(old_alpha_history2)
  *     free(alpha_history3)
  *     free(old_alpha_history3)             # <<<<<<<<<<<<<<
@@ -7120,7 +7849,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  */
   free(__pyx_v_old_alpha_history3);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":616
+  /* "state/particle_methods/stochastic_volatility.pyx":653
  * 
  *     # Compile the rest of the output
  *     return filt_state_est, smo_state_est, log_like, gradient, state_trajectory, hessian1, hessian2             # <<<<<<<<<<<<<<
@@ -7128,45 +7857,45 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
  * @cython.cdivision(True)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_10 = __Pyx_carray_to_py_double(__pyx_v_filt_state_est, 0x169); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 616, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_carray_to_py_double(__pyx_v_filt_state_est, 0x169); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 653, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_11 = __Pyx_carray_to_py_double(__pyx_v_smo_state_est, 0x169); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 616, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_carray_to_py_double(__pyx_v_smo_state_est, 0x169); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 653, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_42 = PyFloat_FromDouble(__pyx_v_log_like); if (unlikely(!__pyx_t_42)) __PYX_ERR(0, 616, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_42);
-  __pyx_t_43 = __Pyx_carray_to_py_double___5b_0x169_5d_(__pyx_v_gradient, 4); if (unlikely(!__pyx_t_43)) __PYX_ERR(0, 616, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_43);
-  __pyx_t_44 = __Pyx_carray_to_py_double(__pyx_v_state_trajectory, 0x169); if (unlikely(!__pyx_t_44)) __PYX_ERR(0, 616, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_44);
-  __pyx_t_45 = __Pyx_carray_to_py_double___5b_4_5d_(__pyx_v_hessian1, 4); if (unlikely(!__pyx_t_45)) __PYX_ERR(0, 616, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_45);
-  __pyx_t_46 = __Pyx_carray_to_py_double___5b_4_5d_(__pyx_v_hessian2, 4); if (unlikely(!__pyx_t_46)) __PYX_ERR(0, 616, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_46);
-  __pyx_t_47 = PyTuple_New(7); if (unlikely(!__pyx_t_47)) __PYX_ERR(0, 616, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_47);
+  __pyx_t_57 = PyFloat_FromDouble(__pyx_v_log_like); if (unlikely(!__pyx_t_57)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_57);
+  __pyx_t_58 = __Pyx_carray_to_py_double___5b_0x169_5d_(__pyx_v_gradient, 4); if (unlikely(!__pyx_t_58)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_58);
+  __pyx_t_59 = __Pyx_carray_to_py_double(__pyx_v_state_trajectory, 0x169); if (unlikely(!__pyx_t_59)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_59);
+  __pyx_t_60 = __Pyx_carray_to_py_double___5b_4_5d_(__pyx_v_hessian1, 4); if (unlikely(!__pyx_t_60)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_60);
+  __pyx_t_61 = __Pyx_carray_to_py_double___5b_4_5d_(__pyx_v_hessian2, 4); if (unlikely(!__pyx_t_61)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_61);
+  __pyx_t_62 = PyTuple_New(7); if (unlikely(!__pyx_t_62)) __PYX_ERR(0, 653, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_62);
   __Pyx_GIVEREF(__pyx_t_10);
-  PyTuple_SET_ITEM(__pyx_t_47, 0, __pyx_t_10);
+  PyTuple_SET_ITEM(__pyx_t_62, 0, __pyx_t_10);
   __Pyx_GIVEREF(__pyx_t_11);
-  PyTuple_SET_ITEM(__pyx_t_47, 1, __pyx_t_11);
-  __Pyx_GIVEREF(__pyx_t_42);
-  PyTuple_SET_ITEM(__pyx_t_47, 2, __pyx_t_42);
-  __Pyx_GIVEREF(__pyx_t_43);
-  PyTuple_SET_ITEM(__pyx_t_47, 3, __pyx_t_43);
-  __Pyx_GIVEREF(__pyx_t_44);
-  PyTuple_SET_ITEM(__pyx_t_47, 4, __pyx_t_44);
-  __Pyx_GIVEREF(__pyx_t_45);
-  PyTuple_SET_ITEM(__pyx_t_47, 5, __pyx_t_45);
-  __Pyx_GIVEREF(__pyx_t_46);
-  PyTuple_SET_ITEM(__pyx_t_47, 6, __pyx_t_46);
+  PyTuple_SET_ITEM(__pyx_t_62, 1, __pyx_t_11);
+  __Pyx_GIVEREF(__pyx_t_57);
+  PyTuple_SET_ITEM(__pyx_t_62, 2, __pyx_t_57);
+  __Pyx_GIVEREF(__pyx_t_58);
+  PyTuple_SET_ITEM(__pyx_t_62, 3, __pyx_t_58);
+  __Pyx_GIVEREF(__pyx_t_59);
+  PyTuple_SET_ITEM(__pyx_t_62, 4, __pyx_t_59);
+  __Pyx_GIVEREF(__pyx_t_60);
+  PyTuple_SET_ITEM(__pyx_t_62, 5, __pyx_t_60);
+  __Pyx_GIVEREF(__pyx_t_61);
+  PyTuple_SET_ITEM(__pyx_t_62, 6, __pyx_t_61);
   __pyx_t_10 = 0;
   __pyx_t_11 = 0;
-  __pyx_t_42 = 0;
-  __pyx_t_43 = 0;
-  __pyx_t_44 = 0;
-  __pyx_t_45 = 0;
-  __pyx_t_46 = 0;
-  __pyx_r = __pyx_t_47;
-  __pyx_t_47 = 0;
+  __pyx_t_57 = 0;
+  __pyx_t_58 = 0;
+  __pyx_t_59 = 0;
+  __pyx_t_60 = 0;
+  __pyx_t_61 = 0;
+  __pyx_r = __pyx_t_62;
+  __pyx_t_62 = 0;
   goto __pyx_L0;
 
   /* "state/particle_methods/stochastic_volatility.pyx":203
@@ -7184,12 +7913,12 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
   __Pyx_XDECREF(__pyx_t_11);
   __PYX_XDEC_MEMVIEW(&__pyx_t_12, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_13, 1);
-  __Pyx_XDECREF(__pyx_t_42);
-  __Pyx_XDECREF(__pyx_t_43);
-  __Pyx_XDECREF(__pyx_t_44);
-  __Pyx_XDECREF(__pyx_t_45);
-  __Pyx_XDECREF(__pyx_t_46);
-  __Pyx_XDECREF(__pyx_t_47);
+  __Pyx_XDECREF(__pyx_t_57);
+  __Pyx_XDECREF(__pyx_t_58);
+  __Pyx_XDECREF(__pyx_t_59);
+  __Pyx_XDECREF(__pyx_t_60);
+  __Pyx_XDECREF(__pyx_t_61);
+  __Pyx_XDECREF(__pyx_t_62);
   __Pyx_AddTraceback("state.particle_methods.stochastic_volatility.flps_sv_corr", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -7202,7 +7931,7 @@ static PyObject *__pyx_pf_5state_16particle_methods_21stochastic_volatility_6flp
   return __pyx_r;
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":620
+/* "state/particle_methods/stochastic_volatility.pyx":657
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef double norm_logpdf(double x, double m, double s):             # <<<<<<<<<<<<<<
@@ -7218,7 +7947,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_norm_log
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("norm_logpdf", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":622
+  /* "state/particle_methods/stochastic_volatility.pyx":659
  * cdef double norm_logpdf(double x, double m, double s):
  *     """Helper for computing the log of the Gaussian pdf."""
  *     cdef double part1 = -0.91893853320467267 # -0.5 * log(2 * pi)             # <<<<<<<<<<<<<<
@@ -7227,7 +7956,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_norm_log
  */
   __pyx_v_part1 = -0.91893853320467267;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":623
+  /* "state/particle_methods/stochastic_volatility.pyx":660
  *     """Helper for computing the log of the Gaussian pdf."""
  *     cdef double part1 = -0.91893853320467267 # -0.5 * log(2 * pi)
  *     cdef double part2 = -log(s)             # <<<<<<<<<<<<<<
@@ -7236,7 +7965,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_norm_log
  */
   __pyx_v_part2 = (-log(__pyx_v_s));
 
-  /* "state/particle_methods/stochastic_volatility.pyx":624
+  /* "state/particle_methods/stochastic_volatility.pyx":661
  *     cdef double part1 = -0.91893853320467267 # -0.5 * log(2 * pi)
  *     cdef double part2 = -log(s)
  *     cdef double part3 = -0.5 * (x - m) * (x - m) / (s * s)             # <<<<<<<<<<<<<<
@@ -7245,7 +7974,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_norm_log
  */
   __pyx_v_part3 = (((-0.5 * (__pyx_v_x - __pyx_v_m)) * (__pyx_v_x - __pyx_v_m)) / (__pyx_v_s * __pyx_v_s));
 
-  /* "state/particle_methods/stochastic_volatility.pyx":625
+  /* "state/particle_methods/stochastic_volatility.pyx":662
  *     cdef double part2 = -log(s)
  *     cdef double part3 = -0.5 * (x - m) * (x - m) / (s * s)
  *     return part1 + part2 + part3             # <<<<<<<<<<<<<<
@@ -7255,7 +7984,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_norm_log
   __pyx_r = ((__pyx_v_part1 + __pyx_v_part2) + __pyx_v_part3);
   goto __pyx_L0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":620
+  /* "state/particle_methods/stochastic_volatility.pyx":657
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef double norm_logpdf(double x, double m, double s):             # <<<<<<<<<<<<<<
@@ -7269,7 +7998,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_norm_log
   return __pyx_r;
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":629
+/* "state/particle_methods/stochastic_volatility.pyx":666
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef void systematic(int *ancestors, double weights[NPART]):             # <<<<<<<<<<<<<<
@@ -7282,7 +8011,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
   int __pyx_v_j;
   double __pyx_v_rnd_number;
   double __pyx_v_cpoint;
-  double __pyx_v_cum_weights[0x64];
+  double __pyx_v_cum_weights[75];
   double __pyx_v_sum_weights;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -7291,7 +8020,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("systematic", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":630
+  /* "state/particle_methods/stochastic_volatility.pyx":667
  * @cython.boundscheck(False)
  * cdef void systematic(int *ancestors, double weights[NPART]):
  *     cdef int cur_idx = 0             # <<<<<<<<<<<<<<
@@ -7300,7 +8029,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_cur_idx = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":631
+  /* "state/particle_methods/stochastic_volatility.pyx":668
  * cdef void systematic(int *ancestors, double weights[NPART]):
  *     cdef int cur_idx = 0
  *     cdef int j = 0             # <<<<<<<<<<<<<<
@@ -7309,7 +8038,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_j = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":632
+  /* "state/particle_methods/stochastic_volatility.pyx":669
  *     cdef int cur_idx = 0
  *     cdef int j = 0
  *     cdef double rnd_number = random_uniform()             # <<<<<<<<<<<<<<
@@ -7318,7 +8047,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_rnd_number = __pyx_f_5state_16particle_methods_21stochastic_volatility_random_uniform();
 
-  /* "state/particle_methods/stochastic_volatility.pyx":633
+  /* "state/particle_methods/stochastic_volatility.pyx":670
  *     cdef int j = 0
  *     cdef double rnd_number = random_uniform()
  *     cdef double cpoint = 0.0             # <<<<<<<<<<<<<<
@@ -7327,7 +8056,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_cpoint = 0.0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":638
+  /* "state/particle_methods/stochastic_volatility.pyx":675
  * 
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]             # <<<<<<<<<<<<<<
@@ -7336,7 +8065,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   (__pyx_v_cum_weights[0]) = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":639
+  /* "state/particle_methods/stochastic_volatility.pyx":676
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]             # <<<<<<<<<<<<<<
@@ -7345,17 +8074,17 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_sum_weights = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":640
+  /* "state/particle_methods/stochastic_volatility.pyx":677
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":641
+    /* "state/particle_methods/stochastic_volatility.pyx":678
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]             # <<<<<<<<<<<<<<
@@ -7364,7 +8093,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
     (__pyx_v_cum_weights[__pyx_v_j]) = ((__pyx_v_cum_weights[(__pyx_v_j - 1)]) + (__pyx_v_weights[__pyx_v_j]));
 
-    /* "state/particle_methods/stochastic_volatility.pyx":642
+    /* "state/particle_methods/stochastic_volatility.pyx":679
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]             # <<<<<<<<<<<<<<
@@ -7374,17 +8103,17 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
     __pyx_v_sum_weights = (__pyx_v_sum_weights + (__pyx_v_weights[__pyx_v_j]));
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":644
+  /* "state/particle_methods/stochastic_volatility.pyx":681
  *         sum_weights += weights[j]
  * 
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] /= sum_weights
  * 
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":645
+    /* "state/particle_methods/stochastic_volatility.pyx":682
  * 
  *     for j in range(1, NPART):
  *         cum_weights[j] /= sum_weights             # <<<<<<<<<<<<<<
@@ -7395,26 +8124,26 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
     (__pyx_v_cum_weights[__pyx_t_2]) = ((__pyx_v_cum_weights[__pyx_t_2]) / __pyx_v_sum_weights);
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":647
+  /* "state/particle_methods/stochastic_volatility.pyx":684
  *         cum_weights[j] /= sum_weights
  * 
  *     for j in range(NPART):             # <<<<<<<<<<<<<<
  *         cpoint = (rnd_number + j) / NPART
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 0; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":648
+    /* "state/particle_methods/stochastic_volatility.pyx":685
  * 
  *     for j in range(NPART):
  *         cpoint = (rnd_number + j) / NPART             # <<<<<<<<<<<<<<
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  *             cur_idx += 1
  */
-    __pyx_v_cpoint = ((__pyx_v_rnd_number + __pyx_v_j) / 100.0);
+    __pyx_v_cpoint = ((__pyx_v_rnd_number + __pyx_v_j) / 75.0);
 
-    /* "state/particle_methods/stochastic_volatility.pyx":649
+    /* "state/particle_methods/stochastic_volatility.pyx":686
  *     for j in range(NPART):
  *         cpoint = (rnd_number + j) / NPART
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:             # <<<<<<<<<<<<<<
@@ -7428,12 +8157,12 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
         __pyx_t_3 = __pyx_t_4;
         goto __pyx_L11_bool_binop_done;
       }
-      __pyx_t_4 = ((__pyx_v_cur_idx < 99) != 0);
+      __pyx_t_4 = ((__pyx_v_cur_idx < 74) != 0);
       __pyx_t_3 = __pyx_t_4;
       __pyx_L11_bool_binop_done:;
       if (!__pyx_t_3) break;
 
-      /* "state/particle_methods/stochastic_volatility.pyx":650
+      /* "state/particle_methods/stochastic_volatility.pyx":687
  *         cpoint = (rnd_number + j) / NPART
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  *             cur_idx += 1             # <<<<<<<<<<<<<<
@@ -7443,7 +8172,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
       __pyx_v_cur_idx = (__pyx_v_cur_idx + 1);
     }
 
-    /* "state/particle_methods/stochastic_volatility.pyx":651
+    /* "state/particle_methods/stochastic_volatility.pyx":688
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  *             cur_idx += 1
  *         ancestors[j] = cur_idx             # <<<<<<<<<<<<<<
@@ -7453,7 +8182,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
     (__pyx_v_ancestors[__pyx_v_j]) = __pyx_v_cur_idx;
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":629
+  /* "state/particle_methods/stochastic_volatility.pyx":666
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef void systematic(int *ancestors, double weights[NPART]):             # <<<<<<<<<<<<<<
@@ -7465,7 +8194,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
   __Pyx_RefNannyFinishContext();
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":655
+/* "state/particle_methods/stochastic_volatility.pyx":692
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef void systematic_corr(int *ancestors, double weights[NPART], double rnd_number):             # <<<<<<<<<<<<<<
@@ -7477,7 +8206,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
   int __pyx_v_cur_idx;
   int __pyx_v_j;
   double __pyx_v_cpoint;
-  double __pyx_v_cum_weights[0x64];
+  double __pyx_v_cum_weights[75];
   double __pyx_v_sum_weights;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -7486,7 +8215,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("systematic_corr", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":656
+  /* "state/particle_methods/stochastic_volatility.pyx":693
  * @cython.boundscheck(False)
  * cdef void systematic_corr(int *ancestors, double weights[NPART], double rnd_number):
  *     cdef int cur_idx = 0             # <<<<<<<<<<<<<<
@@ -7495,7 +8224,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_cur_idx = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":657
+  /* "state/particle_methods/stochastic_volatility.pyx":694
  * cdef void systematic_corr(int *ancestors, double weights[NPART], double rnd_number):
  *     cdef int cur_idx = 0
  *     cdef int j = 0             # <<<<<<<<<<<<<<
@@ -7504,7 +8233,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_j = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":658
+  /* "state/particle_methods/stochastic_volatility.pyx":695
  *     cdef int cur_idx = 0
  *     cdef int j = 0
  *     cdef double cpoint = 0.0             # <<<<<<<<<<<<<<
@@ -7513,7 +8242,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_cpoint = 0.0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":663
+  /* "state/particle_methods/stochastic_volatility.pyx":700
  * 
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]             # <<<<<<<<<<<<<<
@@ -7522,7 +8251,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   (__pyx_v_cum_weights[0]) = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":664
+  /* "state/particle_methods/stochastic_volatility.pyx":701
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]             # <<<<<<<<<<<<<<
@@ -7531,17 +8260,17 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
   __pyx_v_sum_weights = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":665
+  /* "state/particle_methods/stochastic_volatility.pyx":702
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":666
+    /* "state/particle_methods/stochastic_volatility.pyx":703
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]             # <<<<<<<<<<<<<<
@@ -7550,7 +8279,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
  */
     (__pyx_v_cum_weights[__pyx_v_j]) = ((__pyx_v_cum_weights[(__pyx_v_j - 1)]) + (__pyx_v_weights[__pyx_v_j]));
 
-    /* "state/particle_methods/stochastic_volatility.pyx":667
+    /* "state/particle_methods/stochastic_volatility.pyx":704
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]             # <<<<<<<<<<<<<<
@@ -7560,17 +8289,17 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
     __pyx_v_sum_weights = (__pyx_v_sum_weights + (__pyx_v_weights[__pyx_v_j]));
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":669
+  /* "state/particle_methods/stochastic_volatility.pyx":706
  *         sum_weights += weights[j]
  * 
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] /= sum_weights
  * 
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":670
+    /* "state/particle_methods/stochastic_volatility.pyx":707
  * 
  *     for j in range(1, NPART):
  *         cum_weights[j] /= sum_weights             # <<<<<<<<<<<<<<
@@ -7581,26 +8310,26 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
     (__pyx_v_cum_weights[__pyx_t_2]) = ((__pyx_v_cum_weights[__pyx_t_2]) / __pyx_v_sum_weights);
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":672
+  /* "state/particle_methods/stochastic_volatility.pyx":709
  *         cum_weights[j] /= sum_weights
  * 
  *     for j in range(NPART):             # <<<<<<<<<<<<<<
  *         cpoint = (rnd_number + j) / NPART
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 0; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":673
+    /* "state/particle_methods/stochastic_volatility.pyx":710
  * 
  *     for j in range(NPART):
  *         cpoint = (rnd_number + j) / NPART             # <<<<<<<<<<<<<<
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  *             cur_idx += 1
  */
-    __pyx_v_cpoint = ((__pyx_v_rnd_number + __pyx_v_j) / 100.0);
+    __pyx_v_cpoint = ((__pyx_v_rnd_number + __pyx_v_j) / 75.0);
 
-    /* "state/particle_methods/stochastic_volatility.pyx":674
+    /* "state/particle_methods/stochastic_volatility.pyx":711
  *     for j in range(NPART):
  *         cpoint = (rnd_number + j) / NPART
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:             # <<<<<<<<<<<<<<
@@ -7614,12 +8343,12 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
         __pyx_t_3 = __pyx_t_4;
         goto __pyx_L11_bool_binop_done;
       }
-      __pyx_t_4 = ((__pyx_v_cur_idx < 99) != 0);
+      __pyx_t_4 = ((__pyx_v_cur_idx < 74) != 0);
       __pyx_t_3 = __pyx_t_4;
       __pyx_L11_bool_binop_done:;
       if (!__pyx_t_3) break;
 
-      /* "state/particle_methods/stochastic_volatility.pyx":675
+      /* "state/particle_methods/stochastic_volatility.pyx":712
  *         cpoint = (rnd_number + j) / NPART
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  *             cur_idx += 1             # <<<<<<<<<<<<<<
@@ -7629,7 +8358,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
       __pyx_v_cur_idx = (__pyx_v_cur_idx + 1);
     }
 
-    /* "state/particle_methods/stochastic_volatility.pyx":676
+    /* "state/particle_methods/stochastic_volatility.pyx":713
  *         while cum_weights[cur_idx] < cpoint and cur_idx < NPART - 1:
  *             cur_idx += 1
  *         ancestors[j] = cur_idx             # <<<<<<<<<<<<<<
@@ -7639,7 +8368,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
     (__pyx_v_ancestors[__pyx_v_j]) = __pyx_v_cur_idx;
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":655
+  /* "state/particle_methods/stochastic_volatility.pyx":692
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef void systematic_corr(int *ancestors, double weights[NPART], double rnd_number):             # <<<<<<<<<<<<<<
@@ -7651,7 +8380,7 @@ static void __pyx_f_5state_16particle_methods_21stochastic_volatility_systematic
   __Pyx_RefNannyFinishContext();
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":680
+/* "state/particle_methods/stochastic_volatility.pyx":717
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef double random_uniform():             # <<<<<<<<<<<<<<
@@ -7665,7 +8394,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_u
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("random_uniform", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":681
+  /* "state/particle_methods/stochastic_volatility.pyx":718
  * @cython.boundscheck(False)
  * cdef double random_uniform():
  *     cdef double r = rand()             # <<<<<<<<<<<<<<
@@ -7674,7 +8403,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_u
  */
   __pyx_v_r = rand();
 
-  /* "state/particle_methods/stochastic_volatility.pyx":682
+  /* "state/particle_methods/stochastic_volatility.pyx":719
  * cdef double random_uniform():
  *     cdef double r = rand()
  *     return r / RAND_MAX             # <<<<<<<<<<<<<<
@@ -7684,7 +8413,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_u
   __pyx_r = (__pyx_v_r / RAND_MAX);
   goto __pyx_L0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":680
+  /* "state/particle_methods/stochastic_volatility.pyx":717
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef double random_uniform():             # <<<<<<<<<<<<<<
@@ -7698,7 +8427,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_u
   return __pyx_r;
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":686
+/* "state/particle_methods/stochastic_volatility.pyx":723
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef double random_gaussian():             # <<<<<<<<<<<<<<
@@ -7715,7 +8444,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("random_gaussian", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":689
+  /* "state/particle_methods/stochastic_volatility.pyx":726
  *     cdef double x1, x2, w
  * 
  *     w = 2.0             # <<<<<<<<<<<<<<
@@ -7724,7 +8453,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
  */
   __pyx_v_w = 2.0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":690
+  /* "state/particle_methods/stochastic_volatility.pyx":727
  * 
  *     w = 2.0
  *     while (w >= 1.0):             # <<<<<<<<<<<<<<
@@ -7735,7 +8464,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
     __pyx_t_1 = ((__pyx_v_w >= 1.0) != 0);
     if (!__pyx_t_1) break;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":691
+    /* "state/particle_methods/stochastic_volatility.pyx":728
  *     w = 2.0
  *     while (w >= 1.0):
  *         x1 = 2.0 * random_uniform() - 1.0             # <<<<<<<<<<<<<<
@@ -7744,7 +8473,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
  */
     __pyx_v_x1 = ((2.0 * __pyx_f_5state_16particle_methods_21stochastic_volatility_random_uniform()) - 1.0);
 
-    /* "state/particle_methods/stochastic_volatility.pyx":692
+    /* "state/particle_methods/stochastic_volatility.pyx":729
  *     while (w >= 1.0):
  *         x1 = 2.0 * random_uniform() - 1.0
  *         x2 = 2.0 * random_uniform() - 1.0             # <<<<<<<<<<<<<<
@@ -7753,7 +8482,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
  */
     __pyx_v_x2 = ((2.0 * __pyx_f_5state_16particle_methods_21stochastic_volatility_random_uniform()) - 1.0);
 
-    /* "state/particle_methods/stochastic_volatility.pyx":693
+    /* "state/particle_methods/stochastic_volatility.pyx":730
  *         x1 = 2.0 * random_uniform() - 1.0
  *         x2 = 2.0 * random_uniform() - 1.0
  *         w = x1 * x1 + x2 * x2             # <<<<<<<<<<<<<<
@@ -7763,7 +8492,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
     __pyx_v_w = ((__pyx_v_x1 * __pyx_v_x1) + (__pyx_v_x2 * __pyx_v_x2));
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":695
+  /* "state/particle_methods/stochastic_volatility.pyx":732
  *         w = x1 * x1 + x2 * x2
  * 
  *     w = sqrt((-2.0 * log(w)) / w)             # <<<<<<<<<<<<<<
@@ -7772,7 +8501,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
  */
   __pyx_v_w = sqrt(((-2.0 * log(__pyx_v_w)) / __pyx_v_w));
 
-  /* "state/particle_methods/stochastic_volatility.pyx":696
+  /* "state/particle_methods/stochastic_volatility.pyx":733
  * 
  *     w = sqrt((-2.0 * log(w)) / w)
  *     return x1 * w             # <<<<<<<<<<<<<<
@@ -7782,7 +8511,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
   __pyx_r = (__pyx_v_x1 * __pyx_v_w);
   goto __pyx_L0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":686
+  /* "state/particle_methods/stochastic_volatility.pyx":723
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef double random_gaussian():             # <<<<<<<<<<<<<<
@@ -7796,7 +8525,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_random_g
   return __pyx_r;
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":699
+/* "state/particle_methods/stochastic_volatility.pyx":736
  * 
  * @cython.boundscheck(False)
  * cdef double my_max(double weights[NPART]):             # <<<<<<<<<<<<<<
@@ -7815,7 +8544,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("my_max", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":700
+  /* "state/particle_methods/stochastic_volatility.pyx":737
  * @cython.boundscheck(False)
  * cdef double my_max(double weights[NPART]):
  *     cdef int idx = 0             # <<<<<<<<<<<<<<
@@ -7824,7 +8553,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
  */
   __pyx_v_idx = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":701
+  /* "state/particle_methods/stochastic_volatility.pyx":738
  * cdef double my_max(double weights[NPART]):
  *     cdef int idx = 0
  *     cdef int i = 0             # <<<<<<<<<<<<<<
@@ -7833,7 +8562,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
  */
   __pyx_v_i = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":702
+  /* "state/particle_methods/stochastic_volatility.pyx":739
  *     cdef int idx = 0
  *     cdef int i = 0
  *     cdef double current_largest = weights[0]             # <<<<<<<<<<<<<<
@@ -7842,17 +8571,17 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
  */
   __pyx_v_current_largest = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":704
+  /* "state/particle_methods/stochastic_volatility.pyx":741
  *     cdef double current_largest = weights[0]
  * 
  *     for i in range(1, NPART):             # <<<<<<<<<<<<<<
  *         if weights[i] > current_largest and isfinite(weights[i]):
  *             idx = i
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":705
+    /* "state/particle_methods/stochastic_volatility.pyx":742
  * 
  *     for i in range(1, NPART):
  *         if weights[i] > current_largest and isfinite(weights[i]):             # <<<<<<<<<<<<<<
@@ -7870,7 +8599,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
     __pyx_L6_bool_binop_done:;
     if (__pyx_t_2) {
 
-      /* "state/particle_methods/stochastic_volatility.pyx":706
+      /* "state/particle_methods/stochastic_volatility.pyx":743
  *     for i in range(1, NPART):
  *         if weights[i] > current_largest and isfinite(weights[i]):
  *             idx = i             # <<<<<<<<<<<<<<
@@ -7879,7 +8608,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
  */
       __pyx_v_idx = __pyx_v_i;
 
-      /* "state/particle_methods/stochastic_volatility.pyx":705
+      /* "state/particle_methods/stochastic_volatility.pyx":742
  * 
  *     for i in range(1, NPART):
  *         if weights[i] > current_largest and isfinite(weights[i]):             # <<<<<<<<<<<<<<
@@ -7889,7 +8618,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
     }
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":707
+  /* "state/particle_methods/stochastic_volatility.pyx":744
  *         if weights[i] > current_largest and isfinite(weights[i]):
  *             idx = i
  *     return weights[idx]             # <<<<<<<<<<<<<<
@@ -7899,7 +8628,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
   __pyx_r = (__pyx_v_weights[__pyx_v_idx]);
   goto __pyx_L0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":699
+  /* "state/particle_methods/stochastic_volatility.pyx":736
  * 
  * @cython.boundscheck(False)
  * cdef double my_max(double weights[NPART]):             # <<<<<<<<<<<<<<
@@ -7913,7 +8642,7 @@ static double __pyx_f_5state_16particle_methods_21stochastic_volatility_my_max(d
   return __pyx_r;
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":710
+/* "state/particle_methods/stochastic_volatility.pyx":747
  * 
  * @cython.boundscheck(False)
  * cdef int my_min(int x, int y):             # <<<<<<<<<<<<<<
@@ -7929,7 +8658,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_my_min(int 
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("my_min", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":712
+  /* "state/particle_methods/stochastic_volatility.pyx":749
  * cdef int my_min(int x, int y):
  *     cdef int foo
  *     if x > y or x == y:             # <<<<<<<<<<<<<<
@@ -7947,7 +8676,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_my_min(int 
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "state/particle_methods/stochastic_volatility.pyx":713
+    /* "state/particle_methods/stochastic_volatility.pyx":750
  *     cdef int foo
  *     if x > y or x == y:
  *         foo = x             # <<<<<<<<<<<<<<
@@ -7956,7 +8685,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_my_min(int 
  */
     __pyx_v_foo = __pyx_v_x;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":712
+    /* "state/particle_methods/stochastic_volatility.pyx":749
  * cdef int my_min(int x, int y):
  *     cdef int foo
  *     if x > y or x == y:             # <<<<<<<<<<<<<<
@@ -7966,7 +8695,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_my_min(int 
     goto __pyx_L3;
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":715
+  /* "state/particle_methods/stochastic_volatility.pyx":752
  *         foo = x
  *     else:
  *         foo = y             # <<<<<<<<<<<<<<
@@ -7978,7 +8707,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_my_min(int 
   }
   __pyx_L3:;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":716
+  /* "state/particle_methods/stochastic_volatility.pyx":753
  *     else:
  *         foo = y
  *     return foo             # <<<<<<<<<<<<<<
@@ -7988,7 +8717,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_my_min(int 
   __pyx_r = __pyx_v_foo;
   goto __pyx_L0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":710
+  /* "state/particle_methods/stochastic_volatility.pyx":747
  * 
  * @cython.boundscheck(False)
  * cdef int my_min(int x, int y):             # <<<<<<<<<<<<<<
@@ -8002,7 +8731,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_my_min(int 
   return __pyx_r;
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":720
+/* "state/particle_methods/stochastic_volatility.pyx":757
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef int sampleParticle(double weights[NPART]):             # <<<<<<<<<<<<<<
@@ -8014,7 +8743,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   int __pyx_v_cur_idx;
   int __pyx_v_j;
   double __pyx_v_rnd_number;
-  double __pyx_v_cum_weights[0x64];
+  double __pyx_v_cum_weights[75];
   double __pyx_v_sum_weights;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -8023,7 +8752,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("sampleParticle", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":721
+  /* "state/particle_methods/stochastic_volatility.pyx":758
  * @cython.boundscheck(False)
  * cdef int sampleParticle(double weights[NPART]):
  *     cdef int cur_idx = 0             # <<<<<<<<<<<<<<
@@ -8032,7 +8761,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   __pyx_v_cur_idx = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":722
+  /* "state/particle_methods/stochastic_volatility.pyx":759
  * cdef int sampleParticle(double weights[NPART]):
  *     cdef int cur_idx = 0
  *     cdef int j = 0             # <<<<<<<<<<<<<<
@@ -8041,7 +8770,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   __pyx_v_j = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":723
+  /* "state/particle_methods/stochastic_volatility.pyx":760
  *     cdef int cur_idx = 0
  *     cdef int j = 0
  *     cdef double rnd_number = random_uniform()             # <<<<<<<<<<<<<<
@@ -8050,7 +8779,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   __pyx_v_rnd_number = __pyx_f_5state_16particle_methods_21stochastic_volatility_random_uniform();
 
-  /* "state/particle_methods/stochastic_volatility.pyx":728
+  /* "state/particle_methods/stochastic_volatility.pyx":765
  * 
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]             # <<<<<<<<<<<<<<
@@ -8059,7 +8788,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   (__pyx_v_cum_weights[0]) = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":729
+  /* "state/particle_methods/stochastic_volatility.pyx":766
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]             # <<<<<<<<<<<<<<
@@ -8068,17 +8797,17 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   __pyx_v_sum_weights = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":730
+  /* "state/particle_methods/stochastic_volatility.pyx":767
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":731
+    /* "state/particle_methods/stochastic_volatility.pyx":768
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]             # <<<<<<<<<<<<<<
@@ -8087,7 +8816,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
     (__pyx_v_cum_weights[__pyx_v_j]) = ((__pyx_v_cum_weights[(__pyx_v_j - 1)]) + (__pyx_v_weights[__pyx_v_j]));
 
-    /* "state/particle_methods/stochastic_volatility.pyx":732
+    /* "state/particle_methods/stochastic_volatility.pyx":769
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]             # <<<<<<<<<<<<<<
@@ -8097,17 +8826,17 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
     __pyx_v_sum_weights = (__pyx_v_sum_weights + (__pyx_v_weights[__pyx_v_j]));
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":734
+  /* "state/particle_methods/stochastic_volatility.pyx":771
  *         sum_weights += weights[j]
  * 
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] /= sum_weights
  * 
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":735
+    /* "state/particle_methods/stochastic_volatility.pyx":772
  * 
  *     for j in range(1, NPART):
  *         cum_weights[j] /= sum_weights             # <<<<<<<<<<<<<<
@@ -8118,17 +8847,17 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
     (__pyx_v_cum_weights[__pyx_t_2]) = ((__pyx_v_cum_weights[__pyx_t_2]) / __pyx_v_sum_weights);
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":737
+  /* "state/particle_methods/stochastic_volatility.pyx":774
  *         cum_weights[j] /= sum_weights
  * 
  *     for j in range(NPART):             # <<<<<<<<<<<<<<
  *         if cum_weights[cur_idx] < rnd_number:
  *             cur_idx += 1
  */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 0; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":738
+    /* "state/particle_methods/stochastic_volatility.pyx":775
  * 
  *     for j in range(NPART):
  *         if cum_weights[cur_idx] < rnd_number:             # <<<<<<<<<<<<<<
@@ -8138,7 +8867,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
     __pyx_t_3 = (((__pyx_v_cum_weights[__pyx_v_cur_idx]) < __pyx_v_rnd_number) != 0);
     if (__pyx_t_3) {
 
-      /* "state/particle_methods/stochastic_volatility.pyx":739
+      /* "state/particle_methods/stochastic_volatility.pyx":776
  *     for j in range(NPART):
  *         if cum_weights[cur_idx] < rnd_number:
  *             cur_idx += 1             # <<<<<<<<<<<<<<
@@ -8147,7 +8876,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
       __pyx_v_cur_idx = (__pyx_v_cur_idx + 1);
 
-      /* "state/particle_methods/stochastic_volatility.pyx":738
+      /* "state/particle_methods/stochastic_volatility.pyx":775
  * 
  *     for j in range(NPART):
  *         if cum_weights[cur_idx] < rnd_number:             # <<<<<<<<<<<<<<
@@ -8157,7 +8886,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
       goto __pyx_L9;
     }
 
-    /* "state/particle_methods/stochastic_volatility.pyx":741
+    /* "state/particle_methods/stochastic_volatility.pyx":778
  *             cur_idx += 1
  *         else:
  *             break             # <<<<<<<<<<<<<<
@@ -8171,7 +8900,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   }
   __pyx_L8_break:;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":742
+  /* "state/particle_methods/stochastic_volatility.pyx":779
  *         else:
  *             break
  *     return cur_idx             # <<<<<<<<<<<<<<
@@ -8181,7 +8910,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   __pyx_r = __pyx_v_cur_idx;
   goto __pyx_L0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":720
+  /* "state/particle_methods/stochastic_volatility.pyx":757
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef int sampleParticle(double weights[NPART]):             # <<<<<<<<<<<<<<
@@ -8195,7 +8924,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   return __pyx_r;
 }
 
-/* "state/particle_methods/stochastic_volatility.pyx":746
+/* "state/particle_methods/stochastic_volatility.pyx":783
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef int sampleParticle_corr(double weights[NPART], double rnd_number):             # <<<<<<<<<<<<<<
@@ -8206,7 +8935,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
 static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParticle_corr(double *__pyx_v_weights, double __pyx_v_rnd_number) {
   int __pyx_v_cur_idx;
   int __pyx_v_j;
-  double __pyx_v_cum_weights[0x64];
+  double __pyx_v_cum_weights[75];
   double __pyx_v_sum_weights;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -8215,7 +8944,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("sampleParticle_corr", 0);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":747
+  /* "state/particle_methods/stochastic_volatility.pyx":784
  * @cython.boundscheck(False)
  * cdef int sampleParticle_corr(double weights[NPART], double rnd_number):
  *     cdef int cur_idx = 0             # <<<<<<<<<<<<<<
@@ -8224,7 +8953,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   __pyx_v_cur_idx = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":748
+  /* "state/particle_methods/stochastic_volatility.pyx":785
  * cdef int sampleParticle_corr(double weights[NPART], double rnd_number):
  *     cdef int cur_idx = 0
  *     cdef int j = 0             # <<<<<<<<<<<<<<
@@ -8233,7 +8962,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   __pyx_v_j = 0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":753
+  /* "state/particle_methods/stochastic_volatility.pyx":790
  * 
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]             # <<<<<<<<<<<<<<
@@ -8242,7 +8971,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   (__pyx_v_cum_weights[0]) = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":754
+  /* "state/particle_methods/stochastic_volatility.pyx":791
  *     # Compute the empirical CDF of the weights
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]             # <<<<<<<<<<<<<<
@@ -8251,17 +8980,17 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
   __pyx_v_sum_weights = (__pyx_v_weights[0]);
 
-  /* "state/particle_methods/stochastic_volatility.pyx":755
+  /* "state/particle_methods/stochastic_volatility.pyx":792
  *     cum_weights[0] = weights[0]
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":756
+    /* "state/particle_methods/stochastic_volatility.pyx":793
  *     sum_weights = weights[0]
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]             # <<<<<<<<<<<<<<
@@ -8270,7 +8999,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
     (__pyx_v_cum_weights[__pyx_v_j]) = ((__pyx_v_cum_weights[(__pyx_v_j - 1)]) + (__pyx_v_weights[__pyx_v_j]));
 
-    /* "state/particle_methods/stochastic_volatility.pyx":757
+    /* "state/particle_methods/stochastic_volatility.pyx":794
  *     for j in range(1, NPART):
  *         cum_weights[j] = cum_weights[j-1] + weights[j]
  *         sum_weights += weights[j]             # <<<<<<<<<<<<<<
@@ -8280,17 +9009,17 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
     __pyx_v_sum_weights = (__pyx_v_sum_weights + (__pyx_v_weights[__pyx_v_j]));
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":759
+  /* "state/particle_methods/stochastic_volatility.pyx":796
  *         sum_weights += weights[j]
  * 
  *     for j in range(1, NPART):             # <<<<<<<<<<<<<<
  *         cum_weights[j] /= sum_weights
  * 
  */
-  for (__pyx_t_1 = 1; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 1; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":760
+    /* "state/particle_methods/stochastic_volatility.pyx":797
  * 
  *     for j in range(1, NPART):
  *         cum_weights[j] /= sum_weights             # <<<<<<<<<<<<<<
@@ -8301,17 +9030,17 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
     (__pyx_v_cum_weights[__pyx_t_2]) = ((__pyx_v_cum_weights[__pyx_t_2]) / __pyx_v_sum_weights);
   }
 
-  /* "state/particle_methods/stochastic_volatility.pyx":762
+  /* "state/particle_methods/stochastic_volatility.pyx":799
  *         cum_weights[j] /= sum_weights
  * 
  *     for j in range(NPART):             # <<<<<<<<<<<<<<
  *         if cum_weights[cur_idx] < rnd_number:
  *             cur_idx += 1
  */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 0x64; __pyx_t_1+=1) {
+  for (__pyx_t_1 = 0; __pyx_t_1 < 75; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "state/particle_methods/stochastic_volatility.pyx":763
+    /* "state/particle_methods/stochastic_volatility.pyx":800
  * 
  *     for j in range(NPART):
  *         if cum_weights[cur_idx] < rnd_number:             # <<<<<<<<<<<<<<
@@ -8321,7 +9050,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
     __pyx_t_3 = (((__pyx_v_cum_weights[__pyx_v_cur_idx]) < __pyx_v_rnd_number) != 0);
     if (__pyx_t_3) {
 
-      /* "state/particle_methods/stochastic_volatility.pyx":764
+      /* "state/particle_methods/stochastic_volatility.pyx":801
  *     for j in range(NPART):
  *         if cum_weights[cur_idx] < rnd_number:
  *             cur_idx += 1             # <<<<<<<<<<<<<<
@@ -8330,7 +9059,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
  */
       __pyx_v_cur_idx = (__pyx_v_cur_idx + 1);
 
-      /* "state/particle_methods/stochastic_volatility.pyx":763
+      /* "state/particle_methods/stochastic_volatility.pyx":800
  * 
  *     for j in range(NPART):
  *         if cum_weights[cur_idx] < rnd_number:             # <<<<<<<<<<<<<<
@@ -8340,7 +9069,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
       goto __pyx_L9;
     }
 
-    /* "state/particle_methods/stochastic_volatility.pyx":766
+    /* "state/particle_methods/stochastic_volatility.pyx":803
  *             cur_idx += 1
  *         else:
  *             break             # <<<<<<<<<<<<<<
@@ -8353,7 +9082,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   }
   __pyx_L8_break:;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":767
+  /* "state/particle_methods/stochastic_volatility.pyx":804
  *         else:
  *             break
  *     return cur_idx             # <<<<<<<<<<<<<<
@@ -8361,7 +9090,7 @@ static int __pyx_f_5state_16particle_methods_21stochastic_volatility_sampleParti
   __pyx_r = __pyx_v_cur_idx;
   goto __pyx_L0;
 
-  /* "state/particle_methods/stochastic_volatility.pyx":746
+  /* "state/particle_methods/stochastic_volatility.pyx":783
  * @cython.cdivision(True)
  * @cython.boundscheck(False)
  * cdef int sampleParticle_corr(double weights[NPART], double rnd_number):             # <<<<<<<<<<<<<<
@@ -25647,7 +26376,7 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * @cython.cdivision(True)
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_int_361, __pyx_int_100, __pyx_int_10); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(3, __pyx_int_361, __pyx_int_75, __pyx_int_10); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
@@ -26082,7 +26811,7 @@ static int __Pyx_InitGlobals(void) {
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_10 = PyInt_FromLong(10); if (unlikely(!__pyx_int_10)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_100 = PyInt_FromLong(100); if (unlikely(!__pyx_int_100)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_75 = PyInt_FromLong(75); if (unlikely(!__pyx_int_75)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_361 = PyInt_FromLong(361); if (unlikely(!__pyx_int_361)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_184977713 = PyInt_FromLong(184977713L); if (unlikely(!__pyx_int_184977713)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) __PYX_ERR(0, 1, __pyx_L1_error)

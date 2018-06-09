@@ -1,4 +1,5 @@
 import warnings
+import copy
 import numpy as np
 from scipy.stats import multivariate_normal as mvn
 
@@ -72,6 +73,7 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
                 trace[i, :] = state_history[j]['params_free']
             self.emp_hessian = np.cov(trace, rowvar=False)
             print("Iteration: {}. Computed empirical Hessian matrix.".format(self.current_iter))
+            print(self.emp_hessian)
 
 
     def _propose_parameters(self, current_state, proposed_state):
@@ -104,7 +106,13 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
         else:
             alt_hess = self.settings['hess_corr_fallback']
 
-        hess_corr = self.settings['hess_corr_method']
+        hess_corr = copy.copy(self.settings['hess_corr_method'])
+
+        if hess_corr is 'hybrid':
+            if type(self.emp_hessian) is np.ndarray:
+                hess_corr = 'replace'
+            else:
+                hess_corr = 'regularise'
 
         # Run the smoother to get likelihood and state estimate
         warnings.filterwarnings("error")
@@ -133,9 +141,7 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
 
         try:
             hess = np.linalg.inv(estimator.results['hessian_internal'])
-            hess = np.diag(np.diag(hess))
             hess, fixed_hess = correct_hessian(hess, alt_hess, hess_corr)
-
             nat_grad = hess @ grad
             hess *= step_size_hessian
             nat_grad *= step_size_gradient
@@ -178,7 +184,8 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
             pro_diff = current_probability - proposed_probability
 
             accept_prob = np.min((1.0, np.exp(tar_diff + jac_diff + pro_diff)))
-        except:
+        except Exception as e:
+            print(e)
             if self.settings['remove_overflow_iterations']:
                 return False
             else:

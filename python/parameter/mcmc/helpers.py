@@ -36,7 +36,7 @@ def get_history(mcmc, state_history, lag=None):
         params_free[i, :] = state_history[j]['params_free']
     return params_free
 
-def compute_acf(data, max_lag=None):
+def compute_acf(data, max_lag=100):
     no_data = len(data)
     variance = np.var(data)
     data = data - np.mean(data)
@@ -50,7 +50,7 @@ def compute_acf(data, max_lag=None):
             max_lag = len(result)
     return result[0:max_lag]
 
-def compute_iact(mcmc, state_history, lag=None, max_lag=250):
+def compute_iact(mcmc, state_history, lag=None, max_lag=100):
     params_free = get_history(mcmc, state_history, lag=lag)
     iact = np.zeros(mcmc.no_params_to_estimate)
 
@@ -63,7 +63,7 @@ def compute_iact(mcmc, state_history, lag=None, max_lag=250):
 
     return iact
 
-def compute_ess(mcmc, state_history, lag=None, max_lag=250):
+def compute_ess(mcmc, state_history, lag=None, max_lag=100):
     return  mcmc.current_iter / compute_iact(mcmc, state_history, lag, max_lag)
 
 def compute_sjd(mcmc, state_history, lag=None):
