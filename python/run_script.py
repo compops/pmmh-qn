@@ -15,7 +15,7 @@ if len(sys.argv) > 1:
         for i in range(10):
             example2b.main(data, use_all_data=False, seed_offset=i)
     elif int(sys.argv[1]) == 3:
-        for i in range(1):
+        for i in range(10):
             example3.main(seed_offset=i)
     else:
         raise NameError("Unknown example to run...")
