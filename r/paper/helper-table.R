@@ -22,5 +22,5 @@ helper_table <- function(data, result, settings, memLength=1, offset=1) {
 
   essPerSec <- result$time_per_iteration * memLength * mean(iact)
 
-  c(settings$simulation_name, acceptRate, fracHessiansCorrected, max(iact), result$time_per_iteration, essPerSec)
+  c(settings$simulation_name, acceptRate, fracHessiansCorrected, mean(iact), result$time_per_iteration, essPerSec)
 }
