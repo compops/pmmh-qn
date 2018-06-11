@@ -16,7 +16,7 @@ output <- array(0, dim = c(6, noSimulations, noAlgorithms))
 
 for (i in 1:(noAlgorithms)) {
   for (j in 1:noSimulations) {
-    file_path <- paste("example2", paste(algorithms[i], j-1, sep="_"), sep="-")
+    file_path <- paste("example2", paste(algorithms[i], j-1, sep="-"), sep="-")
     file_path <- paste(output_path, paste(algorithms[i], paste(file_path), sep="/"), sep="/")
 
     data <- read_json(paste(file_path, "/data.json.gz", sep=""), simplifyVector = TRUE)
