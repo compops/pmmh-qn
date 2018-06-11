@@ -13,7 +13,7 @@ offset <- 7000
 memLength <- 1
 
 noAlgorithms <- length(algorithms)
-output <- array(0, dim = c(9, noSimulations, noAlgorithms))
+output <- array(0, dim = c(6, noSimulations, noAlgorithms))
 
 for (i in 1:(noAlgorithms)) {
   for (j in 1:noSimulations) {
