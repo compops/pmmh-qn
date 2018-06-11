@@ -1,46 +1,44 @@
-setwd("~/src/nlssm-base")
+setwd("~/src/pmmh-qn")
+source("r/paper/helper-table.R")
+
 library("jsonlite")
 library("xtable")
 options(xtable.floating = FALSE)
 options(xtable.timestamp = "")
-source("r/paper/helper-example2.R")
 
-output_path <- "~/src/nlssm-base/results-draft1/example2-earthquake"
-algorithms <- list.dirs(output_path, full.names = FALSE, recursive = FALSE)
+output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
+algorithms <- c("mh0", "mh1", "mh2", "qmh-bfgs", "qmh-ls", "qmh-sr1")
+noSimulations <- 10
+offset <- 7000
 
-memLength <- 1
-noSimulations <- 25
 noAlgorithms <- length(algorithms)
-output <- array(0, dim = c(8, noSimulations, noAlgorithms))
+output <- array(0, dim = c(9, noSimulations, noAlgorithms))
 
 for (i in 1:(noAlgorithms)) {
   for (j in 1:noSimulations) {
-    file_path <- paste("example2", paste(algorithms[i], j-1, sep="_"), sep="-")
+    file_path <- paste("example3", paste(algorithms[i], j-1, sep="_"), sep="-")
     file_path <- paste(output_path, paste(algorithms[i], paste(file_path), sep="/"), sep="/")
 
     data <- read_json(paste(file_path, "/data.json.gz", sep=""), simplifyVector = TRUE)
     result <- read_json(paste(file_path, "/mcmc_output.json.gz", sep=""), simplifyVector = TRUE)
     settings <- read_json(paste(file_path, "/settings.json.gz", sep=""), simplifyVector = TRUE)
 
-    output[, j, i] <- helper_table(data, result, settings, memLength=memLength)
+    output[, j, i] <- helper_table(data, result, settings, memLength=memLength, offset=offset)
     print(output[, j, i])
   }
 }
 
 medianOutput <- matrix(0, nrow = noAlgorithms, ncol = 6)
 for (i in 1:noAlgorithms) {
-  outputMethod <- matrix(as.numeric(output[-1, , i]), nrow = noSimulations, ncol = 7, byrow = TRUE)
+  outputMethod <- matrix(as.numeric(output[-1, , i]), nrow = noSimulations, ncol = 5, byrow = TRUE)
   medianOutput[i, 1] <- median(outputMethod[, 1], na.rm = TRUE)
   medianOutput[i, 2] <- median(outputMethod[, 2], na.rm = TRUE)
-  max_iact <- rep(0, noSimulations)
-  for (j in 1:noSimulations) {
-    max_iact[j] <- max(outputMethod[j, 4:6], na.rm = TRUE)
-  }
-  medianOutput[i, 3] <- median(max_iact, na.rm = TRUE)
-  medianOutput[i, 4] <- IQR(max_iact, na.rm = TRUE)
-  medianOutput[i, 5] <- median(1000 * outputMethod[, 6], na.rm = TRUE)
-  medianOutput[i, 6] <- median(1000 * outputMethod[, 7], na.rm = TRUE)
+  medianOutput[i, 3] <- median(outputMethod[, 3], na.rm = TRUE)
+  medianOutput[i, 4] <- IQR(outputMethod[, 3], na.rm = TRUE)
+  medianOutput[i, 5] <- median(1000 * outputMethod[, 4], na.rm = TRUE)
+  medianOutput[i, 6] <- median(1000 * outputMethod[, 5], na.rm = TRUE)
 }
+
 
 medianOutput[, 1] <- round(medianOutput[, 1], 2)
 medianOutput[, 2] <- round(medianOutput[, 2], 2)

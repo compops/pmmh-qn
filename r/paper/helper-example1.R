@@ -9,7 +9,7 @@ helper_table <- function(data, result, settings, memLength=1) {
 
   for (k in 1:noParameters) {
     acf_res <- acf(paramsTrace[idx, k], plot = FALSE, lag.max = 250)
-    iact[k] <- 1 + 2 * sum(acf_res$acf)
+    iact[k] <- 1 + 2 * sum(acf_res$acf[-1])
   }
 
   acceptRate <- mean(result$accepted)
