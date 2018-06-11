@@ -10,6 +10,7 @@ output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
 algorithms <- c("mh0", "mh1", "mh2", "qmh-bfgs", "qmh-ls", "qmh-sr1")
 noSimulations <- 10
 offset <- 7000
+memLength <- 1
 
 noAlgorithms <- length(algorithms)
 output <- array(0, dim = c(9, noSimulations, noAlgorithms))
