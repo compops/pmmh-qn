@@ -9,7 +9,7 @@ options(xtable.timestamp = "")
 output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
 algorithms <- c("mh0", "mh1", "mh2", "qmh_bfgs", "qmh_ls", "qmh_sr1")
 noSimulations <- 10
-offset <- 7000
+offset <- 12000
 memLength <- 1
 
 noAlgorithms <- length(algorithms)

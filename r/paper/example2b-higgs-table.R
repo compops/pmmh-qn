@@ -9,7 +9,7 @@ options(xtable.timestamp = "")
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
 algorithms <- c("mh0", "mh2", "qmh-bfgs", "qmh-ls", "qmh-sr1")
 noSimulations <- 10
-offset <- 7000
+offset <- 12000
 memLength <- 1
 
 noAlgorithms <- length(algorithms)
