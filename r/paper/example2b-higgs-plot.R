@@ -3,10 +3,10 @@ library(ggplot2)
 library(RColorBrewer)
 plotColors = brewer.pal(8, "Dark2");
 
-setwd("~/src/nlssm-base")
-source("~/src/nlssm-base/r/paper/helper-ggplot.R")
+setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
-output_path <- "~/src/nlssm-base/results/example2-higgs"
+output_path <- "~/src/pmmh-qn/results/example2-higgs"
 file_path <- "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz"
 paramsToPlot <- c(2, 18)
 removeIterations <- 12000
