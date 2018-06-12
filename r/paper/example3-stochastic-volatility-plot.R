@@ -6,7 +6,7 @@ plotColors = brewer.pal(8, "Dark2");
 setwd("~/src/pmmh-qn")
 source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
-output_path <- "~/src/pmmh-qn/results-draft1/example3-stochastic-volatility"
+output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
 algorithms <- list.dirs(output_path, full.names = FALSE, recursive=FALSE)
 noIterations <- 20000
 
