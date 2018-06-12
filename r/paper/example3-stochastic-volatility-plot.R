@@ -4,7 +4,6 @@ library(RColorBrewer)
 plotColors = brewer.pal(8, "Dark2");
 
 setwd("~/src/pmmh-qn")
-source("~/src/pmmh-qn/r/paper/helper-example2.R")
 source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
 output_path <- "~/src/pmmh-qn/results-draft1/example3-stochastic-volatility"
