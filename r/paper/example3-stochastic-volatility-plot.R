@@ -11,7 +11,7 @@ algorithms <- list.dirs(output_path, full.names = FALSE, recursive=FALSE)
 noIterations <- 20000
 
 j <- 8
-traces <- matrix(0, nrow=4, ncol=noIterations)
+traces <- matrix(0, nrow=5, ncol=noIterations)
 
 for (k in 1:4) {
       i <- c(1, 3, 4, 5)[k]
@@ -27,16 +27,19 @@ data <- data.frame(y=data$observations, x=seq(1900, 2013))
 
 # Plotting some traces
 trace_mh0 <- data.frame(th=traces[1, ], x=seq(1, noIterations))
-trace_bfgs <- data.frame(th=traces[2, ], x=seq(1, noIterations))
-trace_ls <- data.frame(th=traces[3, ], x=seq(1, noIterations))
-trace_sr1 <- data.frame(th=traces[4, ], x=seq(1, noIterations))
+trace_mh2 <- data.frame(th=traces[2, ], x=seq(1, noIterations))
+trace_bfgs <- data.frame(th=traces[3, ], x=seq(1, noIterations))
+trace_ls <- data.frame(th=traces[4, ], x=seq(1, noIterations))
+trace_sr1 <- data.frame(th=traces[5, ], x=seq(1, noIterations))
 
 acf_mh0 <- acf(traces[1,], lag.max = 250, plot = FALSE)
-acf_bfgs <- acf(traces[2,], lag.max = 250, plot = FALSE)
-acf_ls <- acf(traces[3,], lag.max = 250, plot = FALSE)
-acf_sr1 <- acf(traces[4,], lag.max = 250, plot = FALSE)
+acf_mh2 <- acf(traces[2,], lag.max = 250, plot = FALSE)
+acf_bfgs <- acf(traces[3,], lag.max = 250, plot = FALSE)
+acf_ls <- acf(traces[4,], lag.max = 250, plot = FALSE)
+acf_sr1 <- acf(traces[5,], lag.max = 250, plot = FALSE)
 
 acf_mh0 <- data.frame(acf = acf_mh0$acf, lag = acf_mh0$lag)
+acf_mh2 <- data.frame(acf = acf_mh2$acf, lag = acf_mh2$lag)
 acf_bfgs <- data.frame(acf = acf_bfgs$acf, lag = acf_bfgs$lag)
 acf_ls <- data.frame(acf = acf_ls$acf, lag = acf_ls$lag)
 acf_sr1 <- data.frame(acf = acf_sr1$acf, lag = acf_sr1$lag)
@@ -54,18 +57,23 @@ p1 <- ggplot(data=trace_mh0, aes(x=th)) +
       labs(x = "", y = "posterior") +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-p2 <- ggplot(data=trace_bfgs, aes(x=th)) +
+p2 <- ggplot(data=trace_mh2, aes(x=th)) +
       geom_density(alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       labs(x = "", y = "posterior") +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-p3 <- ggplot(data=trace_sr1, aes(x=th)) +
+p3 <- ggplot(data=trace_bfgs, aes(x=th)) +
+      geom_density(alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
+      labs(x = "", y = "posterior") +
+      theme_minimal() +
+      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+p4 <- ggplot(data=trace_ls, aes(x=th)) +
       geom_density(alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
       labs(x = expression(sigma[v]), y = "posterior") +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-p4 <- ggplot(data=trace_ls, aes(x=th)) +
-      geom_density(alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
+p5 <- ggplot(data=trace_sr1, aes(x=th)) +
+      geom_density(alpha=0.25, fill=plotColors[7], col=plotColors[7]) +
       labs(x = "", y = "posterior") +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
@@ -76,20 +84,26 @@ t1 <- ggplot(data=trace_mh0, aes(x=x, y=th)) +
       coord_cartesian(xlim=c(5000, 5500)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-t2 <- ggplot(data=trace_bfgs, aes(x=x, y=th)) +
+t2 <- ggplot(data=trace_mh2, aes(x=x, y=th)) +
       geom_line(col=plotColors[4]) +
       labs(x = "", y = expression(sigma[v])) +
       coord_cartesian(xlim=c(5000, 5500)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-t3 <- ggplot(data=trace_sr1, aes(x=x, y=th)) +
+t3 <- ggplot(data=trace_bfgs, aes(x=x, y=th)) +
+      geom_line(col=plotColors[5]) +
+      labs(x = "", y = expression(sigma[v])) +
+      coord_cartesian(xlim=c(5000, 5500)) +
+      theme_minimal() +
+      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+t4 <- ggplot(data=trace_sr1, aes(x=x, y=th)) +
       geom_line(col=plotColors[6]) +
       labs(x = "iteration", y = expression(sigma[v])) +
       coord_cartesian(xlim=c(5000, 5500)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-t4 <- ggplot(data=trace_ls, aes(x=x, y=th)) +
-      geom_line(col=plotColors[5]) +
+t5 <- ggplot(data=trace_ls, aes(x=x, y=th)) +
+      geom_line(col=plotColors[7]) +
       labs(x = "", y = expression(sigma[v])) +
       coord_cartesian(xlim=c(5000, 5500)) +
       theme_minimal() +
@@ -101,30 +115,33 @@ a1 <- ggplot(data=acf_mh0, aes(x=lag, y=acf)) +
       labs(x = "", y = expression("ACF of " * sigma[v])) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-a2 <- ggplot(data=acf_bfgs, aes(x=lag, y=acf)) +
+a2 <- ggplot(data=acf_mh2, aes(x=lag, y=acf)) +
       geom_line(col=plotColors[4]) +
       geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[4]) +
       labs(x = "", y = expression("ACF of " * sigma[v])) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-a3 <- ggplot(data=acf_sr1, aes(x=lag, y=acf)) +
+a3 <- ggplot(data=acf_bfgs, aes(x=lag, y=acf)) +
+      geom_line(col=plotColors[5]) +
+      geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[5]) +
+      labs(x = "", y = expression("ACF of " * sigma[v])) +
+      theme_minimal() +
+      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+a4 <- ggplot(data=acf_ls, aes(x=lag, y=acf)) +
       geom_line(col=plotColors[6]) +
       geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[6]) +
       labs(x = "lag", y = expression("ACF of " * sigma[v])) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
-a4 <- ggplot(data=acf_ls, aes(x=lag, y=acf)) +
-      geom_line(col=plotColors[5]) +
+a5 <- ggplot(data=acf_sr1, aes(x=lag, y=acf)) +
+      geom_line(col=plotColors[7]) +
       labs(x = "", y = expression("ACF of " * sigma[v])) +
-      geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[5]) +
+      geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[7]) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 
-#layout=matrix(c(1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13), nrow=5, byrow=TRUE)
-#multiplot(d1, p1, t1, a1, p2, t2, a2, p3, t3, a3, p4, t4, a4, layout=layout)
-
 cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example3-stochastic-volatility.pdf", width=4, height=8)
-layout=matrix(c(1, 1, 2, 3, 4, 5, 6, 7, 8, 9), nrow=5, byrow=TRUE)
-multiplot(d1, p1, a1, p2, a2, p4, a4, p3, a3, layout=layout)
+layout=matrix(c(1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), nrow=6, byrow=TRUE)
+multiplot(d1, p1, a1, p2, a2, p3, a3, p4, a4, p5, p6, layout=layout)
 dev.off()
