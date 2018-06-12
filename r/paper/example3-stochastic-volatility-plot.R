@@ -10,7 +10,7 @@ output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
 algorithms <- list.dirs(output_path, full.names = FALSE, recursive=FALSE)
 noIterations <- 20000
 
-j <- 20
+j <- 8
 traces <- matrix(0, nrow=4, ncol=noIterations)
 
 for (k in 1:4) {
