@@ -8,17 +8,17 @@ source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
 output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
 algorithms <- list.dirs(output_path, full.names = FALSE, recursive=FALSE)
-noIterations <- 20000
+noIterations <- 15000
 
 j <- 8
 traces <- matrix(0, nrow=5, ncol=noIterations)
 
 for (k in 1:4) {
-      i <- c(1, 3, 4, 5)[k]
+      i <- c(1, 3, 4, 5, 6)[k]
       file_path <- paste("example3", paste(algorithms[i], j-1, sep="_"), sep="-")
       file_path <- paste(output_path, paste(algorithms[i], paste(file_path), sep="/"), sep="/")
       result <- read_json(paste(file_path, "/mcmc_output.json.gz", sep=""), simplifyVector = TRUE)
-      traces[k, ] <- result$params[, 4]
+      traces[k, ] <- result$params[12000:27000, 4]
       print(mean(result$accepted))
 }
 
