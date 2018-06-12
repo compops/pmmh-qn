@@ -7,9 +7,9 @@ setwd("~/src/pmmh-qn")
 source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
-file_path <- "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz"
+file_path <- "qmh-ls/example2-qmh-ls-2/mcmc_output.json.gz"
 paramsToPlot <- c(2, 18)
-removeIterations <- 12000
+removeIterations <- 25000
 
 result <- read_json(paste(output_path, file_path, sep="/"), simplifyVector = TRUE)
 traces <- result$params[-(1:removeIterations),]
@@ -20,8 +20,8 @@ noIterations <- dim(traces)[1]
 trace1 <- data.frame(th=traces[, paramsToPlot[1]], x=seq(1, noIterations))
 trace2 <- data.frame(th=traces[, paramsToPlot[2]], x=seq(1, noIterations))
 
-acf1 <- acf(trace1$th, lag.max = 1000, plot = FALSE)
-acf2 <- acf(trace2$th, lag.max = 1000, plot = FALSE)
+acf1 <- acf(trace1$th, lag.max = 250, plot = FALSE)
+acf2 <- acf(trace2$th, lag.max = 250, plot = FALSE)
 
 acf1_df <- data.frame(acf = acf1$acf, lag = acf1$lag)
 acf2_df <- data.frame(acf = acf2$acf, lag = acf2$lag)
@@ -43,14 +43,14 @@ p2 <- ggplot(data=trace2, aes(x=th)) +
 t1 <- ggplot(data=trace1, aes(x=x, y=th)) +
       geom_line(col=plotColors[3]) +
       labs(x = "iteration", y = expression(beta[1])) +
-      coord_cartesian(xlim=c(5000, 5100)) +
+      coord_cartesian(xlim=c(1000, 1100)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 t2 <- ggplot(data=trace2, aes(x=x, y=th)) +
       geom_line(col=plotColors[4]) +
       labs(x = "iteration", y = expression(beta[17])) +
-      coord_cartesian(xlim=c(5000, 5100)) +
+      coord_cartesian(xlim=c(1000, 1100)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 

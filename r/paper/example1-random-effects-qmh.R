@@ -6,37 +6,37 @@ setwd("~/src/pmmh-qn")
 output_path <- "~/src/pmmh-qn/results/example1-random-effects"
 load("~/src/pmmh-qn/results/example1-random-effects/example1.RData")
 
-algorithms <- c("qmh-bfgs", "qmh-ls", "qmh-sr1")
-memoryLengths <- c(5, 10, 15, 20, 25, 30, 35, 40)
-sigmaU <- c("0.0", "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.35", "0.4", "0.45", "0.5", "0.55", "0.6", "0.65", "0.7", "0.75", "0.8", "0.85", "0.9", "0.95", "1.0")
+# algorithms <- c("qmh-bfgs", "qmh-ls", "qmh-sr1")
+# memoryLengths <- c(5, 10, 15, 20, 25, 30, 35, 40)
+# sigmaU <- c("0.0", "0.05", "0.1", "0.15", "0.2", "0.25", "0.3", "0.35", "0.4", "0.45", "0.5", "0.55", "0.6", "0.65", "0.7", "0.75", "0.8", "0.85", "0.9", "0.95", "1.0")
 
-noSimulations <- 24
-noAlgorithms <- length(algorithms)
-noSigmaU <- length(sigmaU)
-noMemoryLengths <- length(memoryLengths)
-output <- array(0, dim = c(4, noSimulations, noAlgorithms, noSigmaU, noMemoryLengths))
+# noSimulations <- 24
+# noAlgorithms <- length(algorithms)
+# noSigmaU <- length(sigmaU)
+# noMemoryLengths <- length(memoryLengths)
+# output <- array(0, dim = c(4, noSimulations, noAlgorithms, noSigmaU, noMemoryLengths))
 
-for (i in 1:(noAlgorithms)) {
-  for (j in 1:noSimulations) {
-    for (k in 1:noSigmaU) {
-      for (l in 1:noMemoryLengths) {
-        file_path <- paste("example1", paste(algorithms[i], j-1, sep="-"), sep="-")
-        file_path <- paste("M", paste(memoryLengths[l], paste(file_path), sep="/"), sep="-")
-        file_path <- paste("sigmau", paste(sigmaU[k], paste(file_path), sep="/"), sep="-")
-        file_path <- paste(output_path, paste(algorithms[i], paste(file_path), sep="/"), sep="/")
+# for (i in 1:(noAlgorithms)) {
+#   for (j in 1:noSimulations) {
+#     for (k in 1:noSigmaU) {
+#       for (l in 1:noMemoryLengths) {
+#         file_path <- paste("example1", paste(algorithms[i], j-1, sep="-"), sep="-")
+#         file_path <- paste("M", paste(memoryLengths[l], paste(file_path), sep="/"), sep="-")
+#         file_path <- paste("sigmau", paste(sigmaU[k], paste(file_path), sep="/"), sep="-")
+#         file_path <- paste(output_path, paste(algorithms[i], paste(file_path), sep="/"), sep="/")
 
-        data <- read_json(paste(file_path, "/data.json.gz", sep=""), simplifyVector = TRUE)
-        result <- read_json(paste(file_path, "/mcmc_output.json.gz", sep=""), simplifyVector = TRUE)
-        settings <- read_json(paste(file_path, "/settings.json.gz", sep=""), simplifyVector = TRUE)
+#         data <- read_json(paste(file_path, "/data.json.gz", sep=""), simplifyVector = TRUE)
+#         result <- read_json(paste(file_path, "/mcmc_output.json.gz", sep=""), simplifyVector = TRUE)
+#         settings <- read_json(paste(file_path, "/settings.json.gz", sep=""), simplifyVector = TRUE)
 
-        output[1:2, j, i, k, l] <- c(sigmaU[k], memoryLengths[l])
-        output[3:4, j, i, k, l] <- helper_table(data, result, settings, memLength=1)
-        print(output[, j, i, k, l])
-      }
-    }
-  }
-}
-save.image("~/src/pmmh-qn/results/example1-random-effects/example1.RData")
+#         output[1:2, j, i, k, l] <- c(sigmaU[k], memoryLengths[l])
+#         output[3:4, j, i, k, l] <- helper_table(data, result, settings, memLength=1)
+#         print(output[, j, i, k, l])
+#       }
+#     }
+#   }
+# }
+# save.image("~/src/pmmh-qn/results/example1-random-effects/example1.RData")
 
 iactBFGS <- matrix(0, nrow=noSigmaU * noMemoryLengths, ncol=3)
 iactSR1 <- matrix(0, nrow=noSigmaU * noMemoryLengths, ncol=3)
