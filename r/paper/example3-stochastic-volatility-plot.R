@@ -7,7 +7,7 @@ setwd("~/src/nlssm-base")
 source("~/src/nlssm-base/r/paper/helper-example2.R")
 source("~/src/nlssm-base/r/paper/helper-ggplot.R")
 
-output_path <- "~/src/nlssm-base/results-draft1/example2-earthquake"
+output_path <- "~/src/nlssm-base/results-draft1/example3-stochastic-volatility"
 algorithms <- list.dirs(output_path, full.names = FALSE, recursive=FALSE)
 noIterations <- 20000
 
@@ -16,10 +16,10 @@ traces <- matrix(0, nrow=4, ncol=noIterations)
 
 for (k in 1:4) {
       i <- c(1, 3, 4, 5)[k]
-      file_path <- paste("example2", paste(algorithms[i], j-1, sep="_"), sep="-")
+      file_path <- paste("example3", paste(algorithms[i], j-1, sep="_"), sep="-")
       file_path <- paste(output_path, paste(algorithms[i], paste(file_path), sep="/"), sep="/")
       result <- read_json(paste(file_path, "/mcmc_output.json.gz", sep=""), simplifyVector = TRUE)
-      traces[k, ] <- result$params[, 3]
+      traces[k, ] <- result$params[, 4]
       print(mean(result$accepted))
 }
 
@@ -125,7 +125,7 @@ a4 <- ggplot(data=acf_ls, aes(x=lag, y=acf)) +
 #layout=matrix(c(1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13), nrow=5, byrow=TRUE)
 #multiplot(d1, p1, t1, a1, p2, t2, a2, p3, t3, a3, p4, t4, a4, layout=layout)
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example2-earthquake.pdf", width=4, height=8)
+cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example3-stochastic-volatility.pdf", width=4, height=8)
 layout=matrix(c(1, 1, 2, 3, 4, 5, 6, 7, 8, 9), nrow=5, byrow=TRUE)
 multiplot(d1, p1, a1, p2, a2, p4, a4, p3, a3, layout=layout)
 dev.off()

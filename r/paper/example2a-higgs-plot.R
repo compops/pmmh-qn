@@ -7,8 +7,8 @@ setwd("~/src/pmmh-qn")
 source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
-noRuns <- 8
-memory_lengths <- c(5, 10, 15, 20, 25, 30, 35, 40)
+noRuns <- 10
+memory_lengths <- c(5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
 
 err_bfgs <- matrix(0, nrow=noRuns, ncol=length(memory_lengths))
 err_ls <- matrix(0, nrow=noRuns, ncol=length(memory_lengths))

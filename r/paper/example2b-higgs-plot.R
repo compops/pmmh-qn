@@ -6,8 +6,8 @@ plotColors = brewer.pal(8, "Dark2");
 setwd("~/src/nlssm-base")
 source("~/src/nlssm-base/r/paper/helper-ggplot.R")
 
-output_path <- "~/src/nlssm-base/results-draft1/example3-higgs"
-file_path <- "qmh-ls/example3-qmh-ls-0/mcmc_output.json.gz"
+output_path <- "~/src/nlssm-base/results/example2-higgs"
+file_path <- "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz"
 paramsToPlot <- c(2, 18)
 removeIterations <- 12000
 
@@ -68,7 +68,7 @@ a2 <- ggplot(data=acf2_df, aes(x=lag, y=acf)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example3-higgs.pdf", width=4, height=6)
+cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example2b-higgs.pdf", width=4, height=6)
 layout=matrix(seq(1, 6), nrow=3, byrow=TRUE)
 multiplot(p1, p2, t1, t2, a1, a2, layout=layout)
 dev.off()
