@@ -24,9 +24,9 @@ trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations))
 trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations))
 trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations))
 
-acf1 <- acf(trace1$th, lag.max = 1000, plot = FALSE)
-acf2 <- acf(trace2$th, lag.max = 1000, plot = FALSE)
-acf3 <- acf(trace3$th, lag.max = 1000, plot = FALSE)
+acf1 <- acf(trace1$th, lag.max = 250, plot = FALSE)
+acf2 <- acf(trace2$th, lag.max = 250, plot = FALSE)
+acf3 <- acf(trace3$th, lag.max = 250, plot = FALSE)
 
 acf1_df <- data.frame(acf = acf1$acf, lag = acf1$lag)
 acf2_df <- data.frame(acf = acf2$acf, lag = acf2$lag)
