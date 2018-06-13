@@ -8,7 +8,7 @@ source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
 filePaths <- c("mh0/example2-mh0-0/mcmc_output.json.gz", "mh2/example2-mh2-0/mcmc_output.json.gz", "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz")
-paramToPlot <- 1
+paramToPlot <- 2
 noIterations <- 15000
 removeIterations <- 12000
 
