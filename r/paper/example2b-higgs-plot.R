@@ -46,7 +46,7 @@ p2 <- ggplot(data=trace2, aes(x=th)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
-p3 <- ggplot(data=trace2, aes(x=th)) +
+p3 <- ggplot(data=trace3, aes(x=th)) +
       geom_density(alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       geom_vline(xintercept = -0.264) +
       labs(x = expression(beta[1]), y = "posterior") +
