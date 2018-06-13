@@ -59,37 +59,38 @@ class BaseStateInference(object):
         if not estimate_gradients and not estimate_hessian:
             return True
 
-
         # Add the log-prior derivatives
         gradient = {}
         gradient_internal = []
         log_prior_gradient = model.log_prior_gradient()
 
-        i = 0
-        for param1 in log_prior_gradient.keys():
-            if isinstance(model.params[param1], tuple):
-                foo = log_prior_gradient[param1]
-                for k in range(len(foo)):
-                    gradient_estimate[i+k] += foo[k]
-            else:
-                gradient_estimate[i] += log_prior_gradient[param1]
-                log_prior_hessian = model.log_prior_hessian()
-            i += 1
+        if type(model.params) is dict:
+            i = 0
+            for param in model.params.keys():
+                gradient_estimate[i] += log_prior_gradient[param]
+                if param in model.params_to_estimate:
+                    gradient.update({param: gradient_estimate[i]})
+                    gradient_internal.append(gradient_estimate[i])
+                i += 1
+        else:
+            for i in range(model.no_params):
+                gradient_estimate[i] += log_prior_gradient[i]
+                if i in model.params_to_estimate:
+                    gradient.update({i: gradient_estimate[i]})
+                    gradient_internal.append(gradient_estimate[i])
 
-        # i = 0
-        # if estimate_hessian:
-        #     for param1 in log_prior_gradient.keys():
-        #         hessian_estimate[i, i] -= log_prior_hessian[param1]
-        #         i += 1
+        if estimate_hessian:
+            log_prior_hessian = model.log_prior_hessian()
+            if type(model.params) is dict:
+                i = 0
+                for param in model.params.keys():
+                    hessian_estimate[i, i] -= log_prior_hessian[param]
+                    i += 1
+            else:
+                for i in range(model.no_params):
+                    hessian_estimate[i, i] -= log_prior_hessian[i]
 
         # Compile output
-        i = 0
-        for param in model.params.keys():
-            if param in model.params_to_estimate:
-                gradient.update({param: gradient_estimate[i]})
-                gradient_internal.append(gradient_estimate[i])
-            i += 1
-
         self.results.update({'gradient_internal': np.array(gradient_internal)})
         self.results.update({'gradient': gradient})
 

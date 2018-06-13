@@ -83,8 +83,13 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
                 init_hessian_ls = state_history
 
                 hess_bfgs, _ = self._qn_bfgs(params_diffs, grads_diffs, init_hessian)
+                hess_bfgs, _ = correct_hessian(hess_bfgs, alt_hess, hess_corr, verbose=False)
+
                 hess_ls, _ = self._qn_ls(params_diffs, grads_diffs, init_hessian_ls)
+                hess_ls, _ = correct_hessian(hess_ls, alt_hess, hess_corr, verbose=False)
+
                 hess_sr1, _ = self._qn_sr1(params_diffs, grads_diffs, init_hessian)
+                hess_sr1, _ = correct_hessian(hess_sr1, alt_hess, hess_corr, verbose=False)
 
                 hess_direct = np.linalg.inv(estimator.results['hessian_internal_noprior'])
 

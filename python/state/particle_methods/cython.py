@@ -94,7 +94,7 @@ class ParticleMethodsCython(BaseStateInference):
             if model.using_gradients or model.using_hessians:
                 self.results.update({'log_joint_gradient_estimate': grad_est})
             if model.using_hessians:
-                self.results.update({'log_joint_hessian_estimate': hessian_est})
+                self.results.update({'log_joint_hessian_estimate': -hessian_est})
 
             if self._estimate_gradient_and_hessian(model):
                 return True
