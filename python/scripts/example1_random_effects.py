@@ -10,8 +10,8 @@ def main(seed_offset=0):
     hessian_guess = 0.1 * np.eye(2)
     initial_params = (1.0, 0.2)
 
-    mh_settings = {'no_iters': 30000,
-                   'no_burnin_iters': 3000,
+    mh_settings = {'no_iters': 5000,
+                   'no_burnin_iters': 1000,
                    'adapt_step_size': True,
                    'adapt_step_size_initial': 0.5,
                    'adapt_step_size_rate': 0.5,
