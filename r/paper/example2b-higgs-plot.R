@@ -15,7 +15,7 @@ removeIterations <- 12000
 traces <- matrix(0, nrow=length(filePaths), ncol=noIterations)
 
 for (i in 1:length(filePaths)) {
-      result <- read_json(paste(output_path, file_path, sep="/"), simplifyVector = TRUE)
+      result <- read_json(paste(output_path, filePaths[i], sep="/"), simplifyVector = TRUE)
       traces[i,] <- result$params[-(1:removeIterations), paramToPlot]
 }
 
