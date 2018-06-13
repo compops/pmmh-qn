@@ -27,32 +27,6 @@ def main(seed_offset=0):
     memory_length_vector = np.arange(5, 45, 5)
 
     for i, sigmau in enumerate(correlated_rvs_sigma_vector):
-        folder_tag = 'sigmau-' + str(sigmau)
-
-        new_mh_settings = copy.deepcopy(mh_settings)
-        new_mh_settings.update({'hessian': hessian_estimate})
-        new_mh_settings.update({'adapt_step_size': False})
-        new_mh_settings.update({'step_size_gradient': 0.0})
-        new_mh_settings.update({'step_size_hessian': 1.595})
-        new_mh_settings.update({'correlated_rvs_sigma': sigmau})
-        mh.run('mh0',
-               mh_settings=new_mh_settings,
-               seed_offset=seed_offset,
-               folder_tag=folder_tag)
-
-        new_mh_settings = copy.deepcopy(mh_settings)
-        new_mh_settings.update({'hessian': hessian_estimate})
-        new_mh_settings.update({'adapt_step_size': False})
-        new_mh_settings.update({'step_size_gradient': 1.0})
-        new_mh_settings.update({'step_size_hessian': 1.0})
-        new_mh_settings.update({'correlated_rvs_sigma': sigmau})
-        mh.run('mh1',
-               mh_settings=new_mh_settings,
-               seed_offset=seed_offset,
-               folder_tag=folder_tag)
-
-
-    for i, sigmau in enumerate(correlated_rvs_sigma_vector):
         for j, mem_length in enumerate(memory_length_vector):
                 folder_tag = 'sigmau-' + str(sigmau) + '/' + 'M-' + str(mem_length)
 
