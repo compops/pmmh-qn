@@ -79,7 +79,7 @@ a3 <- ggplot(data=acf3_df, aes(x=lag, y=acf)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example2b-higgs.pdf", width=4, height=6)
+cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example2b-higgs.pdf", width=4, height=4)
 layout=matrix(seq(1, 6), nrow=3, byrow=TRUE)
 multiplot(p1, a1, p2, a2, p3, a3, layout=layout)
 dev.off()
