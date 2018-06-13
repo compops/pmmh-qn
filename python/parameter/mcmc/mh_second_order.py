@@ -24,7 +24,7 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
         self.name = "Second-order Metropolis-Hastings (manifold MALA)"
         self.using_gradients = True
         self.using_hessians = True
-        self.hessians_computed_by = 'segal-weinstein'
+        self.hessians_computed_by = 'louis'
         self.emp_hessian = None
         model.using_gradients = self.using_gradients
         model.using_hessians = self.using_hessians

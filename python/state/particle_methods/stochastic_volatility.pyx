@@ -13,7 +13,7 @@ from libc.float cimport FLT_MAX
 from libc.stdlib cimport malloc, free
 
 DEF LAG = 10
-DEF NPART = 300
+DEF NPART = 75
 DEF NOBS = 361
 DEF NPARAMS = 4
 DEF PI = 3.1415
