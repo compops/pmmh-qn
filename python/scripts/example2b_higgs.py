@@ -53,15 +53,15 @@ def main(data, seed_offset=0, use_all_data=False):
                    }
 
 
-    new_mh_settings = copy.deepcopy(mh_settings)
-    new_mh_settings.update({'hessian': hessian_estimate})
-    new_mh_settings.update({'adapt_step_size': False})
-    new_mh_settings.update({'step_size_hessian': 0.5 * 2.562 / np.sqrt(no_regressors)})
-    mh.run('mh0',
-           mh_settings=new_mh_settings,
-           data=data,
-           use_all_data=use_all_data,
-           seed_offset=seed_offset)
+    # new_mh_settings = copy.deepcopy(mh_settings)
+    # new_mh_settings.update({'hessian': hessian_estimate})
+    # new_mh_settings.update({'adapt_step_size': False})
+    # new_mh_settings.update({'step_size_hessian': 0.5 * 2.562 / np.sqrt(no_regressors)})
+    # mh.run('mh0',
+    #        mh_settings=new_mh_settings,
+    #        data=data,
+    #        use_all_data=use_all_data,
+    #        seed_offset=seed_offset)
 
 
     new_mh_settings = copy.deepcopy(mh_settings)
@@ -76,39 +76,39 @@ def main(data, seed_offset=0, use_all_data=False):
            seed_offset=seed_offset)
 
 
-    new_mh_settings = copy.deepcopy(mh_settings)
-    new_mh_settings.update({'adapt_step_size_target': 0.2})
-    new_mh_settings.update({'adapt_step_size_initial': 0.1})
-    mh.run('qmh',
-           mh_settings=new_mh_settings,
-           data=data,
-           use_all_data=use_all_data,
-           seed_offset=seed_offset,
-           alg_type='bfgs')
+    # new_mh_settings = copy.deepcopy(mh_settings)
+    # new_mh_settings.update({'adapt_step_size_target': 0.2})
+    # new_mh_settings.update({'adapt_step_size_initial': 0.1})
+    # mh.run('qmh',
+    #        mh_settings=new_mh_settings,
+    #        data=data,
+    #        use_all_data=use_all_data,
+    #        seed_offset=seed_offset,
+    #        alg_type='bfgs')
 
 
-    new_mh_settings = copy.deepcopy(mh_settings)
-    new_mh_settings.update({'adapt_step_size_target': 0.3})
-    new_mh_settings.update({'sr1_trust_region': True})
-    new_mh_settings.update({'sr1_trust_region_scale': 1.0})
-    new_mh_settings.update({'sr1_trust_region_cov': hessian_guess})
-    mh.run('qmh',
-           mh_settings=new_mh_settings,
-           data=data,
-           use_all_data=use_all_data,
-           seed_offset=seed_offset,
-           alg_type='sr1')
+    # new_mh_settings = copy.deepcopy(mh_settings)
+    # new_mh_settings.update({'adapt_step_size_target': 0.3})
+    # new_mh_settings.update({'sr1_trust_region': True})
+    # new_mh_settings.update({'sr1_trust_region_scale': 1.0})
+    # new_mh_settings.update({'sr1_trust_region_cov': hessian_guess})
+    # mh.run('qmh',
+    #        mh_settings=new_mh_settings,
+    #        data=data,
+    #        use_all_data=use_all_data,
+    #        seed_offset=seed_offset,
+    #        alg_type='sr1')
 
 
-    new_mh_settings = copy.deepcopy(mh_settings)
-    new_mh_settings.update({'adapt_step_size_target': 0.2})
-    new_mh_settings.update({'ls_regularisation_parameter': 0.1})
-    mh.run('qmh',
-           mh_settings=new_mh_settings,
-           data=data,
-           use_all_data=use_all_data,
-           seed_offset=seed_offset,
-           alg_type='ls')
+    # new_mh_settings = copy.deepcopy(mh_settings)
+    # new_mh_settings.update({'adapt_step_size_target': 0.2})
+    # new_mh_settings.update({'ls_regularisation_parameter': 0.1})
+    # mh.run('qmh',
+    #        mh_settings=new_mh_settings,
+    #        data=data,
+    #        use_all_data=use_all_data,
+    #        seed_offset=seed_offset,
+    #        alg_type='ls')
 
 
     return None

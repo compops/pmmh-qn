@@ -141,7 +141,7 @@ class LogisticRegressionModel(BaseModel):
 
             outer_product = np.einsum('ij...,i...->ij...', x, x)
             hess = y * scale_1 + (1.0 - y) * scale_0
-            hess = np.sum(hess * outer_product.T, axis=2)
+            hess = -np.sum(hess * outer_product.T, axis=2)
             hessian_internal = hess[0:self.no_params_to_estimate, 0:self.no_params_to_estimate]
 
         else:
