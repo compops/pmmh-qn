@@ -67,8 +67,8 @@ def main(data, seed_offset=0, use_all_data=False):
     new_mh_settings = copy.deepcopy(mh_settings)
     new_mh_settings.update({'hessian': hessian_estimate})
     new_mh_settings.update({'adapt_step_size': False})
-    new_mh_settings.update({'step_size_gradient': 0.8})
-    new_mh_settings.update({'step_size_hessian': 0.8})
+    new_mh_settings.update({'step_size_gradient': 0.5})
+    new_mh_settings.update({'step_size_hessian': 0.5})
     mh.run('mh2',
            mh_settings=new_mh_settings,
            data=data,
