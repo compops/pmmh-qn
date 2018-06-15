@@ -1,6 +1,7 @@
 *.nogit
 
 # Results
+results-old/
 results/
 results-pre/
 results-tests/

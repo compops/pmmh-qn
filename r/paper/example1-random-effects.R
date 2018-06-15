@@ -113,7 +113,7 @@ p3 <- ggplot(gdat3) +
       labs(x = expression(sigma[u]), y = expression(M), fill = "") +
       theme(axis.text=element_text(size=12))
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example1-qn.pdf", height = 4, width = 12)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example1-qn.pdf", height = 4, width = 12)
 p <- multiplot(p1, p2, p3, layout=matrix(c(rep(1, 8), rep(2, 8), rep(3, 10)), nrow=1, byrow=TRUE))
 dev.off()
 
@@ -131,10 +131,9 @@ tes_aprob <- data.frame(cbind(aprob, tes, col))
 colnames(tes_aprob) <- c("aprob", "tes", "col")
 tes_aprob$col <- as.factor(tes_aprob$col)
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example1-qn-aprob.pdf", height = 3, width = 4)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example1-qn-aprob.pdf", height = 3, width = 4)
 ggplot(tes_aprob, aes(x = aprob, y = tes, color = col, fill = col)) +
   geom_smooth(alpha = 0.25) +
-  lims(x = c(0, 0.75), y = c(0, 1.25)) +
   scale_color_brewer(guide=FALSE, palette = "Dark2", name = "") +
   scale_fill_brewer(guide=FALSE, palette = "Dark2", name = "") +
   labs(x = "acceptance probability", y = "time per effective sample") +

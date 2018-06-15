@@ -24,6 +24,8 @@ trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations))
 trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations))
 trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations))
 
+var(trace3$th) / var(trace2$th)
+
 acf1 <- acf(trace1$th, lag.max = 250, plot = FALSE)
 acf2 <- acf(trace2$th, lag.max = 250, plot = FALSE)
 acf3 <- acf(trace3$th, lag.max = 250, plot = FALSE)
@@ -79,7 +81,7 @@ a3 <- ggplot(data=acf3_df, aes(x=lag, y=acf)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example2b-higgs.pdf", width=4, height=4)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example2b-higgs.pdf", width=4, height=4)
 layout=matrix(seq(1, 6), nrow=3, byrow=TRUE)
 multiplot(p1, a1, p2, a2, p3, a3, layout=layout)
 dev.off()

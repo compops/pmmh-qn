@@ -458,6 +458,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
 
 
     def _qn_sr1(self, params_diffs, grads_diffs, initial):
+        # Note that this is the SR1 estimate for the inverse Hessian.
         no_samples = 0
         skip_limit = self.settings['sr1_skip_limit']
         estimate = np.array(initial, copy=True)
@@ -479,10 +480,14 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
             else:
                 no_samples += 1
 
-        estimate *= -1.0
+        # Return the negative inverse Hessian
+        estimate = -estimate
+
         return estimate, no_samples
 
     def _qn_ls(self, params_diffs, grads_diffs, state_history):
+        # Note that this is the LS estimate for the inverse Hessian.
+
         lam = self.settings['ls_regularisation_parameter']
         memory_length = self.settings['memory_length']
         no_params = self.no_params_to_estimate
@@ -499,5 +504,6 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         if self.settings['ls_help_settings_regularisation_parameter']:
             print("LS reg term: {}".format(np.diag(grads_diffs.T @ params_diffs)))
 
-        estimate = 0.5 * (estimate + estimate.transpose())
-        return -estimate, grads_diffs.shape[0]
+        # Make the estimate symmetric and of the inverse negative Hessian
+        estimate = -0.5 * (estimate + estimate.transpose())
+        return estimate, grads_diffs.shape[0]

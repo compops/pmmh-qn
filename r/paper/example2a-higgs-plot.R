@@ -32,7 +32,7 @@ err_sr1 <- apply(err_sr1, 2, median)
 
 df <- data.frame(cbind(err_bfgs, err_ls, err_sr1, iqr_err_bfgs, iqr_err_ls, iqr_err_sr1, memory_lengths))
 
-cairo_pdf("~/src/uon-papers/pmmh-memory-journal2018/draft1/images/example2a-higgs.pdf", width=4, height=3)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example2a-higgs.pdf", width=4, height=3)
 ggplot(data=df, aes(x=memory_lengths)) +
       geom_ribbon(aes(ymin=err_bfgs-iqr_err_bfgs, ymax=err_bfgs+iqr_err_bfgs), fill=plotColors[1], alpha=0.25) +
       geom_ribbon(aes(ymin=err_ls-iqr_err_ls, ymax=err_ls+iqr_err_ls), fill=plotColors[2], alpha=0.25) +
@@ -42,7 +42,7 @@ ggplot(data=df, aes(x=memory_lengths)) +
       geom_line(aes(x=memory_lengths, y=err_sr1), col=plotColors[3], size=1) +
       labs(x = "memory length", y = "Hessian error") +
       theme_minimal() +
-      lims(y = c(0.0, 0.08)) +
+      lims(y = c(0.0, 0.03)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 dev.off()
 

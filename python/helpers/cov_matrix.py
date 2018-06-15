@@ -148,10 +148,6 @@ def correct_hessian(estimate, fallback_hessian, strategy='flip', verbose=False):
         # No correction required
         return estimate, False
 
-    if not problematic_hessian(-estimate, verbose=verbose):
-        # Wrong sign on Hessan estimate
-        return -estimate, False
-
     if strategy is 'replace' or estimate is None:
         # Replace the Hessian estimate with another estimate
         corr_estimate = fallback_hessian
