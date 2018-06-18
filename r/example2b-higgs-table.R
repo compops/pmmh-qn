@@ -1,15 +1,15 @@
 setwd("~/src/pmmh-qn")
-source("r/paper/helper-table.R")
+source("r/helper-table.R")
 
 library("jsonlite")
 library("xtable")
 options(xtable.floating = FALSE)
 options(xtable.timestamp = "")
 
-output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
-algorithms <- c("mh0", "mh1", "mh2", "qmh_bfgs", "qmh_ls", "qmh_sr1")
+output_path <- "~/src/pmmh-qn/results/example2-higgs"
+algorithms <- c("mh0", "mh2", "qmh-bfgs", "qmh-ls", "qmh-sr1")
 noSimulations <- 10
-offset <- 12000
+offset <- 17000
 memLength <- 1
 
 noAlgorithms <- length(algorithms)
@@ -17,7 +17,7 @@ output <- array(0, dim = c(6, noSimulations, noAlgorithms))
 
 for (i in 1:(noAlgorithms)) {
   for (j in 1:noSimulations) {
-    file_path <- paste("example3", paste(algorithms[i], j-1, sep="_"), sep="-")
+    file_path <- paste("example2", paste(algorithms[i], j-1, sep="-"), sep="-")
     file_path <- paste(output_path, paste(algorithms[i], paste(file_path), sep="/"), sep="/")
 
     data <- read_json(paste(file_path, "/data.json.gz", sep=""), simplifyVector = TRUE)
@@ -39,7 +39,6 @@ for (i in 1:noAlgorithms) {
   medianOutput[i, 5] <- median(1000 * outputMethod[, 4], na.rm = TRUE)
   medianOutput[i, 6] <- median(1000 * outputMethod[, 5], na.rm = TRUE)
 }
-
 
 medianOutput[, 1] <- round(medianOutput[, 1], 2)
 medianOutput[, 2] <- round(medianOutput[, 2], 2)

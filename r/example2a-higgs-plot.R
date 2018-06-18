@@ -1,10 +1,10 @@
+setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/helper-ggplot.R")
+
 library(jsonlite)
 library(ggplot2)
 library(RColorBrewer)
 plotColors = brewer.pal(8, "Dark2");
-
-setwd("~/src/pmmh-qn")
-source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
 noRuns <- 10

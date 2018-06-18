@@ -1,20 +1,20 @@
+setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/helper-ggplot.R")
+
 library(jsonlite)
 library(ggplot2)
 library(RColorBrewer)
 plotColors = brewer.pal(8, "Dark2")
 
-setwd("~/src/pmmh-qn")
-source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
-
 output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
 filePaths <- c("mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz")
-noIterations <- 20000
+noIterations <- 15000
 
 j <- 1
 traces <- matrix(0, nrow=length(filePaths), ncol=noIterations)
 for (i in 1:length(filePaths)) {
       result <- read_json(paste(output_path, filePaths[i], sep="/"), simplifyVector = TRUE)
-      traces[i, ] <- result$params[7001:27000, 4]
+      traces[i, ] <- result$params[12001:27000, 4]
       print(mean(result$accepted))
 }
 
@@ -90,3 +90,6 @@ cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example3-stochastic-volatility
 layout=matrix(c(1, 1, 2, 3, 4, 5, 6, 7), nrow=4, byrow=TRUE)
 multiplot(d1, p1, a1, p2, a2, p3, a3, layout=layout)
 dev.off()
+
+(1 - var(trace_bfgs$th) / var(trace_mh2$th))
+(1 - var(trace_ls$th) / var(trace_mh2$th))

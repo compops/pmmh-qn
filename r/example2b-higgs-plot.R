@@ -1,10 +1,10 @@
+setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/helper-ggplot.R")
+
 library(jsonlite)
 library(ggplot2)
 library(RColorBrewer)
 plotColors = brewer.pal(8, "Dark2");
-
-setwd("~/src/pmmh-qn")
-source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
 filePaths <- c("mh0/example2-mh0-0/mcmc_output.json.gz", "mh2/example2-mh2-0/mcmc_output.json.gz", "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz")
@@ -23,8 +23,6 @@ for (i in 1:length(filePaths)) {
 trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations))
 trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations))
 trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations))
-
-var(trace3$th) / var(trace2$th)
 
 acf1 <- acf(trace1$th, lag.max = 250, plot = FALSE)
 acf2 <- acf(trace2$th, lag.max = 250, plot = FALSE)
@@ -85,3 +83,5 @@ cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example2b-higgs.pdf", width=4,
 layout=matrix(seq(1, 6), nrow=3, byrow=TRUE)
 multiplot(p1, a1, p2, a2, p3, a3, layout=layout)
 dev.off()
+
+var(trace3$th) / var(trace2$th)

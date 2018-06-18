@@ -1,8 +1,8 @@
-library("jsonlite")
-source("~/src/pmmh-qn/r/paper/helper-example1.R")
-source("~/src/pmmh-qn/r/paper/helper-ggplot.R")
 setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/helper-example1.R")
+source("~/src/pmmh-qn/r/helper-ggplot.R")
 
+library("jsonlite")
 output_path <- "~/src/pmmh-qn/results/example1-random-effects"
 load("~/src/pmmh-qn/results/example1-random-effects/example1.RData")
 
