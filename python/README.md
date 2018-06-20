@@ -29,17 +29,16 @@ python run_script.py experiment_number
 
 where `experiment_number` is 1, 2 or 3. Note that this will still mean that 25 experiments are run for examples 1 and 2. To run only one repetition for a single experiment, change the code in `run_script.py` by removing the for-loop.
 
-### Example 1: Correlation and memory lengths in a random effects model
+### Example 1: Selection correlation and memory lengths
 
-### Example 2: Mixing performance in state-space model
+### Example 2: Sub-sampling for logistic regression model
 
-### Example 3: Posterior quality in a large-scale logistic regression model
+### Example 3: Particle filtering for stochastic volatility model
 
 
 ## File structure
 An overview of the file structure of the code base is found below.
 
-* **data/** contains the datasets used in the paper.
 * **helpers/** contains helpers for models, parameterisations, distributions, file management and connection to databases. These should not require any alterations.
 * **models/** contains the different models used in the paper. It is here you need to add your own models (see below) if you want to use the code for some other problem.
 * **parameter/** contains the MH algorithm and quasi-Newton methods for estimating the Hessian.

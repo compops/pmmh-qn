@@ -1,7 +1,10 @@
-quandl==3.1.0
-numpy==1.13.3
-scipy==0.19.1
-pandas==0.20.3
-matplotlib==2.1.0
-palettable==3.1.0
-cython==0.26.1
+quandl==3.3.0
+numpy==1.14.3
+scipy==1.1.0
+pandas==0.23.0
+matplotlib==2.2.2
+palettable==3.1.1
+cython==0.28.3
+sklearn-contrib-lightning==0.5.0
+feather-format==0.4.0
+requests==2.19.1
