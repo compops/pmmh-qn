@@ -1,6 +1,28 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+"""Helpers for MCMC samplers."""
+
 import numpy as np
 
+
 def estimate_hessian(mcmc):
+    """Estimates the Hessian using the trace from the burn-in."""
     if not hasattr(mcmc, 'state_history'):
         raise NameError("No state history found in MCMC object.")
 
@@ -16,7 +38,9 @@ def estimate_hessian(mcmc):
 
     return np.cov(free_params, rowvar=False)
 
+
 def get_history(mcmc, state_history, lag=None):
+    """Helper to extract the history of the Markov chain."""
     no_iters = mcmc.current_iter
     no_burnin_iters = mcmc.settings['no_burnin_iters']
     if lag:
@@ -36,7 +60,9 @@ def get_history(mcmc, state_history, lag=None):
         params_free[i, :] = state_history[j]['params_free']
     return params_free
 
+
 def compute_acf(data, max_lag=100):
+    """Helper for computing the empirical ACF."""
     no_data = len(data)
     variance = np.var(data)
     data = data - np.mean(data)
@@ -50,7 +76,9 @@ def compute_acf(data, max_lag=100):
             max_lag = len(result)
     return result[0:max_lag]
 
+
 def compute_iact(mcmc, state_history, lag=None, max_lag=100):
+    """Helper for computing the IACT."""
     params_free = get_history(mcmc, state_history, lag=lag)
     iact = np.zeros(mcmc.no_params_to_estimate)
 
@@ -63,10 +91,14 @@ def compute_iact(mcmc, state_history, lag=None, max_lag=100):
 
     return iact
 
+
 def compute_ess(mcmc, state_history, lag=None, max_lag=100):
-    return  mcmc.current_iter / compute_iact(mcmc, state_history, lag, max_lag)
+    """Helper for computing the effective sample size."""
+    return mcmc.current_iter / compute_iact(mcmc, state_history, lag, max_lag)
+
 
 def compute_sjd(mcmc, state_history, lag=None):
+    """Helper for computing the squared jump distance."""
     params_free = get_history(mcmc, state_history, lag)
     squared_jumps = np.linalg.norm(np.diff(params_free, axis=0), 2, axis=1)**2
     return np.mean(squared_jumps)

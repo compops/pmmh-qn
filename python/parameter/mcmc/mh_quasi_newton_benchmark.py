@@ -1,3 +1,24 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+"""Helper for checking the accuracy of the quasi-Newton estimate of the
+   Hessian when mMALA is running the main chain."""
+
 import time
 import copy
 import warnings
@@ -10,7 +31,10 @@ from helpers.cov_matrix import correct_hessian
 from helpers.distributions import product_multivariate_gaussian as pmvn
 from parameter.mcmc.mh_quasi_newton import QuasiNewtonMetropolisHastings
 
+
 class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
+    """Helper for checking the accuracy of the quasi-Newton estimate of the
+       Hessian when mMALA is running the main chain."""
     current_iter = 0
     start_time = 0
     time_offset = 0
@@ -18,7 +42,6 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
     time_per_iter = 0
     no_hessians_corrected = 0
     iter_hessians_corrected = []
-
 
     def __init__(self, model, settings=None):
         super().__init__(model, settings)
@@ -43,7 +66,7 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
 
         hess_corr = self.settings['hess_corr_method']
 
-        ## Run the smoother to get likelihood and state estimate
+        # Run the smoother to get likelihood and state estimate
         warnings.filterwarnings("error")
         try:
             self.model.store_free_params(proposed_state['params_free'])
@@ -55,9 +78,11 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
 
         if self.settings['correlated_rvs'] and estimator.alg_type is not 'kalman':
             rvs = {'rvs': proposed_state['rvs']}
-            smoother_completed = estimator.smoother(self.model, compute_hessian=True, rvs=rvs)
+            smoother_completed = estimator.smoother(
+                self.model, compute_hessian=True, rvs=rvs)
         else:
-            smoother_completed = estimator.smoother(self.model, compute_hessian=True)
+            smoother_completed = estimator.smoother(
+                self.model, compute_hessian=True)
 
         if not smoother_completed:
             print("MH-QN-benchmark: Smoother failed...")
@@ -77,33 +102,46 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
 
         if self.current_iter > self.settings['memory_length']:
             for i, memory_length in enumerate(memory_length_vector):
-                params_diffs, grads_diffs = self._qn_compute_diffs(state_history, memory_length=memory_length)
+                params_diffs, grads_diffs = self._qn_compute_diffs(
+                    state_history, memory_length=memory_length)
 
                 init_hessian = self._qn_init_hessian(grad)
                 init_hessian_ls = state_history
 
-                hess_bfgs, _ = self._qn_bfgs(params_diffs, grads_diffs, init_hessian)
-                hess_bfgs, _ = correct_hessian(hess_bfgs, alt_hess, hess_corr, verbose=False)
+                hess_bfgs, _ = self._qn_bfgs(
+                    params_diffs, grads_diffs, init_hessian)
+                hess_bfgs, _ = correct_hessian(
+                    hess_bfgs, alt_hess, hess_corr, verbose=False)
 
-                hess_ls, _ = self._qn_ls(params_diffs, grads_diffs, init_hessian_ls)
-                hess_ls, _ = correct_hessian(hess_ls, alt_hess, hess_corr, verbose=False)
+                hess_ls, _ = self._qn_ls(
+                    params_diffs, grads_diffs, init_hessian_ls)
+                hess_ls, _ = correct_hessian(
+                    hess_ls, alt_hess, hess_corr, verbose=False)
 
-                hess_sr1, _ = self._qn_sr1(params_diffs, grads_diffs, init_hessian)
-                hess_sr1, _ = correct_hessian(hess_sr1, alt_hess, hess_corr, verbose=False)
+                hess_sr1, _ = self._qn_sr1(
+                    params_diffs, grads_diffs, init_hessian)
+                hess_sr1, _ = correct_hessian(
+                    hess_sr1, alt_hess, hess_corr, verbose=False)
 
-                hess_direct = np.linalg.inv(estimator.results['hessian_internal_noprior'])
+                hess_direct = np.linalg.inv(
+                    estimator.results['hessian_internal_noprior'])
 
-                error_bfgs_fro.append(np.linalg.norm(hess_direct - hess_bfgs, 'fro'))
-                error_ls_fro.append(np.linalg.norm(hess_direct - hess_ls, 'fro'))
-                error_sr1_fro.append(np.linalg.norm(hess_direct - hess_sr1, 'fro'))
+                error_bfgs_fro.append(np.linalg.norm(
+                    hess_direct - hess_bfgs, 'fro'))
+                error_ls_fro.append(np.linalg.norm(
+                    hess_direct - hess_ls, 'fro'))
+                error_sr1_fro.append(np.linalg.norm(
+                    hess_direct - hess_sr1, 'fro'))
 
-        hess, fixed_hess = correct_hessian(hess, alt_hess, hess_corr, verbose=False)
+        hess, fixed_hess = correct_hessian(
+            hess, alt_hess, hess_corr, verbose=False)
 
         grad = estimator.results['gradient_internal']
         nat_grad = hess @ grad
         if np.isfinite(step_size_hessian) and np.isfinite(step_size_gradient):
             output_hess = np.array(hess, copy=True) * step_size_hessian
-            output_nat_grad = np.array(nat_grad, copy=True) * step_size_gradient
+            output_nat_grad = np.array(
+                nat_grad, copy=True) * step_size_gradient
         else:
             print("MH-QN-benchmark: Gradient or Hessian not finite.")
             return False
@@ -147,7 +185,7 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
         params_diffs = np.zeros((memory_length - 2, no_params))
         grads_diffs = np.zeros((memory_length - 2, no_params))
         for i in range(len(idx) - 1):
-            params_diffs[i, :]= params[i + 1, :] - params[i, :]
+            params_diffs[i, :] = params[i + 1, :] - params[i, :]
             grads_diffs[i, :] = grads[i + 1, :] - grads[i, :]
 
         return params_diffs, grads_diffs

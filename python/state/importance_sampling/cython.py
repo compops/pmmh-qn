@@ -1,4 +1,23 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
 """Importance sampling methods."""
+
 import numpy as np
 from scipy.stats import norm
 from state.base_state_inference import BaseStateInference
@@ -16,7 +35,7 @@ class ImportanceSamplingCython(BaseStateInference):
             self.c_filter = c_filter_random
             self.c_get_settings = c_get_settings_random
         else:
-            raise NameError ("Cython implementation for model missing.")
+            raise NameError("Cython implementation for model missing.")
 
         self._init_importance_sampler(model)
         self.results = {}
@@ -34,11 +53,14 @@ class ImportanceSamplingCython(BaseStateInference):
                 rv_p = rvs[:, 1:].flatten()
             else:
                 rv_r = np.random.uniform()
-                rv_p = np.random.normal(size=(self.no_obs, self.no_particles)).flatten()
+                rv_p = np.random.normal(
+                    size=(self.no_obs, self.no_particles)).flatten()
 
-            xf, ll, xtraj, _ = self.c_filter(obs, params=params, rvr=rv_r, rvp=rv_p)
+            xf, ll, xtraj, _ = self.c_filter(
+                obs, params=params, rvr=rv_r, rvp=rv_p)
             self.results.update({'filt_state_est': np.array(xf).flatten()})
-            self.results.update({'state_trajectory': np.array(xtraj).flatten()})
+            self.results.update(
+                {'state_trajectory': np.array(xtraj).flatten()})
             self.results.update({'log_like': float(ll)})
             return True
 
@@ -61,13 +83,17 @@ class ImportanceSamplingCython(BaseStateInference):
                 rv_p = rvs[:, 1:].flatten()
             else:
                 rv_r = np.random.uniform()
-                rv_p = np.random.normal(size=(self.no_obs, self.no_particles)).flatten()
+                rv_p = np.random.normal(
+                    size=(self.no_obs, self.no_particles)).flatten()
 
-            xf, ll, xtraj, grad = self.c_filter(obs, params=params, rvr=rv_r, rvp=rv_p)
+            xf, ll, xtraj, grad = self.c_filter(
+                obs, params=params, rvr=rv_r, rvp=rv_p)
             self.results.update({'filt_state_est': np.array(xf).flatten()})
-            self.results.update({'state_trajectory': np.array(xtraj).flatten()})
+            self.results.update(
+                {'state_trajectory': np.array(xtraj).flatten()})
             self.results.update({'log_like': float(ll)})
-            self.results.update({'log_joint_gradient_estimate': np.array(grad).flatten()})
+            self.results.update(
+                {'log_joint_gradient_estimate': np.array(grad).flatten()})
             if self._estimate_gradient_and_hessian(model):
                 return True
             else:
@@ -83,7 +109,8 @@ class ImportanceSamplingCython(BaseStateInference):
         no_obs, no_particles = self.c_get_settings()
         assert no_obs == model.no_obs
 
-        self.name = "Importance sampling (Cython) for " + model.short_name + " model"
+        self.name = "Importance sampling (Cython) for " + \
+            model.short_name + " model"
         self.alg_type = 'particle'
         self.settings = {'no_particles': no_particles,
                          'no_obs': no_obs,
@@ -94,7 +121,8 @@ class ImportanceSamplingCython(BaseStateInference):
         self.dim_rvs = (no_obs, no_particles + 1)
 
         print("-------------------------------------------------------------------")
-        print("Cython importance sampling implementation for " + model.short_name + " initialised.")
+        print("Cython importance sampling implementation for " +
+              model.short_name + " initialised.")
         print("")
         print("The settings are as follows: ")
         for key in self.settings:

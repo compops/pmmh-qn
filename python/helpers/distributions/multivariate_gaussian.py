@@ -1,6 +1,26 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """Helpers for the multivariate Gaussian distribution."""
 import numpy as np
 from scipy.stats import multivariate_normal
+
 
 def pdf(parm, mean, cov_matrix):
     """ Computes the pdf of the Gaussian distribution.
@@ -115,6 +135,7 @@ def logpdf_hessian(parm, mean, cov_matrix):
     else:
         raise NotImplementedError
 
+
 def rv(mean, cov_matrix, print_warnings=False):
     no_param = len(mean)
 
@@ -126,7 +147,7 @@ def rv(mean, cov_matrix, print_warnings=False):
         except RuntimeWarning:
             if print_warnings:
                 print("Warning raised in np.random.multivariate_normal " +
-                    "so using Cholesky to generate random variables.")
+                      "so using Cholesky to generate random variables.")
 
             cov_matrix_root = np.linalg.cholesky(cov_matrix)
             rv = np.random.multivariate_normal(np.zeros(no_param),

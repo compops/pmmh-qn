@@ -1,4 +1,5 @@
 *.nogit
+data/
 
 # Results
 results-old/

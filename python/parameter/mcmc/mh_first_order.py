@@ -1,10 +1,35 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+"""First-order Metropolis-Hastings (MALA) using gradient information
+    in the proposal distribution for the parameters."""
+
 import warnings
 import numpy as np
 from scipy.stats import multivariate_normal as mvn
 
 from parameter.mcmc.base_class import MarkovChainMonteCarlo
 
+
 class FirstOrderMetropolisHastings(MarkovChainMonteCarlo):
+    """First-order Metropolis-Hastings (MALA) using gradient information
+       in the proposal distribution for the parameters."""
+
     current_iter = 0
     start_time = 0
     time_offset = 0
@@ -28,7 +53,7 @@ class FirstOrderMetropolisHastings(MarkovChainMonteCarlo):
                          'no_burnin_iters': 300,
                          'adapt_step_size': False,
                          'adapt_step_size_initial': 0.1,
-                         'adapt_step_size_rate': 2.0/3.0,
+                         'adapt_step_size_rate': 2.0 / 3.0,
                          'adapt_step_size_target': 0.25,
                          'correlated_rvs': False,
                          'correlated_rvs_sigma': 0.5,
@@ -115,11 +140,15 @@ class FirstOrderMetropolisHastings(MarkovChainMonteCarlo):
         proposed_hess = proposed_state['hessian']
 
         try:
-            proposed_probability = mvn.logpdf(proposed, current_mean, current_hess)
-            current_probability = mvn.logpdf(current, proposed_mean, proposed_hess)
+            proposed_probability = mvn.logpdf(
+                proposed, current_mean, current_hess)
+            current_probability = mvn.logpdf(
+                current, proposed_mean, proposed_hess)
 
-            tar_diff = proposed_state['log_target'] - current_state['log_target']
-            jac_diff = proposed_state['log_jacobian'] - current_state['log_jacobian']
+            tar_diff = proposed_state['log_target'] - \
+                current_state['log_target']
+            jac_diff = proposed_state['log_jacobian'] - \
+                current_state['log_jacobian']
             pro_diff = current_probability - proposed_probability
 
             accept_prob = np.min((1.0, np.exp(tar_diff + jac_diff + pro_diff)))

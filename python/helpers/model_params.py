@@ -1,7 +1,27 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """Helpers for storing and returning parameters in inference/system models."""
 
 import copy
 import numpy as np
+
 
 def store_free_params(model, new_params):
     """ Stores reparameterised parameters to the model.
@@ -29,7 +49,8 @@ def store_free_params(model, new_params):
     else:
         if not isinstance(model.params_to_estimate, str):
             for param in model.params_to_estimate:
-                param_single = new_params[model.params_to_estimate.index(param)]
+                param_single = new_params[model.params_to_estimate.index(
+                    param)]
                 model.free_params[param] = float(param_single)
         else:
             model.free_params[model.params_to_estimate] = new_params
@@ -39,6 +60,7 @@ def store_free_params(model, new_params):
     except:
         print("Problematic parameters, cannot compute free parameters.")
         print("new_params: {}".format(new_params))
+
 
 def store_params(model, new_params):
     """ Stores (restricted) parameters to the model.
@@ -72,6 +94,7 @@ def store_params(model, new_params):
             model.params[model.params_to_estimate] = new_params
     model.transform_params_to_free()
 
+
 def get_free_params(model):
     """ Returns the reparameterised parameters under inference in the model.
 
@@ -92,6 +115,7 @@ def get_free_params(model):
             parameters.append(model.free_params[param])
     return np.array(parameters)
 
+
 def get_params(model):
     """ Returns the parameters under inference in the model.
 
@@ -111,6 +135,7 @@ def get_params(model):
             parameters.append(model.params[param])
     return np.array(parameters)
 
+
 def get_all_params(model):
     """ Returns all the parameters in the model.
 
@@ -124,8 +149,8 @@ def get_all_params(model):
     parameters = []
     for param in model.params:
         if isinstance(model.params[param], float) \
-            or isinstance(model.params[param], np.float) \
-            or (isinstance(model.params[param], np.ndarray) and not model.params[param].shape):
+                or isinstance(model.params[param], np.float) \
+                or (isinstance(model.params[param], np.ndarray) and not model.params[param].shape):
             parameters.append(model.params[param])
         else:
             for _, value in enumerate(model.params[param]):

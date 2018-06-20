@@ -1,4 +1,23 @@
-"""Direct methods."""
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
+"""Direct methods for computing log-target and its gradients and Hessians."""
 import numpy as np
 
 from scipy.stats import norm
@@ -9,7 +28,7 @@ from state.direct.subsampling import get_settings
 
 
 class DirectComputation(BaseStateInference):
-    """Direct log-likelihood and gradient computations."""
+    """Direct methods for computing log-target and its gradients and Hessians."""
 
     def __init__(self, model, new_settings=None, use_all_data=False):
         self.alg_type = 'direct'
@@ -61,7 +80,8 @@ class DirectComputation(BaseStateInference):
             idx = np.arange(model.no_obs).astype(int)
 
         # try:
-        results = model.get_loglike_gradient(compute_gradient=True, compute_hessian=compute_hessian, idx=idx)
+        results = model.get_loglike_gradient(
+            compute_gradient=True, compute_hessian=compute_hessian, idx=idx)
 
         self.results.update({'filt_state_est': 0.0})
         self.results.update({'state_trajectory': 0.0})
@@ -71,7 +91,8 @@ class DirectComputation(BaseStateInference):
         gradient_internal += model.log_prior_gradient()
 
         hessian_internal = np.array(results['hessian_internal'])
-        self.results.update({'hessian_internal_noprior': np.copy(hessian_internal)})
+        self.results.update(
+            {'hessian_internal_noprior': np.copy(hessian_internal)})
         hessian_internal += model.log_prior_hessian()
 
         self.results.update({'gradient_internal': gradient_internal})
@@ -80,17 +101,12 @@ class DirectComputation(BaseStateInference):
         self.results.update({'hessian': np.array(results['hessian'])})
         return True
 
-        # except Exception as e:
-        #     # Smoother did not run properly, return False
-        #     print("Error in computation of likelihood and its gradient.")
-        #     print(e)
-        #     return False
-
     def _init_direct_computation(self, model):
         no_obs, no_particles = get_settings()
         assert no_obs == model.no_obs
 
-        self.name = "Direct log-likelihood and gradient computations for " + model.short_name + " model"
+        self.name = "Direct log-likelihood and gradient computations for " + \
+            model.short_name + " model"
         self.alg_type = 'direct'
         self.no_obs = no_obs
         self.no_particles = no_particles
@@ -98,7 +114,8 @@ class DirectComputation(BaseStateInference):
         self.settings.update({'no_obs': no_obs, 'no_particles': no_particles})
 
         print("-------------------------------------------------------------------")
-        print("Direct log-likelihood and gradient computations for " + model.short_name + " initialised.")
+        print("Direct log-likelihood and gradient computations for " +
+              model.short_name + " initialised.")
         print("")
         print("The settings are as follows: ")
         for key in self.settings:

@@ -1,3 +1,22 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """System model class for a stochstic volatility model."""
 import numpy as np
 from scipy.stats import norm
@@ -40,7 +59,8 @@ class StochasticVolatilityModel(BaseModel):
         self.short_name = "sv"
 
         self.params = {'mu': 0.2, 'phi': 0.75, 'sigma_v': 1.0, 'rho': -0.8}
-        self.free_params = {'mu': 0.2, 'phi': 0.64, 'sigma_v': 0.0, 'rho': -0.66}
+        self.free_params = {'mu': 0.2, 'phi': 0.64,
+                            'sigma_v': 0.0, 'rho': -0.66}
         self.no_params = len(self.params)
         self.params_prior = {'mu': (normal, 0.0, 2.0),
                              'phi': (normal, 0.9, 0.05),
@@ -83,8 +103,10 @@ class StochasticVolatilityModel(BaseModel):
                 An array of samples from the next time step.
 
         """
-        mean = self.params['mu'] + self.params['phi'] * (cur_state - self.params['mu'])
-        mean += self.params['sigma_v'] * self.params['rho'] * np.exp(-0.5 * cur_state) * self.obs[time_step]
+        mean = self.params['mu'] + self.params['phi'] * \
+            (cur_state - self.params['mu'])
+        mean += self.params['sigma_v'] * self.params['rho'] * \
+            np.exp(-0.5 * cur_state) * self.obs[time_step]
         stdev = np.sqrt(1.0 - self.params['rho']**2) * self.params['sigma_v']
         noise = stdev * np.random.randn(1, len(cur_state))
         return mean + noise
@@ -104,7 +126,7 @@ class StochasticVolatilityModel(BaseModel):
         mean = self.params['mu']
         mean += self.params['phi'] * (cur_state - self.params['mu'])
         mean += self.params['sigma_v'] * self.params['rho'] * \
-                np.exp(-0.5 * cur_state) * self.obs[time_step - 1]
+            np.exp(-0.5 * cur_state) * self.obs[time_step - 1]
         stdev = np.sqrt(1.0 - self.params['rho']**2) * self.params['sigma_v']
         return norm.logpdf(next_state, mean, stdev)
 
@@ -209,11 +231,10 @@ class StochasticVolatilityModel(BaseModel):
         state_quad_term = next_state - self.params['mu']
         state_quad_term -= self.params['phi'] * (cur_state - self.params['mu'])
         state_quad_term -= self.params['sigma_v'] * self.params['rho'] * \
-                           np.exp(-0.5 * cur_state) * self.obs[time_index]
+            np.exp(-0.5 * cur_state) * self.obs[time_index]
 
         rho_term = (1.0 - self.params['rho']**2)
         q_matrix = self.params['sigma_v']**(-2) * rho_term**(-1)
-
 
         gradient_mu = q_matrix * state_quad_term * (1.0 - self.params['phi'])
 
@@ -223,14 +244,15 @@ class StochasticVolatilityModel(BaseModel):
 
         gradient_sigmav = q_matrix * state_quad_term**2 - 1.0
         gradient_sigmav += state_quad_term * self.params['rho'] * \
-                           self.params['sigma_v'] * self.obs[time_index] * \
-                           np.exp(-0.5 * cur_state) * q_matrix * \
-                           self.params['sigma_v']
+            self.params['sigma_v'] * self.obs[time_index] * \
+            np.exp(-0.5 * cur_state) * q_matrix * \
+            self.params['sigma_v']
 
         gradient_rho = rho_term**(-1) * self.params['rho']
         gradient_rho += state_quad_term * self.params['sigma_v'] * \
-                        self.obs[time_index] * np.exp(-0.5 * cur_state) * q_matrix
-        gradient_rho -= -self.params['rho'] * state_quad_term**2 * q_matrix / rho_term
+            self.obs[time_index] * np.exp(-0.5 * cur_state) * q_matrix
+        gradient_rho -= -self.params['rho'] * \
+            state_quad_term**2 * q_matrix / rho_term
         gradient_rho *= (1.0 - self.params['rho']**2)
 
         gradient = {}
@@ -271,7 +293,8 @@ class StochasticVolatilityModel(BaseModel):
 
         """
         sign_phi = np.sign(np.tanh(self.free_params['phi']))
-        rescaled_phi = np.min((np.abs(np.tanh(self.free_params['phi'])), 0.999))
+        rescaled_phi = np.min(
+            (np.abs(np.tanh(self.free_params['phi'])), 0.999))
         rescaled_phi *= sign_phi
 
         self.params['mu'] = self.free_params['mu']
@@ -299,5 +322,6 @@ class StochasticVolatilityModel(BaseModel):
             jacobian.update({'rho': np.log(1.0 - self.params['rho']**2)})
         except:
             print("model: log_jacobian failed, returning -inf.")
-            jacobian = {'mu': -np.inf, 'phi': -np.inf, 'sigma_v': -np.inf, 'rho': -np.inf}
+            jacobian = {'mu': -np.inf, 'phi': -np.inf,
+                        'sigma_v': -np.inf, 'rho': -np.inf}
         return self._compile_log_jacobian(jacobian)

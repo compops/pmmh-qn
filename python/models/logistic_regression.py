@@ -1,3 +1,22 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """System model class for a logistic regression."""
 import copy
 import numpy as np
@@ -142,7 +161,8 @@ class LogisticRegressionModel(BaseModel):
             outer_product = np.einsum('ij...,i...->ij...', x, x)
             hess = y * scale_1 + (1.0 - y) * scale_0
             hess = -np.sum(hess * outer_product.T, axis=2)
-            hessian_internal = hess[0:self.no_params_to_estimate, 0:self.no_params_to_estimate]
+            hessian_internal = hess[0:self.no_params_to_estimate,
+                                    0:self.no_params_to_estimate]
 
         else:
             hess = np.zeros(len(beta))
@@ -184,7 +204,8 @@ class LogisticRegressionModel(BaseModel):
                 Second value: the sum of the log-prior for all variables.
 
         """
-        grad = multivariate_gaussian.logpdf_gradient(self.params[0:self.no_params_to_estimate], 0.0, 1.0)
+        grad = multivariate_gaussian.logpdf_gradient(
+            self.params[0:self.no_params_to_estimate], 0.0, 1.0)
         return grad
 
     def log_prior_hessian(self):
@@ -195,7 +216,8 @@ class LogisticRegressionModel(BaseModel):
                 Second value: the sum of the log-prior for all variables.
 
         """
-        hess = multivariate_gaussian.logpdf_hessian(self.params[0:self.no_params_to_estimate], 0.0, 1.0)
+        hess = multivariate_gaussian.logpdf_hessian(
+            self.params[0:self.no_params_to_estimate], 0.0, 1.0)
         return np.diag(hess)
 
     def transform_params_to_free(self):
@@ -328,7 +350,8 @@ class LogisticRegressionModel(BaseModel):
         if isinstance(params_to_estimate, type(None)):
             self.no_params_to_estimate = self.no_regressors
             self.params_to_estimate = range(self.no_regressors)
-            self.params_to_estimate_idx = np.arange(self.no_regressors).astype(int)
+            self.params_to_estimate_idx = np.arange(
+                self.no_regressors).astype(int)
         else:
             if type(params_to_estimate) is tuple or type(params_to_estimate) is np.ndarray:
                 self.no_params_to_estimate = len(params_to_estimate)

@@ -1,8 +1,28 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """Helpers for generating and importing data from/to models."""
 import os.path
 import pandas as pd
 import numpy as np
 import quandl
+
 
 def import_data_quandl(model, handle, start_date, end_date, variable, api_key=None):
     """ Imports financial data from Quandl.
@@ -41,6 +61,7 @@ def import_data_quandl(model, handle, start_date, end_date, variable, api_key=No
     model.obs = obs
     print("Loaded {} observations from Quandl.".format(model.no_obs))
 
+
 def import_data(model, file_name):
     """ Imports data from file.
 
@@ -68,7 +89,8 @@ def import_data(model, file_name):
         obs = np.array(obs, copy=True).reshape((model.no_obs + 1, 1))
         model.obs = obs
     else:
-        raise ValueError("No observations in file, header must be observation.")
+        raise ValueError(
+            "No observations in file, header must be observation.")
 
     if 'state' in list(data_frame):
         states = data_frame['state'].values[0:(model.no_obs + 1)]
@@ -81,6 +103,7 @@ def import_data(model, file_name):
         model.inputs = inputs
 
     print("Loaded data from file: " + file_name + ".")
+
 
 def import_paneldata_numpy(model, file_name_x, file_name_y):
     """ Imports panel data from a numpy data file.
@@ -114,7 +137,9 @@ def import_paneldata_numpy(model, file_name_x, file_name_y):
     model.no_regressors = data_x.shape[2]
 
     print("Loaded data from files: " + file_name_x + " and " + file_name_y + ".")
-    print("No individuals: {}, no obs: {} and no regressors: {}.".format(data_x.shape[0], data_x.shape[1], data_x.shape[2]))
+    print("No individuals: {}, no obs: {} and no regressors: {}.".format(
+        data_x.shape[0], data_x.shape[1], data_x.shape[2]))
+
 
 def generate_data(model, file_name=None):
     """ Generates data from model and saves it to file.
@@ -136,7 +161,7 @@ def generate_data(model, file_name=None):
     model.states[0] = model.initial_state
 
     for i in range(1, model.no_obs + 1):
-        model.states[i] = model.generate_state(model.states[i-1], i)
+        model.states[i] = model.generate_state(model.states[i - 1], i)
         model.obs[i] = model.generate_obs(model.states[i], i)
 
     if file_name:

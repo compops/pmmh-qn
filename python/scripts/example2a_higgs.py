@@ -1,21 +1,26 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """Script for reproducing example 2a in paper."""
 import copy
 import numpy as np
 import scripts.helper_higgs as mh
-
-def load_data(file_path, subset=None):
-    x = np.load(file_path + '/higgs_x.npy')[:, :21]
-    y = np.load(file_path + '/higgs_y.npy')
-
-    if subset:
-        x = x[0:subset, :]
-        y = y[0:subset]
-        print("Using a subset of the data set.")
-
-    data = {'x': x, 'y': y}
-    print("Higgs data loaded...")
-    print("{} observations and {} covariates.".format(x.shape[0], x.shape[1]))
-    return data
 
 def main(data, seed_offset=0, use_all_data=False):
     """Runs the experiment."""

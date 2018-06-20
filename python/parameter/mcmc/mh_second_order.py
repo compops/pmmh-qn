@@ -1,3 +1,24 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
+"""Second-order Metropolis-Hastings (manifold MALA) using gradient and
+Hessian information in the proposal distribution for the parameters."""
 import warnings
 import copy
 import numpy as np
@@ -6,7 +27,10 @@ from scipy.stats import multivariate_normal as mvn
 from helpers.cov_matrix import correct_hessian
 from parameter.mcmc.base_class import MarkovChainMonteCarlo
 
+
 class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
+    """Second-order Metropolis-Hastings (manifold MALA) using gradient and
+    Hessian information in the proposal distribution for the parameters."""
     current_iter = 0
     start_time = 0
     time_offset = 0
@@ -14,7 +38,6 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
     time_per_iter = 0
     no_hessians_corrected = 0
     iter_hessians_corrected = []
-
 
     def __init__(self, model, settings=None):
         super().__init__(model, settings)
@@ -35,13 +58,12 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
         self.iter_hessians_corrected = []
         return proposed_state
 
-
     def _set_settings(self, new_settings):
         self.settings = {'no_iters': 1000,
                          'no_burnin_iters': 300,
                          'adapt_step_size': False,
                          'adapt_step_size_initial': 0.1,
-                         'adapt_step_size_rate': 2.0/3.0,
+                         'adapt_step_size_rate': 2.0 / 3.0,
                          'adapt_step_size_target': 0.25,
                          'correlated_rvs': False,
                          'correlated_rvs_sigma': 0.5,
@@ -55,26 +77,25 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
                          }
         self.settings.update(new_settings)
 
-
     def _initialise_algorithm(self):
         self.no_hessians_corrected = 0
         self.iter_hessians_corrected = []
         self.time_offset = 0.0
-
 
     def _initialise_iteration(self, state_history):
         # Compute empirical Hessian estimate for hybrid regularisation method
         # Estimate computed using the latter part of the burn-in
         no_burnin_iters = self.settings['no_burnin_iters']
         if self.current_iter == no_burnin_iters:
-            trace = np.zeros((int(0.5 * no_burnin_iters), self.no_params_to_estimate))
+            trace = np.zeros((int(0.5 * no_burnin_iters),
+                              self.no_params_to_estimate))
             for i in range(int(0.5 * no_burnin_iters)):
                 j = int(0.5 * no_burnin_iters) + i
                 trace[i, :] = state_history[j]['params_free']
             self.emp_hessian = np.cov(trace, rowvar=False)
-            print("Iteration: {}. Computed empirical Hessian matrix.".format(self.current_iter))
+            print("Iteration: {}. Computed empirical Hessian matrix.".format(
+                self.current_iter))
             print(self.emp_hessian)
-
 
     def _propose_parameters(self, current_state, proposed_state):
         curr_params = current_state['params_free']
@@ -88,7 +109,6 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
             return True
         else:
             return False
-
 
     def _estimate_state(self, estimator, proposed_state, state_history):
         # Get adapted step sizes (if there are any) otherwise use fixed
@@ -127,9 +147,11 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
 
         if self.settings['correlated_rvs']:
             rvs = {'rvs': proposed_state['rvs']}
-            smoother_completed = estimator.smoother(self.model, compute_hessian=True, rvs=rvs)
+            smoother_completed = estimator.smoother(
+                self.model, compute_hessian=True, rvs=rvs)
         else:
-            smoother_completed = estimator.smoother(self.model, compute_hessian=True)
+            smoother_completed = estimator.smoother(
+                self.model, compute_hessian=True)
 
         if not smoother_completed:
             print("State estimation failed with error...")
@@ -176,11 +198,15 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
         proposed_hess = proposed_state['hessian']
 
         try:
-            proposed_probability = mvn.logpdf(proposed, current_mean, current_hess)
-            current_probability = mvn.logpdf(current, proposed_mean, proposed_hess)
+            proposed_probability = mvn.logpdf(
+                proposed, current_mean, current_hess)
+            current_probability = mvn.logpdf(
+                current, proposed_mean, proposed_hess)
 
-            tar_diff = proposed_state['log_target'] - current_state['log_target']
-            jac_diff = proposed_state['log_jacobian'] - current_state['log_jacobian']
+            tar_diff = proposed_state['log_target'] - \
+                current_state['log_target']
+            jac_diff = proposed_state['log_jacobian'] - \
+                current_state['log_jacobian']
             pro_diff = current_probability - proposed_probability
 
             accept_prob = np.min((1.0, np.exp(tar_diff + jac_diff + pro_diff)))
@@ -194,4 +220,3 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
 
         proposed_state.update({'accept_prob': accept_prob})
         return True
-

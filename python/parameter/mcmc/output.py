@@ -1,3 +1,22 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """Helpers for displaying and storing results from MCMC algorithms."""
 import sys
 import copy
@@ -16,6 +35,8 @@ from palettable.colorbrewer.qualitative import Dark2_8
 
 
 def print_progress_report(mcmc, proposed_state, state_history, lag=1000):
+    """Prints the progress report to screen."""
+
     i = mcmc.current_iter
     iters_between_reports = mcmc.settings['no_iters_between_progress_reports']
 
@@ -86,6 +107,8 @@ def print_progress_report(mcmc, proposed_state, state_history, lag=1000):
 
 
 def print_greeting(mcmc, estimator):
+    """Prints the greeting when starting a run to screen."""
+
     print("")
     print("###################################################################")
     print("Starting MH algorithm...")
@@ -187,6 +210,9 @@ def plot(mcmc, max_acf_lag = 500):
     plt.show()
 
 def compile_benchmark_results(mcmc, sim_name=None):
+    """Helper for compiling the benchmark results from a run of
+       the algorithm in mh_quasi_newton_benchmark.py before saving to file."""
+
     no_iters = mcmc.settings['no_iters']
     no_burnin_iters = mcmc.settings['no_burnin_iters']
     no_effective_iters = no_iters - no_burnin_iters
@@ -238,6 +264,7 @@ def compile_benchmark_results(mcmc, sim_name=None):
 
 
 def compile_results(mcmc, sim_name=None):
+    """Helper for compiling the results from a run before saving to file."""
     no_iters = mcmc.settings['no_iters']
     no_burnin_iters = mcmc.settings['no_burnin_iters']
     no_effective_iters = no_iters - no_burnin_iters
@@ -306,7 +333,7 @@ def compile_results(mcmc, sim_name=None):
     return mcmcout, data, recasted_settings, df
 
 def save_to_file(mcmc, file_path, sim_name=None, sim_desc=None):
-
+    """Helper for saving results to file."""
     mcout, data, settings, mcoutdf = compile_results(mcmc, sim_name=sim_name)
 
     if sim_desc:

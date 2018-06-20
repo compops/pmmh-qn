@@ -1,3 +1,22 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
 """Defines the basic model class."""
 import numpy as np
 
@@ -9,7 +28,7 @@ from helpers.model_params import get_free_params, get_params, get_all_params
 
 
 class BaseModel(object):
-
+    """Defines the basic model class."""
     name = None
     file_prefix = None
 
@@ -41,7 +60,7 @@ class BaseModel(object):
         print("Standard parameters:")
         print("--------------------------------------------")
         for param in self.params:
-            print(param + ": {}".format(self.params[param]) )
+            print(param + ": {}".format(self.params[param]))
         print("")
         if self.free_params:
             print("Free (unrestricted) parameters:")
@@ -165,7 +184,8 @@ class BaseModel(object):
                 dist = self.params_prior[param][0]
                 hyppar1 = self.params_prior[param][1]
                 hyppar2 = self.params_prior[param][2]
-                prior.update({param: dist.logpdf(self.params[param], hyppar1, hyppar2)})
+                prior.update(
+                    {param: dist.logpdf(self.params[param], hyppar1, hyppar2)})
         except Exception as e:
             print("Problematic parameters, cannot compute log_prior.")
             print(e)

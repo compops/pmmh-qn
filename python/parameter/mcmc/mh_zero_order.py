@@ -1,10 +1,32 @@
+###############################################################################
+#    Correlated pseudo-marginal Metropolis-Hastings using
+#    quasi-Newton proposals
+#    Copyright (C) 2018  Johan Dahlin < uni (at) johandahlin [dot] com >
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+###############################################################################
+
+"""Metropolis-Hastings using random walk proposals."""
 import warnings
 import numpy as np
 from scipy.stats import multivariate_normal as mvn
 
 from parameter.mcmc.base_class import MarkovChainMonteCarlo
 
+
 class ZeroOrderMetropolisHastings(MarkovChainMonteCarlo):
+    """Metropolis-Hastings using random walk proposals."""
     current_iter = 0
     start_time = 0
     time_offset = 0
@@ -28,7 +50,7 @@ class ZeroOrderMetropolisHastings(MarkovChainMonteCarlo):
                          'no_burnin_iters': 300,
                          'adapt_step_size': False,
                          'adapt_step_size_initial': 0.1,
-                         'adapt_step_size_rate': 2.0/3.0,
+                         'adapt_step_size_rate': 2.0 / 3.0,
                          'adapt_step_size_target': 0.25,
                          'correlated_rvs': False,
                          'correlated_rvs_sigma': 0.5,
@@ -39,7 +61,6 @@ class ZeroOrderMetropolisHastings(MarkovChainMonteCarlo):
                          'remove_overflow_iterations': True
                          }
         self.settings.update(new_settings)
-
 
     def _propose_parameters(self, current_state, proposed_state):
         curr_params = current_state['params_free']
@@ -55,7 +76,6 @@ class ZeroOrderMetropolisHastings(MarkovChainMonteCarlo):
             return True
         else:
             return False
-
 
     def _estimate_state(self, estimator, proposed_state, state_history):
         # Get adapted step sizes (if there are any) otherwise use fixed
@@ -99,7 +119,6 @@ class ZeroOrderMetropolisHastings(MarkovChainMonteCarlo):
 
         return True
 
-
     def _compute_accept_prob(self, current_state, proposed_state):
         current_mean = current_state['params_free']
         current_hess = current_state['hessian']
@@ -107,11 +126,15 @@ class ZeroOrderMetropolisHastings(MarkovChainMonteCarlo):
         proposed_hess = proposed_state['hessian']
 
         try:
-            proposed_probability = mvn.logpdf(proposed_mean, current_mean, current_hess)
-            current_probability = mvn.logpdf(current_mean, proposed_mean, proposed_hess)
+            proposed_probability = mvn.logpdf(
+                proposed_mean, current_mean, current_hess)
+            current_probability = mvn.logpdf(
+                current_mean, proposed_mean, proposed_hess)
 
-            tar_diff = proposed_state['log_target'] - current_state['log_target']
-            jac_diff = proposed_state['log_jacobian'] - current_state['log_jacobian']
+            tar_diff = proposed_state['log_target'] - \
+                current_state['log_target']
+            jac_diff = proposed_state['log_jacobian'] - \
+                current_state['log_jacobian']
             pro_diff = current_probability - proposed_probability
 
             if self.verbose:
