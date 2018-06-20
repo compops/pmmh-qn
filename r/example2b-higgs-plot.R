@@ -1,17 +1,35 @@
-setwd("~/src/pmmh-qn")
-source("~/src/pmmh-qn/r/helper-ggplot.R")
+###############################################################################
+#
+# Correlated pseudo-marginal Metropolis-Hastings using quasi-Newton proposals
+#
+# (c) 2018 Johan Dahlin
+# uni (at) johandahlin.com
+#
+# Code function
+# Recreates Figure 4 in the paper after running the Python code for the
+# first experiment
+###############################################################################
 
 library(jsonlite)
 library(ggplot2)
 library(RColorBrewer)
-plotColors = brewer.pal(8, "Dark2");
 
+setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/helpers.R")
+
+###############################################################################
+# Settings
+###############################################################################
+plotColors <- brewer.pal(8, "Dark2");
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
 filePaths <- c("mh0/example2-mh0-0/mcmc_output.json.gz", "mh2/example2-mh2-0/mcmc_output.json.gz", "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz")
 paramToPlot <- 2
 noIterations <- 20000
 removeIterations <- 7000
 
+###############################################################################
+# Data pre-processing
+###############################################################################
 traces <- matrix(0, nrow=length(filePaths), ncol=noIterations)
 
 for (i in 1:length(filePaths)) {
@@ -19,7 +37,9 @@ for (i in 1:length(filePaths)) {
       traces[i,] <- result$params[-(1:removeIterations), paramToPlot]
 }
 
-# Plotting some traces
+###############################################################################
+# Plotting
+###############################################################################
 trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations))
 trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations))
 trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations))
@@ -79,9 +99,14 @@ a3 <- ggplot(data=acf3_df, aes(x=lag, y=acf)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 
-cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example2b-higgs.pdf", width=4, height=4)
-layout=matrix(seq(1, 6), nrow=3, byrow=TRUE)
-multiplot(p1, a1, p2, a2, p3, a3, layout=layout)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example2b-higgs.pdf", width=4, height=6)
+      layout=matrix(seq(1, 6), nrow=3, byrow=TRUE)
+      multiplot(p1, a1, p2, a2, p3, a3, layout=layout)
 dev.off()
 
+# Computing the improvement in posterior variance
 var(trace3$th) / var(trace2$th)
+
+###############################################################################
+# End of file
+###############################################################################

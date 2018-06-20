@@ -1,17 +1,35 @@
-setwd("~/src/pmmh-qn")
-source("r/helper-table.R")
+###############################################################################
+#
+# Correlated pseudo-marginal Metropolis-Hastings using quasi-Newton proposals
+#
+# (c) 2018 Johan Dahlin
+# uni (at) johandahlin.com
+#
+# Code function
+# Recreates Table 1 in the paper after running the Python code for the
+# first experiment
+###############################################################################
 
-library("jsonlite")
-library("xtable")
+library(jsonlite)
+library(xtable)
+
+setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/helpers.R")
+
+###############################################################################
+# Settings
+###############################################################################
 options(xtable.floating = FALSE)
 options(xtable.timestamp = "")
-
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
 algorithms <- c("mh0", "mh2", "qmh-bfgs", "qmh-ls", "qmh-sr1")
 noSimulations <- 10
 offset <- 17000
 memLength <- 1
 
+###############################################################################
+# Data pre-processing
+###############################################################################
 noAlgorithms <- length(algorithms)
 output <- array(0, dim = c(6, noSimulations, noAlgorithms))
 
@@ -47,6 +65,12 @@ medianOutput[, 4] <- round(medianOutput[, 4], 0)
 medianOutput[, 5] <- round(medianOutput[, 5], 2)
 medianOutput[, 6] <- round(medianOutput[, 6], 2)
 
+###############################################################################
+# Create table
+###############################################################################
 row.names(medianOutput) <- algorithms
 xtable(medianOutput, digits = c(0, 2, 2, 0, 0, 2, 2))
 
+###############################################################################
+# End of file
+###############################################################################

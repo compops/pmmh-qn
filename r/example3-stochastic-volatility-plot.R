@@ -1,15 +1,33 @@
-setwd("~/src/pmmh-qn")
-source("~/src/pmmh-qn/r/helper-ggplot.R")
+###############################################################################
+#
+# Correlated pseudo-marginal Metropolis-Hastings using quasi-Newton proposals
+#
+# (c) 2018 Johan Dahlin
+# uni (at) johandahlin.com
+#
+# Code function
+# Recreates Figure 5 in the paper after running the Python code for the
+# first experiment
+###############################################################################
 
 library(jsonlite)
 library(ggplot2)
 library(RColorBrewer)
-plotColors = brewer.pal(8, "Dark2")
 
+setwd("~/src/pmmh-qn")
+source("~/src/pmmh-qn/r/helpers.R")
+
+###############################################################################
+# Settings
+###############################################################################
+plotColors <- brewer.pal(8, "Dark2")
 output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
 filePaths <- c("mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz")
 noIterations <- 15000
 
+###############################################################################
+# Data pre-processing
+###############################################################################
 j <- 1
 traces <- matrix(0, nrow=length(filePaths), ncol=noIterations)
 for (i in 1:length(filePaths)) {
@@ -22,7 +40,9 @@ dates <- seq(as.POSIXct("2016-11-07 01:00:00 CET"), as.POSIXct("2017-11-02 01:00
 data <- read_json(paste(output_path, "mh2/example3-mh2_0/data.json.gz", sep="/"), simplifyVector = TRUE)
 data <- data.frame(y=data$observations, x=dates)
 
-# Plotting some traces
+###############################################################################
+# Plotting
+###############################################################################
 trace_mh2 <- data.frame(th=traces[1, ], x=seq(1, noIterations))
 trace_bfgs <- data.frame(th=traces[2, ], x=seq(1, noIterations))
 trace_ls <- data.frame(th=traces[3, ], x=seq(1, noIterations))
@@ -85,11 +105,17 @@ a3 <- ggplot(data=acf_ls, aes(x=lag, y=acf)) +
       theme_minimal() +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
-
+# Write to file
 cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example3-stochastic-volatility.pdf", width=4, height=6)
-layout=matrix(c(1, 1, 2, 3, 4, 5, 6, 7), nrow=4, byrow=TRUE)
-multiplot(d1, p1, a1, p2, a2, p3, a3, layout=layout)
+      layout=matrix(c(1, 1, 2, 3, 4, 5, 6, 7), nrow=4, byrow=TRUE)
+      multiplot(d1, p1, a1, p2, a2, p3, a3, layout=layout)
 dev.off()
 
+# Compute improvement in posterior variance
 (1 - var(trace_bfgs$th) / var(trace_mh2$th))
 (1 - var(trace_ls$th) / var(trace_mh2$th))
+
+
+###############################################################################
+# End of file
+###############################################################################
