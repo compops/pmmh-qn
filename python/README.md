@@ -1,11 +1,7 @@
 # Python code
 
 ## Installation
-This code was developed using Anaconda 3 and Python 3.6.3. To satisfy these requirements, please download Anaconda from https://www.anaconda.com/ for your OS and some extra libraries by running
-``` bash
-conda install quandl palettable cython numpy scipy pandas
-```
-If you opt to install python yourself some additional libraries are required. These can be installed by executing the following in the root directory:
+This code was developed using Anaconda 3 and Python 3.6.3. To satisfy these requirements, please download Anaconda from https://www.anaconda.com/ for your OS. Then install the libraries used in the paper by executing in the root folder of the repo
 ``` bash
 pip install -r requirements.txt
 ```
