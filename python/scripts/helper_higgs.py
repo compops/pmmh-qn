@@ -17,11 +17,15 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ###############################################################################
 
+import warnings
+warnings.filterwarnings("ignore", message="numpy.dtype size changed")
+warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
+
 import numpy as np
 import os.path
 import urllib.request
 
-from lightning.classification import SGDClassifier
+#from lightning.classification import SGDClassifier
 from helpers.file_system import ensure_dir
 
 from models.logistic_regression import LogisticRegressionModel
@@ -114,6 +118,7 @@ def get_data(file_path=".", subset=None):
 
     if not os.path.isfile(file_name):
         print("No data found so downloading. About 3 GB so this might take some time.")
+        ensure_dir(file_name)
         urllib.request.urlretrieve('https://archive.ics.uci.edu/ml/machine-learning-databases/00280/HIGGS.csv.gz', file_name)
     else:
         print("Found data so skipping download.")
@@ -134,16 +139,16 @@ def get_data(file_path=".", subset=None):
         y_subset = y
 
     # Set classifier options.
-    print("Running SGD algorithm.")
-    clf = SGDClassifier(penalty="l2", loss="log", max_iter=1000, alpha=1e-2)
-    print("SGD done.")
+    #print("Running SGD algorithm.")
+    #clf = SGDClassifier(penalty="l2", loss="log", max_iter=1000, alpha=1e-2)
+    #print("SGD done.")
 
     # Train the model.
-    clf.fit(x_subset, y_subset)
+    #clf.fit(x_subset, y_subset)
 
-    print(clf.coef_)
-    print(clf.coef_[0][1])
-    print(clf.coef_[0][17])
+    #print(clf.coef_)
+    #print(clf.coef_[0][1])
+    #print(clf.coef_[0][17])
 
     print("Saving data to file.")
     ensure_dir(file_path + "higgs_x")

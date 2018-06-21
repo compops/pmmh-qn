@@ -42,7 +42,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
     iter_hessians_corrected = []
 
     def __init__(self, model, settings=None, qn_method='bfgs'):
-    """Constructor for MH with a quasi-Newton method as the proposal for the
+        """Constructor for MH with a quasi-Newton method as the proposal for the
        parameters.
 
         Args:
@@ -145,7 +145,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
                 Hessian estimate for the BFGS and SR1 methods. Usually 0.01
                 is a good choice.
                 (small positive float)
-        """
+            """
         super().__init__(model, settings)
 
         self.type = 'qmh'
@@ -629,7 +629,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         return estimate, no_samples
 
     def _qn_sr1(self, params_diffs, grads_diffs, initial):
-    """ Implements SR1 update for Hessian estimation.
+        """ Implements SR1 update for Hessian estimation.
         The limited memory SR1 algorithm is applied to estimate the Hessian
         (actually the inverse negative Hessian of the log-target) using
         gradient information used from the last memory_length number of time
@@ -653,7 +653,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
             First argument: estimate of the negative inverse Hessian of the
                             logarithm of the target.
             Second argument: the number of samples used to obtain the estimate.
-    """
+        """
         no_samples = 0
         skip_limit = self.settings['sr1_skip_limit']
         estimate = np.array(initial, copy=True)
@@ -681,7 +681,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         return estimate, no_samples
 
     def _qn_ls(self, params_diffs, grads_diffs, state_history):
-    """ Implements LS update for Hessian estimation.
+        """ Implements LS update for Hessian estimation.
         The limited memory LS algorithm is applied to estimate the Hessian
         (actually the inverse negative Hessian of the log-target) using
         gradient information used from the last memory_length number of time
@@ -704,7 +704,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
             First argument: estimate of the negative inverse Hessian of the
                             logarithm of the target.
             Second argument: the number of samples used to obtain the estimate.
-    """
+        """
 
         lam = self.settings['ls_regularisation_parameter']
         memory_length = self.settings['memory_length']

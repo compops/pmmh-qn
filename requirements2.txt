@@ -1,0 +1,5 @@
+palettable==3.1.1
+quandl==3.3.0
+sklearn-contrib-lightning==0.5.0
+feather-format==0.4.0
+requests==2.19.1

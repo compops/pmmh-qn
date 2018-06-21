@@ -40,7 +40,7 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
     iter_hessians_corrected = []
 
     def __init__(self, model, settings=None):
-    """Constructor for MH with a discretized Langevin diffusion as the
+        """Constructor for MH with a discretized Langevin diffusion as the
         proposal for the parameters.
 
         Args:
