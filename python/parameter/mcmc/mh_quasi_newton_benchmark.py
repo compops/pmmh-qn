@@ -44,6 +44,8 @@ class QuasiNewtonMetropolisHastingsBenchmark(QuasiNewtonMetropolisHastings):
     iter_hessians_corrected = []
 
     def __init__(self, model, settings=None):
+        """ Constructor. See the constructor for parameter.mcmc.mh_quasi_newton
+        for all the settings. """
         super().__init__(model, settings)
         self.type = 'qmh_benchmark'
         self.alg_type = 'qmh_benchmark'
