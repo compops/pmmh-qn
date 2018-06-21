@@ -33,7 +33,27 @@ from parameter.mcmc.output import plot
 
 
 class MarkovChainMonteCarlo(BaseParameterInference):
-    """Base class for a MCMC sampler."""
+    """ Metropolis-Hastings algorithm.
+        Implements the standard Metropolis-Hastings algorithm with a Gaussian
+        proposal with some mean and covariance.
+
+        The description of the algorithm is given by:
+        1) Initialise Markov chain [_initialise_params]
+        2) FOR iter in 1 to no_iters
+            2a) Propose a candidate parameter. [_propose_params]
+            2b) Compute the acceptance probability. [_compute_accept_prob]
+            2c) Accept / reject step. [_accept_params / _reject_params]
+            2d) Compile output and write to screen. [print_progress_report]
+        3) Post-processing and writing results to file. [store_results_to_file]
+
+        These steps are implemented as separate functions in this file with the
+        names given as above. The main steps are given in the function "run".
+        The settings of the algorithms are encoded in the dict settings given
+        at initialisation of the class. Standard settings are given otherwise.
+
+        Some of these base methods are overloaded by specific versions of MH.
+        See the respective files for the details.
+    """
     current_iter = 0
     start_time = 0
     time_offset = 0
@@ -43,13 +63,30 @@ class MarkovChainMonteCarlo(BaseParameterInference):
     settings = None
 
     def __init__(self, model, settings):
-        """Constructor augumented by the different sub-classes."""
+        """Constructor augmented by the different sub-classes.
+        Args:
+            model: a model class to conduct inference on.
+            settings: a dict with settings for the sampler,
+                      see the specific type of MH for the details.
+        """
         self.model = model
         self.no_params_to_estimate = self.model.no_params_to_estimate
         self._set_settings(settings)
 
     def run(self, estimator, verbose=False):
-        """Run the MCMC algorithm."""
+        """ Runs the MH algorithm.
+        Args:
+            estimator: function that provides evaluations/estimates of the
+                       log-target and possibly its gradients and Hessians.
+                       Typically this is an importance sampler or SMC algorithm.
+            verbose: Boolean flag to print debugging messages.
+
+        Returns:
+            Nothing. The results are available as an array of dictionaries
+            with the name state_history. The results can be plotted and exported
+            using helper methods, .e.g., plot and save_to_file.
+        """
+
         no_iters = self.settings['no_iters']
         no_burnin_iters = self.settings['no_burnin_iters']
         assert no_iters > no_burnin_iters

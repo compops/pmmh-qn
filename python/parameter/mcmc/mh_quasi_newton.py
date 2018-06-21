@@ -42,6 +42,110 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
     iter_hessians_corrected = []
 
     def __init__(self, model, settings=None, qn_method='bfgs'):
+    """Constructor for MH with a quasi-Newton method as the proposal for the
+       parameters.
+
+        Args:
+            model: a model class to conduct inference on.
+            settings: a dict with the following settings:
+
+                'no_iters': number of MH iterations to carry out. (integer)
+
+                'no_burnin_iters': number of iterations to discard as burn-in.
+                (integer)
+
+                'adapt_step_size': should the step sizes be adapted. This will
+                adapt both the step size for the drift and random step to the
+                same value. (boolean)
+
+                'adapt_step_size_initial': initial step size. (float)
+
+                'adapt_step_size_rate': rate determining how quickly the
+                adaption will fade out. (float between 0.5 and 1.0)
+
+                'adapt_step_size_target': target acceptance probability. (float)
+
+                'correlated_rvs': should correlated random variables be used to
+                estimate/compute the log-target and its gradients and Hessians.
+                (boolean)
+
+                'correlated_rvs_sigma': the standard deviation in the proposal
+                for the random variables.
+                (float between 0.0 and 1.0)
+
+                'memory_length': length of the memory in the quasi-Newton
+                proposal, usually 30-40 is a good choice.
+                (positive integer)
+
+                'accept_first_iterations': accept the first iterations so that
+                the quasi-Newton proposal is fully initialised. Typically this
+                is set to the same value as the memory length.
+                (positive integer)
+
+                'step_size_gradient': the step size for the gradient drift in
+                the parameter proposal proposal (if not adapted by the setting
+                above). (positive float)
+
+                'step_size_hessian': the step size for the random step proposed
+                by the parameter proposal (if not adapted by the setting above).
+                (positive float)
+
+                'hess_corr_fallback': the fallback matrix for the covariance
+                matrix of the parameter proposal, which is used if the estimate
+                is not positive definite and cannot be corrected.
+                (numpy.ndarray)
+
+                'hess_corr_method': method used to correcting Hessian estimates
+                which are not finite or positive definite. See the help for
+                helpers.cov_matrix.correct_hessian for details
+                (string: 'flip', 'regularise' or 'replace')
+
+                'min_no_samples_hessian_estimate': the smallest alloed number of
+                data points used in the Hessian estimate. If this is not
+                fulfilled, the fallback is used instead.
+
+                'initial_params': initial guess of parameters.
+                (array of floats)
+
+                'no_iters_between_progress_reports': no. iterations between
+                printing of progress to screen.
+                (positive integer)
+
+                'remove_overflow_iterations': should candidates be rejected if
+                an overflow occurs in the acceptance probability computation.
+                (boolean)
+
+                'ls_regularisation_parameter': the scaling the the regulari-
+                sation of the Hessian estimate, lambda in the paper. Typically
+                selected as 0.1. (positive float)
+
+                'ls_help_settings_regularisation_parameter': prints the size
+                of the two terms in the LS update to get information about
+                a reasonable size of lambda. (boolean)
+
+                'sr1_skip_limit': limit for the error in the Hessian estimate
+                is SR1. No more information is added if this limit is reached.
+                (small float)
+
+                'sr1_trust_region': should the SR1 update use a trust region.
+                (boolean)
+
+                'sr1_trust_region_scale': scaling of the trust region covariance
+                matrix (not used in the paper). (positive float)
+
+                'sr1_trust_region_cov': initial estimate of the trust region
+                covariance before the empirical covariance matrix can be
+                computed. Usually the same as the fallback. (numpy.ndarray)
+
+                'bfgs_curv_cond': type of BFGS update to use. The paper only
+                makes use of damped.
+                (string: 'damped', 'ignore' or 'enforce').
+
+                'initial_hessian_scaling': scaling of the initial guess of the
+                Hessian estimate for the BFGS and SR1 methods. Usually 0.01
+                is a good choice.
+                (small positive float)
+        """
         super().__init__(model, settings)
 
         self.type = 'qmh'
@@ -139,7 +243,8 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         return current_state
 
     def _initialise_iteration(self, state_history):
-        # Compute empirical Hessian estimate for hybrid regularisation method
+        # Compute empirical Hessian estimate for replace regularisation method
+        # and as the trust region and regularisation for SR1 and LS updates.
         # Estimate computed using the latter part of the burn-in
         no_burnin_iters = self.settings['no_burnin_iters']
         if self.current_iter == no_burnin_iters:
@@ -164,6 +269,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
             current_state['nat_gradient']
 
         if self.qn_method is 'sr1' and self.settings['sr1_trust_region']:
+            # Using trust-region approach for the SR1 update.
             prop_params = pmvn.rvs(current_mean,
                                    current,
                                    current_state['hessian'],
@@ -324,6 +430,7 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
 
         try:
             if self.qn_method is 'sr1' and self.settings['sr1_trust_region']:
+                # Using trust-region approach for the SR1 update.
                 current = current_state['params_free']
                 current_mean = current + current_state['nat_gradient']
 
@@ -383,6 +490,8 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         return True
 
     def _qn_compute_diffs(self, state_history):
+        """Computes the differences in the parameters and gradients for the use
+        in quasi-Newton updates."""
         memory_length = self.settings['memory_length']
         no_params = self.no_params_to_estimate
 
@@ -413,6 +522,9 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         return params_diffs, grads_diffs
 
     def _qn_init_hessian(self, prop_grad):
+        """ Initialises the Hessian estimate by an identity matrix such that
+        the proposed gradient would make a step 'initial_hessian_scaling'] in
+        the 2-norm. """
         scaling = self.settings['initial_hessian_scaling']
         ident_mat = np.eye(self.no_params_to_estimate)
         grad_norm = np.linalg.norm(prop_grad, 2)
@@ -422,6 +534,35 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
             return ident_mat * scaling
 
     def _qn_bfgs(self, params_diffs, grads_diffs, initial):
+        """ Implements BFGS update for Hessian estimation.
+            The limited memory BFGS algorithm is applied to estimate the Hessian
+            (actually the inverse negative Hessian of the log-target) using
+            gradient information used from the last memory_length number of time
+            steps.
+
+            The curvature condition in the BFGS algorithm is important as it
+            makes sure that the estimate is positive semi-definite. It can be
+            controlled by setting the field mcmc.settings['bfgs_curv_cond']:
+                'enforce': the standard condition is enforced and all differences
+                        in parameters and gradients violating this condition
+                        are removed.
+                'ignore':  ignores the condition and relies on a correction in
+                        a later step to obtain a positive semidefinite estimate.
+                'damped':  makes use of damped BFGS to adjust the differences in
+                        parameters and gradients to fulfill the curvature
+                        condition.
+            Args:
+                params_diffs: a list of differences in the parameters for the last
+                            few iterations in the memory length.
+                grads_diffs:  a list of differences in the gradients for the last
+                            few iterations in the memory length.
+                initial:      an estimate of the initial Hessian.
+
+            Returns:
+                First argument: estimate of the negative inverse Hessian of the
+                                logarithm of the target.
+                Second argument: the number of samples used to obtain the estimate.
+        """
         curv_cond = self.settings['bfgs_curv_cond']
         estimate = np.array(initial, copy=True)
         ident_mat = np.eye(self.no_params_to_estimate)
@@ -462,7 +603,6 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
                 new_grads_diffs = theta * \
                     grads_diffs[i, :] + (1.0 - theta) * grad_guess
 
-            elif curv_cond is 'ignore':
                 new_grads_diffs = grads_diffs[i, :]
 
             else:
@@ -489,7 +629,31 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         return estimate, no_samples
 
     def _qn_sr1(self, params_diffs, grads_diffs, initial):
-        # Note that this is the SR1 estimate for the inverse Hessian.
+    """ Implements SR1 update for Hessian estimation.
+        The limited memory SR1 algorithm is applied to estimate the Hessian
+        (actually the inverse negative Hessian of the log-target) using
+        gradient information used from the last memory_length number of time
+        steps.
+
+        The update makes use of all samples or until the error in the Hessian
+        estimate is less than the setting 'sr1_skip_limit'.
+
+        The trust region approach enters when sampling the proposal and when
+        computing the acceptance probability. Hence, it is not found in this
+        method.
+
+        Args:
+            params_diffs: a list of differences in the parameters for the last
+                          few iterations in the memory length.
+            grads_diffs:  a list of differences in the gradients for the last
+                          few iterations in the memory length.
+            initial:      an estimate of the initial Hessian.
+
+        Returns:
+            First argument: estimate of the negative inverse Hessian of the
+                            logarithm of the target.
+            Second argument: the number of samples used to obtain the estimate.
+    """
         no_samples = 0
         skip_limit = self.settings['sr1_skip_limit']
         estimate = np.array(initial, copy=True)
@@ -517,7 +681,30 @@ class QuasiNewtonMetropolisHastings(MarkovChainMonteCarlo):
         return estimate, no_samples
 
     def _qn_ls(self, params_diffs, grads_diffs, state_history):
-        # Note that this is the LS estimate for the inverse Hessian.
+    """ Implements LS update for Hessian estimation.
+        The limited memory LS algorithm is applied to estimate the Hessian
+        (actually the inverse negative Hessian of the log-target) using
+        gradient information used from the last memory_length number of time
+        steps.
+
+        The update makes use a regularisation of the estimate with the parameter
+        determined by the setting 'ls_regularisation_parameter'. The prior
+        is either with fallback matrix defined by the setting
+        'hess_corr_fallback' or the empirical estimate of the variance of the
+        posterior.
+
+        Args:
+            params_diffs:  a list of differences in the parameters for the last
+                           few iterations in the memory length.
+            grads_diffs:   a list of differences in the gradients for the last
+                           few iterations in the memory length.
+            state_history: not used.
+
+        Returns:
+            First argument: estimate of the negative inverse Hessian of the
+                            logarithm of the target.
+            Second argument: the number of samples used to obtain the estimate.
+    """
 
         lam = self.settings['ls_regularisation_parameter']
         memory_length = self.settings['memory_length']

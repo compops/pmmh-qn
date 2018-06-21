@@ -34,6 +34,51 @@ class ZeroOrderMetropolisHastings(MarkovChainMonteCarlo):
     time_per_iter = 0
 
     def __init__(self, model, settings=None):
+        """Constructor for MH with standard random walk proposal
+        Args:
+            model: a model class to conduct inference on.
+            settings: a dict with the following settings:
+
+                'no_iters': number of MH iterations to carry out. (integer)
+
+                'no_burnin_iters': number of iterations to discard as burn-in.
+                (integer)
+
+                'adapt_step_size': should the step size be adapted (boolean).
+
+                'adapt_step_size_initial': initial step size. (float)
+
+                'adapt_step_size_rate': rate determining how quickly the
+                adaption will fade out. (float between 0.5 and 1.0)
+
+                'adapt_step_size_target': target acceptance probability. (float)
+
+                'correlated_rvs': should correlated random variables be used to
+                estimate/compute the log-target and its gradients and Hessians.
+                (boolean)
+
+                'correlated_rvs_sigma': the standard deviation in the proposal
+                for the random variables.
+                (float between 0.0 and 1.0)
+
+                'step_size_hessian': the step size for the proposal (if not
+                adapted by the setting above).
+                (positive float)
+
+                'hessian': the covariance matrix of the parameter proposal.
+                (numpy.ndarray)
+
+                'initial_params': initial guess of parameters.
+                (array of floats)
+
+                'no_iters_between_progress_reports': no. iterations between
+                printing of progress to screen.
+                (positive integer)
+
+                'remove_overflow_iterations': should candidates be rejected if
+                an overflow occurs in the acceptance probability computation.
+                (boolean)
+        """
         super().__init__(model, settings)
 
         self.type = 'mh'

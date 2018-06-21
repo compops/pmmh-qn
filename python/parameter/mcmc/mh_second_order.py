@@ -40,6 +40,66 @@ class SecondOrderMetropolisHastings(MarkovChainMonteCarlo):
     iter_hessians_corrected = []
 
     def __init__(self, model, settings=None):
+    """Constructor for MH with a discretized Langevin diffusion as the
+        proposal for the parameters.
+
+        Args:
+            model: a model class to conduct inference on.
+            settings: a dict with the following settings:
+
+                'no_iters': number of MH iterations to carry out. (integer)
+
+                'no_burnin_iters': number of iterations to discard as burn-in.
+                (integer)
+
+                'adapt_step_size': should the step sizes be adapted. This will
+                adapt both the step size for the drift and random step to the
+                same value. (boolean)
+
+                'adapt_step_size_initial': initial step size. (float)
+
+                'adapt_step_size_rate': rate determining how quickly the
+                adaption will fade out. (float between 0.5 and 1.0)
+
+                'adapt_step_size_target': target acceptance probability. (float)
+
+                'correlated_rvs': should correlated random variables be used to
+                estimate/compute the log-target and its gradients and Hessians.
+                (boolean)
+
+                'correlated_rvs_sigma': the standard deviation in the proposal
+                for the random variables.
+                (float between 0.0 and 1.0)
+
+                'step_size_gradient': the step size for the gradient drift in
+                the parameter proposal proposal (if not adapted by the setting
+                above). (positive float)
+
+                'step_size_hessian': the step size for the random step proposed
+                by the parameter proposal (if not adapted by the setting above).
+                (positive float)
+
+                'hess_corr_fallback': the fallback matrix for the covariance
+                matrix of the parameter proposal, which is used if the estimate
+                is not positive definite and cannot be corrected.
+                (numpy.ndarray)
+
+                'hess_corr_method': method used to correcting Hessian estimates
+                which are not finite or positive definite. See the help for
+                helpers.cov_matrix.correct_hessian for details
+                (string: 'flip', 'regularise' or 'replace')
+
+                'initial_params': initial guess of parameters.
+                (array of floats)
+
+                'no_iters_between_progress_reports': no. iterations between
+                printing of progress to screen.
+                (positive integer)
+
+                'remove_overflow_iterations': should candidates be rejected if
+                an overflow occurs in the acceptance probability computation.
+                (boolean)
+        """
         super().__init__(model, settings)
 
         self.type = 'mh2'
