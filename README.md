@@ -48,3 +48,6 @@ This source code is distributed under the GPLv3 license with (c) Johan Dahlin 20
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ###############################################################################
 ```
+
+## Acknowledgements
+This code makes use of the argsort implementation by Jason Rudy found at https://github.com/jcrudy/cython-argsort.
