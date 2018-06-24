@@ -34,7 +34,7 @@ def main(seed_offset=0):
     mh_settings = {'no_iters': 30000,
                    'no_burnin_iters': 3000,
                    'adapt_step_size': True,
-                   'adapt_step_size_initial': 0.2,
+                   'adapt_step_size_initial': 0.1,
                    'adapt_step_size_rate': 0.5,
                    'adapt_step_size_target': 0.6,
                    'initial_params': initial_params,
@@ -51,8 +51,8 @@ def main(seed_offset=0):
     new_mh_settings = copy.deepcopy(mh_settings)
     new_mh_settings.update({'hessian': hessian_guess})
     new_mh_settings.update({'adapt_step_size': False})
-    new_mh_settings.update({'step_size_gradient': 0.8})
-    new_mh_settings.update({'step_size_hessian': 0.8})
+    new_mh_settings.update({'step_size_gradient': 1.0})
+    new_mh_settings.update({'step_size_hessian': 1.0})
     mh.run('mh2',
            mh_settings=new_mh_settings,
            seed_offset=seed_offset)

@@ -32,6 +32,7 @@ memLength <- 1
 ###############################################################################
 noAlgorithms <- length(algorithms)
 output <- array(0, dim = c(6, noSimulations, noAlgorithms))
+post_var <- array(0, dim = c(4, noSimulations, noAlgorithms))
 
 for (i in 1:(noAlgorithms)) {
   for (j in 1:noSimulations) {
@@ -43,6 +44,7 @@ for (i in 1:(noAlgorithms)) {
     settings <- read_json(paste(file_path, "/settings.json.gz", sep=""), simplifyVector = TRUE)
 
     output[, j, i] <- helper_table(data, result, settings, memLength=memLength, offset=offset)
+    post_var[, j, i] <- helper_post_var(result, memLength=memLength, offset=offset)
     print(output[, j, i])
   }
 }
@@ -70,6 +72,22 @@ medianOutput[, 6] <- round(medianOutput[, 6], 2)
 ###############################################################################
 row.names(medianOutput) <- algorithms
 xtable(medianOutput, digits = c(0, 2, 2, 0, 0, 2, 2))
+
+###############################################################################
+# Comparing posterior covariances
+###############################################################################
+
+post_var_rel_bfgs <- rep(0, noSimulations)
+post_var_rel_ls <- rep(0, noSimulations)
+post_var_rel_sr1 <- rep(0, noSimulations)
+
+for (j in 1:noSimulations) {
+  post_var_rel_bfgs[j] <- mean(post_var[, j, 4] / post_var[, j, 3])
+  post_var_rel_ls[j] <- mean(post_var[, j, 5] / post_var[, j, 3])
+  post_var_rel_sr1[j] <- mean(post_var[, j, 6] / post_var[, j, 3])
+}
+
+c(median(post_var_rel_bfgs), median(post_var_rel_ls), median(post_var_rel_sr1))
 
 ###############################################################################
 # End of file
