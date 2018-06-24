@@ -121,8 +121,8 @@ iactBFGSinterp <- interp(iactBFGS[, 1], iactBFGS[, 2], iactBFGS[, 3])
 iactSR1interp <- interp(iactSR1[, 1], iactSR1[, 2], iactSR1[, 3])
 iactLSinterp <- interp(iactLS[, 1], iactLS[, 2], iactLS[, 3])
 gdat1 <- interp2xyz(iactBFGSinterp, data.frame=TRUE)
-gdat2 <- interp2xyz(iactSR1interp, data.frame=TRUE)
-gdat3 <- interp2xyz(iactLSinterp, data.frame=TRUE)
+gdat2 <- interp2xyz(iactLSinterp, data.frame=TRUE)
+gdat3 <- interp2xyz(iactSR1interp, data.frame=TRUE)
 
 # Create plots
 p1 <- ggplot(gdat1) +

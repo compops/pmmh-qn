@@ -1,3 +1,5 @@
+# This code makes use of the argsort implementation by Jason Rudy found at https://github.com/jcrudy/cython-argsort.
+
 from __future__ import absolute_import
 
 import cython

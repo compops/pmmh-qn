@@ -81,3 +81,6 @@ In the paper, all model parameters are unrestricted and can assume any real valu
 Furthermore, some alterations are probably required to the settings used in the quasi-Newton algorithm such as initial guess of the Hessian, a standard step length, memory length, etc.
 
 Please, let me know if you need any help with this and I will try my best to sort it out.
+
+## Acknowledgements
+This code makes use of the argsort implementation by Jason Rudy found at https://github.com/jcrudy/cython-argsort.

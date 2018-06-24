@@ -57,28 +57,28 @@ for (i in 1:3) {
     t1 <- ggplot(data=trace, aes(x=x, y=th.1)) +
         geom_line(col=plotColors[3]) +
         lims(x = c(8800, 9000)) +
-        labs(x = expression(mu), y = "iteration") +
+        labs(y = expression(mu), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t2 <- ggplot(data=trace, aes(x=x, y=th.2)) +
         geom_line(col=plotColors[4]) +
         lims(x = c(8800, 9000)) +
-        labs(x = expression(phi), y = "iteration") +
+        labs(y = expression(phi), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t3 <- ggplot(data=trace, aes(x=x, y=th.3)) +
         geom_line(col=plotColors[5]) +
         lims(x = c(8800, 9000)) +
-        labs(x = expression(sigma[v]), y = "iteration") +
+        labs(y = expression(sigma[v]), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t4 <- ggplot(data=trace, aes(x=x, y=th.4)) +
         geom_line(col=plotColors[6]) +
         lims(x = c(8800, 9000)) +
-        labs(x = expression(rho), y = "iteration") +
+        labs(y = expression(rho), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
