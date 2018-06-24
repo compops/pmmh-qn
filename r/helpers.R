@@ -91,3 +91,19 @@ helper_table <- function(data, result, settings, memLength=1, offset=1) {
 
   c(settings$simulation_name, acceptRate, fracHessiansCorrected, mean(iact), result$time_per_iteration, essPerSec)
 }
+
+helper_post_var <- function(result, memLength=1, offset=1) {
+
+  paramsTrace <- result$params
+  noIterations <- dim(paramsTrace)[1]
+  noParameters <- dim(paramsTrace)[2]
+
+  idx <- seq(offset, noIterations, memLength)
+  post_var <- rep(0, noParameters)
+
+  for (k in 1:noParameters) {
+    post_var[k] <- var(paramsTrace[idx, k])
+  }
+
+  post_var
+}

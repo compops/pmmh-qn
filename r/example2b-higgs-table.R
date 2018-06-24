@@ -32,6 +32,7 @@ memLength <- 1
 ###############################################################################
 noAlgorithms <- length(algorithms)
 output <- array(0, dim = c(6, noSimulations, noAlgorithms))
+post_var <- array(0, dim = c(22, noSimulations, noAlgorithms))
 
 for (i in 1:(noAlgorithms)) {
   for (j in 1:noSimulations) {
@@ -43,6 +44,7 @@ for (i in 1:(noAlgorithms)) {
     settings <- read_json(paste(file_path, "/settings.json.gz", sep=""), simplifyVector = TRUE)
 
     output[, j, i] <- helper_table(data, result, settings, memLength=memLength, offset=offset)
+    post_var[, j, i] <- helper_post_var(result, memLength=memLength, offset=offset)
     print(output[, j, i])
   }
 }
