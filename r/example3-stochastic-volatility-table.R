@@ -77,14 +77,14 @@ xtable(medianOutput, digits = c(0, 2, 2, 0, 0, 2, 2))
 # Comparing posterior covariances
 ###############################################################################
 
-post_var_rel_bfgs <- rep(0, noSimulations)
-post_var_rel_ls <- rep(0, noSimulations)
-post_var_rel_sr1 <- rep(0, noSimulations)
+post_var_rel_bfgs <- matrix(0, nrow=noSimulations, ncol=4)
+post_var_rel_ls <- matrix(0, nrow=noSimulations, ncol=4)
+post_var_rel_sr1 <- matrix(0, nrow=noSimulations, ncol=4)
 
 for (j in 1:noSimulations) {
-  post_var_rel_bfgs[j] <- mean(post_var[, j, 4] / post_var[, j, 3])
-  post_var_rel_ls[j] <- mean(post_var[, j, 5] / post_var[, j, 3])
-  post_var_rel_sr1[j] <- mean(post_var[, j, 6] / post_var[, j, 3])
+  post_var_rel_bfgs[j,] <- post_var[, j, 4] / post_var[, j, 3]
+  post_var_rel_ls[j,] <- post_var[, j, 5] / post_var[, j, 3]
+  post_var_rel_sr1[j,] <- post_var[, j, 6] / post_var[, j, 3]
 }
 
 c(median(post_var_rel_bfgs), median(post_var_rel_ls), median(post_var_rel_sr1))
