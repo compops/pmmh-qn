@@ -22,7 +22,7 @@ source("~/src/pmmh-qn/r/helpers.R")
 ###############################################################################
 plotColors <- brewer.pal(8, "Dark2")
 output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
-filePaths <- c("mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz")
+filePaths <- c("mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz", "qmh_sr1/example3-qmh_sr1_0/mcmc_output.json.gz")
 noIterations <- 15000
 
 ###############################################################################
@@ -39,9 +39,11 @@ for (i in 1:length(filePaths)) {
 ###############################################################################
 # Plotting
 ###############################################################################
-file_name <- c("~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-mh2.pdf", "~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-bfgs.pdf", "~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-ls.pdf")
+file_name <- c("~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-mh2.pdf", "~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-bfgs.pdf", "~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-ls.pdf",
+"~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-sr1.pdf")
 
-for (i in 1:3) {
+
+for (i in 1:4) {
     trace <- data.frame(th=traces[i,, ], x=seq(1, noIterations))
 
     acf_mu <- acf(trace[,1], lag.max = 250, plot = FALSE)
@@ -56,28 +58,28 @@ for (i in 1:3) {
 
     t1 <- ggplot(data=trace, aes(x=x, y=th.1)) +
         geom_line(col=plotColors[3]) +
-        lims(x = c(8800, 9000)) +
+        lims(x = c(8800, 9000), y = c(0.0, 3.5)) +
         labs(y = expression(mu), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t2 <- ggplot(data=trace, aes(x=x, y=th.2)) +
         geom_line(col=plotColors[4]) +
-        lims(x = c(8800, 9000)) +
+        lims(x = c(8800, 9000), y = c(0.8, 1.0)) +
         labs(y = expression(phi), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t3 <- ggplot(data=trace, aes(x=x, y=th.3)) +
         geom_line(col=plotColors[5]) +
-        lims(x = c(8800, 9000)) +
+        lims(x = c(8800, 9000), y = c(0.2, 0.7)) +
         labs(y = expression(sigma[v]), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t4 <- ggplot(data=trace, aes(x=x, y=th.4)) +
         geom_line(col=plotColors[6]) +
-        lims(x = c(8800, 9000)) +
+        lims(x = c(8800, 9000), y = c(-0.5, 0.2)) +
         labs(y = expression(rho), x = "iteration") +
         theme_minimal() +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
@@ -86,24 +88,28 @@ for (i in 1:3) {
         geom_density(alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
         labs(x = expression(mu), y = "posterior") +
         theme_minimal() +
+        lims(x = c(0.0, 3.5)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     p2 <- ggplot(data=trace, aes(x=th.2)) +
         geom_density(alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
         labs(x = expression(phi), y = "posterior") +
         theme_minimal() +
+        lims(x = c(0.8, 1.0)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     p3 <- ggplot(data=trace, aes(x=th.3)) +
         geom_density(alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
         labs(x = expression(sigma[v]), y = "posterior") +
         theme_minimal() +
+        lims(x = c(0.2, 0.7)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     p4 <- ggplot(data=trace, aes(x=th.4)) +
         geom_density(alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
         labs(x = expression(rho), y = "posterior") +
         theme_minimal() +
+        lims(x = c(-0.5, 0.2)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a1 <- ggplot(data=acf_mu, aes(x=lag, y=acf)) +
@@ -111,6 +117,7 @@ for (i in 1:3) {
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[3]) +
         labs(x = "lag", y = expression("ACF of " * mu)) +
         theme_minimal() +
+        lims(y = c(-0.3, 1.0)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a2 <- ggplot(data=acf_phi, aes(x=lag, y=acf)) +
@@ -118,6 +125,7 @@ for (i in 1:3) {
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[4]) +
         labs(x = "lag", y = expression("ACF of " * phi)) +
         theme_minimal() +
+        lims(y = c(-0.3, 1.0)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a3 <- ggplot(data=acf_sigma, aes(x=lag, y=acf)) +
@@ -125,6 +133,7 @@ for (i in 1:3) {
         labs(x = "lag", y = expression("ACF of " * sigma[v])) +
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[5]) +
         theme_minimal() +
+        lims(y = c(-0.3, 1.0)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a4 <- ggplot(data=acf_rho, aes(x=lag, y=acf)) +
@@ -132,6 +141,7 @@ for (i in 1:3) {
         labs(x = "lag", y = expression("ACF of " * rho)) +
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[6]) +
         theme_minimal() +
+        lims(y = c(-0.3, 1.0)) +
         theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     # Write to file

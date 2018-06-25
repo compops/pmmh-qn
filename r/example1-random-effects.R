@@ -180,6 +180,7 @@ cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example1-qn-aprob.pdf", height
   scale_fill_brewer(guide=FALSE, palette = "Dark2", name = "") +
   labs(x = "acceptance probability", y = "time per effective sample") +
   theme_minimal() +
+  coord_cartesian(ylim=c(0.0, 0.3)) +
   theme(axis.text=element_text(size=8), axis.title=element_text(size=9))
 dev.off()
 

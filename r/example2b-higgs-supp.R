@@ -24,9 +24,10 @@ makeSubplotPosteriors <- function(data, true_params, index, xlabel) {
     noIterations <- dim(traces)[2]
     trace <- data.frame(th=t(traces[, , index]), x=seq(1, noIterations))
     ggplot(data=trace, aes(x=th.1)) +
-       geom_density(aes(x=th.1), alpha=0.25, fill=plotColors[1], col=plotColors[1]) +
-       geom_density(aes(x=th.2), alpha=0.25, fill=plotColors[2], col=plotColors[2]) +
-       geom_density(aes(x=th.3), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
+       geom_density(aes(x=th.1), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
+       geom_density(aes(x=th.2), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
+       geom_density(aes(x=th.3), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
+       geom_density(aes(x=th.4), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
        labs(x = xlabel, y = "posterior") +
        geom_vline(xintercept = true_params[index]) +
        theme_minimal() +
@@ -37,9 +38,10 @@ makeSubplotTraces <- function(data, true_params, index, ylabel) {
     noIterations <- dim(traces)[2]
     trace <- data.frame(th=t(data[, , index]), x=seq(1, noIterations))
     ggplot(data=trace, aes(x=x, y=th.1)) +
-       geom_line(aes(x=x, y=th.3), col=plotColors[3]) +
-       geom_line(aes(x=x, y=th.1), col=plotColors[1]) +
-       geom_line(aes(x=x, y=th.2), col=plotColors[2]) +
+       geom_line(aes(x=x, y=th.2), col=plotColors[4]) +
+       geom_line(aes(x=x, y=th.3), col=plotColors[5]) +
+       geom_line(aes(x=x, y=th.4), col=plotColors[6]) +
+       geom_line(aes(x=x, y=th.1), col=plotColors[3]) +
        labs(y = ylabel, x = "iteration") +
        geom_hline(yintercept = true_params[index]) +
        lims(x = c(8800, 9000)) +
@@ -52,7 +54,7 @@ makeSubplotTraces <- function(data, true_params, index, ylabel) {
 ###############################################################################
 plotColors <- brewer.pal(8, "Dark2");
 output_path <- "~/src/pmmh-qn/results/example2-higgs"
-filePaths <- c("mh0/example2-mh0-0/mcmc_output.json.gz", "mh2/example2-mh2-0/mcmc_output.json.gz", "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz")
+filePaths <- c("mh2/example2-mh2-0/mcmc_output.json.gz", "qmh-bfgs/example2-qmh-bfgs-0/mcmc_output.json.gz", "qmh-ls/example2-qmh-ls-0/mcmc_output.json.gz", "qmh-sr1/example2-qmh-sr1-0/mcmc_output.json.gz")
 paramToPlot <- 2
 noIterations <- 10000
 removeIterations <- 17000
