@@ -72,8 +72,8 @@ s1 <- ggplot(data=state_estimate, aes(x=x, y=mean)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p1 <- ggplot(data=trace_mu, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey", size=0.5) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.25) +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
@@ -84,8 +84,8 @@ p1 <- ggplot(data=trace_mu, aes(x=mh2)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p2 <- ggplot(data=trace_phi, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey", size=0.5) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.25) +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
@@ -96,8 +96,8 @@ p2 <- ggplot(data=trace_phi, aes(x=mh2)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p3 <- ggplot(data=trace_sigma, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey", size=0.5) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +      geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.25) +      geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
       #geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
@@ -108,8 +108,8 @@ p3 <- ggplot(data=trace_sigma, aes(x=mh2)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p4 <- ggplot(data=trace_rho, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey", size=0.5) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.25) +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
