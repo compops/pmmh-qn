@@ -42,10 +42,10 @@ for (i in 1:length(filePaths)) {
 ###############################################################################
 # Plotting
 ###############################################################################
-trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
-trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
-trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
-trace4 <- data.frame(th=traces[4, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
+trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1))
+trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1))
+trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1))
+trace4 <- data.frame(th=traces[4, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1))
 
 acf1 <- acf(trace1$th, lag.max = 250, plot = FALSE)
 acf2 <- acf(trace2$th, lag.max = 250, plot = FALSE)
