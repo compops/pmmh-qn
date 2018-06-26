@@ -22,7 +22,7 @@ source("~/src/pmmh-qn/r/helpers.R")
 ###############################################################################
 plotColors <- brewer.pal(8, "Dark2")
 output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
-filePaths <- c("mh2/example3-mh0_0/mcmc_output.json.gz", "mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz", "qmh_sr1/example3-qmh_sr1_0/mcmc_output.json.gz")
+filePaths <- c("mh0/example3-mh0_0/mcmc_output.json.gz", "mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz", "qmh_sr1/example3-qmh_sr1_0/mcmc_output.json.gz")
 noIterations <- 15000
 noIterationsMH <- floor(noIterations * 18 / 101)
 MHiters <- seq(1, noIterations - noIterationsMH)
