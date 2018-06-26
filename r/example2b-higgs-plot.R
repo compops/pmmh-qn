@@ -42,10 +42,10 @@ for (i in 1:length(filePaths)) {
 ###############################################################################
 # Plotting
 ###############################################################################
-trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations))
-trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations))
-trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations))
-trace4 <- data.frame(th=traces[4, ], x=seq(1, noIterations))
+trace1 <- data.frame(th=traces[1, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
+trace2 <- data.frame(th=traces[2, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
+trace3 <- data.frame(th=traces[3, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
+trace4 <- data.frame(th=traces[4, ], x=seq(1, noIterations), prior = rnorm(noIterations, 0, 1)))
 
 acf1 <- acf(trace1$th, lag.max = 250, plot = FALSE)
 acf2 <- acf(trace2$th, lag.max = 250, plot = FALSE)
@@ -58,6 +58,7 @@ acf3_df <- data.frame(acf = acf3$acf, lag = acf3$lag)
 acf4_df <- data.frame(acf = acf4$acf, lag = acf4$lag)
 
 p1 <- ggplot(data=trace1, aes(x=th)) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
       geom_density(alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +
@@ -66,6 +67,7 @@ p1 <- ggplot(data=trace1, aes(x=th)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p2 <- ggplot(data=trace2, aes(x=th)) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
       geom_density(alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +
@@ -74,6 +76,7 @@ p2 <- ggplot(data=trace2, aes(x=th)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p3 <- ggplot(data=trace3, aes(x=th)) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
       geom_density(alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +
@@ -82,6 +85,7 @@ p3 <- ggplot(data=trace3, aes(x=th)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p4 <- ggplot(data=trace4, aes(x=th)) +
+      geom_density(aes(x=prior), col="grey", size=0.25) +
       geom_density(alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +

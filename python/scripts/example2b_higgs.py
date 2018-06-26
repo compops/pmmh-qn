@@ -83,7 +83,6 @@ def main(data, seed_offset=0, use_all_data=False):
 
     new_mh_settings.update({'adapt_step_size_target': 0.2})
     new_mh_settings = copy.deepcopy(mh_settings)
-    new_mh_settings.update({'adapt_step_size_initial': 0.1})
     mh.run('qmh',
            mh_settings=new_mh_settings,
            data=data,
