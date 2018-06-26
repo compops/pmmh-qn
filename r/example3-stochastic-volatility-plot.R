@@ -22,7 +22,7 @@ source("~/src/pmmh-qn/r/helpers.R")
 ###############################################################################
 plotColors <- brewer.pal(8, "Dark2")
 output_path <- "~/src/pmmh-qn/results/example3-stochastic-volatility"
-filePaths <- c("mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz", "qmh_sr1/example3-qmh_sr1_0/mcmc_output.json.gz")
+filePaths <- c("mh2/example3-mh0_0/mcmc_output.json.gz", "mh2/example3-mh2_0/mcmc_output.json.gz", "qmh_bfgs/example3-qmh_bfgs_0/mcmc_output.json.gz", "qmh_ls/example3-qmh_ls_0/mcmc_output.json.gz", "qmh_sr1/example3-qmh_sr1_0/mcmc_output.json.gz")
 noIterations <- 15000
 noIterationsMH <- floor(noIterations * 18 / 101)
 MHiters <- seq(1, noIterations - noIterationsMH)
@@ -52,10 +52,10 @@ state_estimate <- data.frame(mean=apply(results_ls$state_trajectory, 2, mean), l
 # Plotting
 ###############################################################################
 grid <- seq(1, noIterations)
-trace_mu <- data.frame(mh2=traces[1,,1], bfgs=traces[2,,1], ls=traces[3,,1], sr1=traces[4,,1], x=grid)
-trace_phi <- data.frame(mh2=traces[1,,2], bfgs=traces[2,,2], ls=traces[3,,2], sr1=traces[4,,2], x=grid)
-trace_sigma <- data.frame(mh2=traces[1,,3], bfgs=traces[2,,3], ls=traces[3,,3], sr1=traces[4,,3], x=grid)
-trace_rho <- data.frame(mh2=traces[1,,4], bfgs=traces[2,,4], ls=traces[3,,4], sr1=traces[4,,4], x=grid)
+trace_mu <- data.frame(mh0=traces[1,,1], mh2=traces[2,,1], bfgs=traces[3,,1], ls=traces[4,,1], sr1=traces[5,,1], x=grid, prior = rnorm(noIterations, 0, 1))
+trace_phi <- data.frame(mh0=traces[1,,2], mh2=traces[2,,2], bfgs=traces[3,,2], ls=traces[4,,2], sr1=traces[5,,2], x=grid, prior = rnorm(noIterations, 0.95, 0.05))
+trace_sigma <- data.frame(mh0=traces[1,,3], mh2=traces[2,,3], bfgs=traces[3,,3], ls=traces[4,,3], sr1=traces[5,,3], x=grid, prior = rgamma(noIterations, shape=2, rate=10))
+trace_rho <- data.frame(mh0=traces[1,,4], mh2=traces[2,,4], bfgs=traces[3,,4], ls=traces[4,,4], sr1=traces[5,,4], x=grid, prior = rnorm(noIterations, 0, 1))
 
 d1 <- ggplot(data=data, aes(x=x, y=y)) +
       geom_line(col=plotColors[1]) +
@@ -72,6 +72,8 @@ s1 <- ggplot(data=state_estimate, aes(x=x, y=mean)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p1 <- ggplot(data=trace_mu, aes(x=mh2)) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      geom_density(aes(x=prior), col="grey") +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
@@ -81,6 +83,8 @@ p1 <- ggplot(data=trace_mu, aes(x=mh2)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p2 <- ggplot(data=trace_phi, aes(x=mh2)) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      geom_density(aes(x=prior), col="grey") +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
@@ -90,6 +94,8 @@ p2 <- ggplot(data=trace_phi, aes(x=mh2)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p3 <- ggplot(data=trace_sigma, aes(x=mh2)) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      geom_density(aes(x=prior), col="grey") +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
@@ -99,6 +105,8 @@ p3 <- ggplot(data=trace_sigma, aes(x=mh2)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p4 <- ggplot(data=trace_rho, aes(x=mh2)) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      geom_density(aes(x=prior), col="grey") +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
       geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
