@@ -72,48 +72,48 @@ s1 <- ggplot(data=state_estimate, aes(x=x, y=mean)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p1 <- ggplot(data=trace_mu, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey") +
+      geom_density(aes(x=prior), col="grey", size=0.5) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
-      geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
+      #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
-      geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      #geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
       labs(x = expression(mu), y = "posterior") +
       theme_minimal() +
       lims(x = c(1, 3)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p2 <- ggplot(data=trace_phi, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey") +
+      geom_density(aes(x=prior), col="grey", size=0.5) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
-      geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
+      #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
-      geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      #geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
       labs(x = expression(phi), y = "posterior") +
       theme_minimal() +
       lims(x = c(0.8, 1)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p3 <- ggplot(data=trace_sigma, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey") +
-      geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
-      geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
+      geom_density(aes(x=prior), col="grey", size=0.5) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +      geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
+      #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
-      geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      #geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
+
       labs(x = expression(sigma[v]), y = "posterior") +
       theme_minimal() +
       lims(x = c(0.2, 0.7)) +
       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p4 <- ggplot(data=trace_rho, aes(x=mh2)) +
-      geom_density(aes(x=prior), col="grey") +
+      geom_density(aes(x=prior), col="grey", size=0.5) +
+      geom_density(aes(x=mh0), col="black", linetype="dashed", size=0.5) +
       geom_density(aes(x=mh2), alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
-      geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
+      #geom_density(aes(x=bfgs), alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
       geom_density(aes(x=ls), alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
-      geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
-      geom_density(aes(x=mh0), col="black", linetype="dashed") +
+      #geom_density(aes(x=sr1), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
       labs(x = expression(rho), y = "posterior") +
       theme_minimal() +
       lims(x = c(-0.4, 0.1)) +
