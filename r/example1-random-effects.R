@@ -131,8 +131,8 @@ p1 <- ggplot(gdat1) +
       geom_contour(color = "black", alpha = 0.5) +
       scale_fill_distiller(palette="Spectral", na.value="white", limits=c(0.0, 0.2), guide=FALSE, direction=1) +
       theme_minimal() +
-      labs(x = expression(sigma[u]), y = expression(M)) +
-      theme(axis.text=element_text(size=12))
+      labs(x = expression(sigma[u]), y = expression(M)) #+
+      #theme(axis.text=element_text(size=12))
 
 p2<- ggplot(gdat2) +
       aes(x = x, y = y, z = z, fill = z) +
@@ -140,8 +140,8 @@ p2<- ggplot(gdat2) +
       geom_contour(color = "black", alpha = 0.5) +
       scale_fill_distiller(palette="Spectral", na.value="white", limits=c(0.0, 0.2), guide=FALSE, direction=1) +
       theme_minimal() +
-      labs(x = expression(sigma[u]), y = expression(M)) +
-      theme(axis.text=element_text(size=12))
+      labs(x = expression(sigma[u]), y = expression(M)) #+
+      #theme(axis.text=element_text(size=12))
 
 p3 <- ggplot(gdat3) +
       aes(x = x, y = y, z = z, fill = z) +
@@ -149,11 +149,11 @@ p3 <- ggplot(gdat3) +
       geom_contour(color = "black", alpha = 0.5) +
       scale_fill_distiller(palette="Spectral", na.value="white", limits=c(0.0, 0.2), direction=1) +
       theme_minimal() +
-      labs(x = expression(sigma[u]), y = expression(M), fill = "") +
-      theme(axis.text=element_text(size=12))
+      labs(x = expression(sigma[u]), y = expression(M), fill = "") #+
+      #theme(axis.text=element_text(size=12))
 
 # Write to file
-cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example1-qn.pdf", height = 4, width = 12)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/example1-qn.pdf", height = 4, width = 12)
   multiplot(p1, p2, p3, layout=matrix(c(rep(1, 8), rep(2, 8), rep(3, 10)), nrow=1, byrow=TRUE))
 dev.off()
 
@@ -173,15 +173,15 @@ colnames(tes_aprob) <- c("aprob", "tes", "col")
 tes_aprob$col <- as.factor(tes_aprob$col)
 
 # Write to file
-cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example1-qn-aprob.pdf", height = 3, width = 4)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/example1-qn-aprob.pdf", height = 5, width = 8)
   ggplot(tes_aprob, aes(x = aprob, y = tes, color = col, fill = col)) +
   geom_smooth(alpha = 0.25) +
   scale_color_brewer(guide=FALSE, palette = "Dark2", name = "") +
   scale_fill_brewer(guide=FALSE, palette = "Dark2", name = "") +
   labs(x = "acceptance probability", y = "time per effective sample") +
   theme_minimal() +
-  coord_cartesian(ylim=c(0.0, 0.3)) +
-  theme(axis.text=element_text(size=8), axis.title=element_text(size=9))
+  coord_cartesian(ylim=c(0.0, 0.3)) #+
+  #theme(axis.text=element_text(size=8), axis.title=element_text(size=9))
 dev.off()
 
 

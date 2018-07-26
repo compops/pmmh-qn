@@ -30,8 +30,8 @@ makeSubplotPosteriors <- function(data, true_params, index, xlabel) {
        geom_density(aes(x=th.4), alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
        labs(x = xlabel, y = "posterior") +
        geom_vline(xintercept = true_params[index]) +
-       theme_minimal() +
-       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+       theme_minimal() #+
+       #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 }
 
 makeSubplotTraces <- function(data, true_params, index, ylabel) {
@@ -45,8 +45,8 @@ makeSubplotTraces <- function(data, true_params, index, ylabel) {
        labs(y = ylabel, x = "iteration") +
        geom_hline(yintercept = true_params[index]) +
        lims(x = c(8800, 9000)) +
-       theme_minimal() +
-       theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+       theme_minimal() #+
+       #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 }
 
 ###############################################################################
@@ -98,7 +98,7 @@ p20 <- makeSubplotPosteriors(traces, sgd_beta, 20, bquote(beta[19]))
 p21 <- makeSubplotPosteriors(traces, sgd_beta, 21, bquote(beta[20]))
 p22 <- makeSubplotPosteriors(traces, sgd_beta, 22, bquote(beta[21]))
 
-cairo_pdf("~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example2b-higgs-supp-post.pdf", width=8, height=10)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/example2b-higgs-supp-post.pdf", width=8, height=10)
       layout=matrix(seq(1, 21), nrow=7, byrow=TRUE)
       multiplot(p02, p03, p04, p05, p06, p07, p08, p09, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, layout=layout)
 dev.off()
@@ -129,7 +129,7 @@ p20 <- makeSubplotTraces(traces, sgd_beta, 20, bquote(beta[19]))
 p21 <- makeSubplotTraces(traces, sgd_beta, 21, bquote(beta[20]))
 p22 <- makeSubplotTraces(traces, sgd_beta, 22, bquote(beta[21]))
 
-cairo_pdf("~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example2b-higgs-supp-trace.pdf", width=8, height=10)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/example2b-higgs-supp-trace.pdf", width=8, height=10)
       layout=matrix(seq(1, 21), nrow=7, byrow=TRUE)
       multiplot(p02, p03, p04, p05, p06, p07, p08, p09, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, layout=layout)
 dev.off()

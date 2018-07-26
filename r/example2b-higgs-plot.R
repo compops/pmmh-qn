@@ -63,8 +63,8 @@ p1 <- ggplot(data=trace1, aes(x=th)) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +
       theme_minimal() +
-      lims(x = c(-0.1, 0.15)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      lims(x = c(-0.1, 0.15)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p2 <- ggplot(data=trace2, aes(x=th)) +
       geom_density(aes(x=prior), col="grey", size=0.25) +
@@ -72,8 +72,8 @@ p2 <- ggplot(data=trace2, aes(x=th)) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +
       theme_minimal() +
-      lims(x = c(-0.1, 0.15)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      lims(x = c(-0.1, 0.15)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p3 <- ggplot(data=trace3, aes(x=th)) +
       geom_density(aes(x=prior), col="grey", size=0.25) +
@@ -81,8 +81,8 @@ p3 <- ggplot(data=trace3, aes(x=th)) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +
       theme_minimal() +
-      lims(x = c(-0.1, 0.15)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      lims(x = c(-0.1, 0.15)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 p4 <- ggplot(data=trace4, aes(x=th)) +
       geom_density(aes(x=prior), col="grey", size=0.25) +
@@ -90,8 +90,8 @@ p4 <- ggplot(data=trace4, aes(x=th)) +
       geom_vline(xintercept = sgd_beta) +
       labs(x = expression(beta[12]), y = "posterior") +
       theme_minimal() +
-      lims(x = c(-0.1, 0.15)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      lims(x = c(-0.1, 0.15)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 
 
@@ -100,34 +100,34 @@ a1 <- ggplot(data=acf1_df, aes(x=lag, y=acf)) +
       geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[3]) +
       labs(x = "", y = expression("ACF of " * beta[12])) +
       theme_minimal() +
-      coord_cartesian(ylim=c(-0.3, 1.0)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      coord_cartesian(ylim=c(-0.3, 1.0)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 a2 <- ggplot(data=acf2_df, aes(x=lag, y=acf)) +
       geom_line(col=plotColors[4]) +
       geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[4]) +
       labs(x = "", y = expression("ACF of " * beta[12])) +
       theme_minimal() +
-      coord_cartesian(ylim=c(-0.3, 1.0)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      coord_cartesian(ylim=c(-0.3, 1.0)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 a3 <- ggplot(data=acf3_df, aes(x=lag, y=acf)) +
       geom_line(col=plotColors[5]) +
       geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[5]) +
       labs(x = "", y = expression("ACF of " * beta[12])) +
       theme_minimal() +
-      coord_cartesian(ylim=c(-0.3, 1.0)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      coord_cartesian(ylim=c(-0.3, 1.0)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
 a4 <- ggplot(data=acf4_df, aes(x=lag, y=acf)) +
       geom_line(col=plotColors[6]) +
       geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[6]) +
       labs(x = "", y = expression("ACF of " * beta[12])) +
       theme_minimal() +
-      coord_cartesian(ylim=c(-0.3, 1.0)) +
-      theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+      coord_cartesian(ylim=c(-0.3, 1.0)) #+
+      #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
-cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/images/example2b-higgs.pdf", width=4, height=6)
+cairo_pdf("~/src/uon-papers/pmmh-qn/draft1/example2b-higgs.pdf", width=8, height=10)
       layout=matrix(seq(1, 8), nrow=4, byrow=TRUE)
       multiplot(p1, a1, p2, a2, p3, a3, p4, a4, layout=layout)
 dev.off()

@@ -39,8 +39,8 @@ for (i in 1:length(filePaths)) {
 ###############################################################################
 # Plotting
 ###############################################################################
-file_name <- c("~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-mh2.pdf", "~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-bfgs.pdf", "~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-ls.pdf",
-"~/src/uon-papers/pmmh-qn/supplementary-draft1/images/example3-stochastic-volatility-supp-sr1.pdf")
+file_name <- c("~/src/uon-papers/pmmh-qn/draft1/example3-stochastic-volatility-supp-mh2.pdf", "~/src/uon-papers/pmmh-qn/draft1/example3-stochastic-volatility-supp-bfgs.pdf", "~/src/uon-papers/pmmh-qn/draft1/example3-stochastic-volatility-supp-ls.pdf",
+"~/src/uon-papers/pmmh-qn/draft1/example3-stochastic-volatility-supp-sr1.pdf")
 
 
 for (i in 1:4) {
@@ -60,89 +60,89 @@ for (i in 1:4) {
         geom_line(col=plotColors[3]) +
         lims(x = c(8800, 9000), y = c(0.0, 3.5)) +
         labs(y = expression(mu), x = "iteration") +
-        theme_minimal() +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        theme_minimal() #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t2 <- ggplot(data=trace, aes(x=x, y=th.2)) +
         geom_line(col=plotColors[4]) +
         lims(x = c(8800, 9000), y = c(0.8, 1.0)) +
         labs(y = expression(phi), x = "iteration") +
-        theme_minimal() +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        theme_minimal() #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t3 <- ggplot(data=trace, aes(x=x, y=th.3)) +
         geom_line(col=plotColors[5]) +
         lims(x = c(8800, 9000), y = c(0.2, 0.7)) +
         labs(y = expression(sigma[v]), x = "iteration") +
-        theme_minimal() +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        theme_minimal() #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     t4 <- ggplot(data=trace, aes(x=x, y=th.4)) +
         geom_line(col=plotColors[6]) +
         lims(x = c(8800, 9000), y = c(-0.5, 0.2)) +
         labs(y = expression(rho), x = "iteration") +
-        theme_minimal() +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        theme_minimal() #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     p1 <- ggplot(data=trace, aes(x=th.1)) +
         geom_density(alpha=0.25, fill=plotColors[3], col=plotColors[3]) +
         labs(x = expression(mu), y = "posterior") +
         theme_minimal() +
-        lims(x = c(0.0, 3.5)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(x = c(0.0, 3.5)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     p2 <- ggplot(data=trace, aes(x=th.2)) +
         geom_density(alpha=0.25, fill=plotColors[4], col=plotColors[4]) +
         labs(x = expression(phi), y = "posterior") +
         theme_minimal() +
-        lims(x = c(0.8, 1.0)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(x = c(0.8, 1.0)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     p3 <- ggplot(data=trace, aes(x=th.3)) +
         geom_density(alpha=0.25, fill=plotColors[5], col=plotColors[5]) +
         labs(x = expression(sigma[v]), y = "posterior") +
         theme_minimal() +
-        lims(x = c(0.2, 0.7)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(x = c(0.2, 0.7)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     p4 <- ggplot(data=trace, aes(x=th.4)) +
         geom_density(alpha=0.25, fill=plotColors[6], col=plotColors[6]) +
         labs(x = expression(rho), y = "posterior") +
         theme_minimal() +
-        lims(x = c(-0.5, 0.2)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(x = c(-0.5, 0.2)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a1 <- ggplot(data=acf_mu, aes(x=lag, y=acf)) +
         geom_line(col=plotColors[3]) +
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[3]) +
         labs(x = "lag", y = expression("ACF of " * mu)) +
         theme_minimal() +
-        lims(y = c(-0.3, 1.0)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(y = c(-0.3, 1.0)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a2 <- ggplot(data=acf_phi, aes(x=lag, y=acf)) +
         geom_line(col=plotColors[4]) +
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[4]) +
         labs(x = "lag", y = expression("ACF of " * phi)) +
         theme_minimal() +
-        lims(y = c(-0.3, 1.0)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(y = c(-0.3, 1.0)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a3 <- ggplot(data=acf_sigma, aes(x=lag, y=acf)) +
         geom_line(col=plotColors[5]) +
         labs(x = "lag", y = expression("ACF of " * sigma[v])) +
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[5]) +
         theme_minimal() +
-        lims(y = c(-0.3, 1.0)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(y = c(-0.3, 1.0)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     a4 <- ggplot(data=acf_rho, aes(x=lag, y=acf)) +
         geom_line(col=plotColors[6]) +
         labs(x = "lag", y = expression("ACF of " * rho)) +
         geom_ribbon(aes(ymin=0, ymax=acf), alpha=0.25, fill=plotColors[6]) +
         theme_minimal() +
-        lims(y = c(-0.3, 1.0)) +
-        theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
+        lims(y = c(-0.3, 1.0)) #+
+        #theme(axis.text=element_text(size=7), axis.title=element_text(size=8))
 
     # Write to file
     cairo_pdf(file_name[i], width=8, height=10)
